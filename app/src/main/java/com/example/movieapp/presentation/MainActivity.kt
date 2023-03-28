@@ -6,7 +6,7 @@ import android.util.Log
 import android.widget.Button
 import com.example.movieapp.R
 import com.example.movieapp.databinding.ActivityMainBinding
-import com.example.movieapp.test.ApiFactory
+import com.example.movieapp.data.network.ApiFactory
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel

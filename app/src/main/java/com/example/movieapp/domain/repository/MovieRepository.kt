@@ -1,4 +1,4 @@
-package com.example.movieapp.domain
+package com.example.movieapp.domain.repository
 
 import Movie
 import androidx.lifecycle.LiveData

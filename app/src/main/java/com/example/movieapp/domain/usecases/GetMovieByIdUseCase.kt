@@ -1,6 +1,6 @@
 package com.example.movieapp.domain.usecases
 
-import com.example.movieapp.domain.MovieRepository
+import com.example.movieapp.domain.repository.MovieRepository
 
 class GetMovieByIdUseCase(private val movieRepository: MovieRepository) {
 
