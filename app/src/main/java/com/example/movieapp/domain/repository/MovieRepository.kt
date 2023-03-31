@@ -11,7 +11,7 @@ interface MovieRepository {
 
     fun getMovie(): LiveData<Movie>
 
-    fun getMovieList(): LiveData<List<Movie>>
+    fun getMovieListByPage(): LiveData<List<Movie>>
 
     fun loadData()
 }
