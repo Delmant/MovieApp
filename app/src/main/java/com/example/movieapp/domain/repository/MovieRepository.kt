@@ -6,15 +6,15 @@ import androidx.lifecycle.LiveData
 
 interface MovieRepository {
 
-    fun getMovieById(id: Int): LiveData<Movie>
+    suspend fun getMovieById(id: Int): LiveData<Movie>
 
-    fun getRandomMovie(): LiveData<Movie>
+    suspend fun getRandomMovie(): LiveData<Movie>
 
-    fun getMovie(): LiveData<Movie>
+    suspend fun getMovie(): LiveData<Movie>
 
-    fun getMovieListByPage(): LiveData<List<Movie>>
+    suspend fun getMovieListByPage(): LiveData<List<Movie>>
 
-    fun getPersonById(): LiveData<Person>
+    suspend fun getPersonById(): LiveData<Person>
 
-    fun loadData()
+    suspend fun loadData()
 }

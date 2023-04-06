@@ -4,5 +4,5 @@ import com.example.movieapp.domain.repository.MovieRepository
 
 class GetMovieListByPage(private val movieRepository: MovieRepository) {
 
-    operator fun invoke() = movieRepository.getMovieListByPage()
+    suspend operator fun invoke() = movieRepository.getMovieListByPage()
 }
