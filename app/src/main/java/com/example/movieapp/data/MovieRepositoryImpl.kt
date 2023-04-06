@@ -10,27 +10,27 @@ class MovieRepositoryImpl(
 
 ): MovieRepository {
 
-    override fun getMovieById(id: Int): LiveData<Movie> {
+    override suspend fun getMovieById(id: Int): LiveData<Movie> {
         TODO("Not yet implemented")
     }
 
-    override fun getRandomMovie(): LiveData<Movie> {
+    override suspend fun getRandomMovie(): LiveData<Movie> {
         TODO("Not yet implemented")
     }
 
-    override fun getMovie(): LiveData<Movie> {
+    override suspend fun getMovie(): LiveData<Movie> {
         TODO("Not yet implemented")
     }
 
-    override fun getMovieListByPage(): LiveData<List<Movie>> {
+    override suspend fun getMovieListByPage(): LiveData<List<Movie>> {
         TODO("Not yet implemented")
     }
 
-    override fun getPersonById(): LiveData<Person> {
+    override suspend fun getPersonById(): LiveData<Person> {
         TODO("Not yet implemented")
     }
 
-    override fun loadData() {
+    override suspend fun loadData() {
         TODO("Not yet implemented")
     }
 }
