@@ -1,6 +1,7 @@
 package com.example.movieapp.data
 
 import Movie
+import Person
 import androidx.lifecycle.LiveData
 import com.example.movieapp.domain.repository.MovieRepository
 
@@ -21,6 +22,10 @@ class MovieRepositoryImpl(
     }
 
     override fun getMovieListByPage(): LiveData<List<Movie>> {
+        TODO("Not yet implemented")
+    }
+
+    override fun getPersonById(): LiveData<Person> {
         TODO("Not yet implemented")
     }
 
