@@ -1,6 +1,7 @@
 package com.example.movieapp.domain.repository
 
 import Movie
+import Person
 import androidx.lifecycle.LiveData
 
 interface MovieRepository {
@@ -12,6 +13,8 @@ interface MovieRepository {
     fun getMovie(): LiveData<Movie>
 
     fun getMovieListByPage(): LiveData<List<Movie>>
+
+    fun getPersonById(): LiveData<Person>
 
     fun loadData()
 }
