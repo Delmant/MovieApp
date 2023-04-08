@@ -3,15 +3,21 @@ package com.example.movieapp.data
 import Movie
 import Person
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.Transformations
+import com.example.movieapp.data.network.ApiService
 
 import com.example.movieapp.domain.repository.MovieRepository
+import javax.inject.Inject
 
-class MovieRepositoryImpl(
-
+class MovieRepositoryImpl @Inject constructor(
+    val apiService: ApiService
 ): MovieRepository {
 
     override suspend fun getMovieById(id: Int): LiveData<Movie> {
-        TODO("Not yet implemented")
+//        return Transformations.map() {
+//                it
+//        }
+        TODO()
     }
 
     override suspend fun getRandomMovie(): LiveData<Movie> {
