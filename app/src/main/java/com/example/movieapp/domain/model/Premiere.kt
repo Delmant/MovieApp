@@ -1,4 +1,4 @@
-
+package com.example.movieapp.domain.model
 data class Premiere(
     val bluray: String,
     val cinema: String,

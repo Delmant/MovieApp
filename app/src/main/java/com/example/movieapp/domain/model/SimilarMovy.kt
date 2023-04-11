@@ -1,3 +1,4 @@
+package com.example.movieapp.domain.model
 
 data class SimilarMovy(
     val alternativeName: String,

@@ -1,6 +1,5 @@
 package com.example.movieapp.presentation.rv
 
-import Movie
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup

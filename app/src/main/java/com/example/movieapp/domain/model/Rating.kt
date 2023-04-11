@@ -1,4 +1,4 @@
-
+package com.example.movieapp.domain.model
 data class Rating(
     val await: Double,
     val filmCritics: Int,

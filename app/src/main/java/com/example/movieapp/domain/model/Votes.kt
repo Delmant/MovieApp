@@ -1,4 +1,4 @@
-
+package com.example.movieapp.domain.model
 
 data class Votes(
     val await: Int,

@@ -1,4 +1,4 @@
-
+package com.example.movieapp.domain.model
 data class Teaser(
     val name: String,
     val site: String,
