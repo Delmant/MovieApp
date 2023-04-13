@@ -1,4 +1,9 @@
+package com.example.movieapp.domain.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class SimilarMovy(
     val alternativeName: String,
     val enName: String,
@@ -6,4 +11,4 @@ data class SimilarMovy(
     val name: String,
     val poster: Poster,
     val type: String
-)
+) : Parcelable

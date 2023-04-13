@@ -1,4 +1,9 @@
+package com.example.movieapp.domain.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class Premiere(
     val bluray: String,
     val cinema: String,
@@ -7,4 +12,4 @@ data class Premiere(
     val dvd: String,
     val russia: String,
     val world: String
-)
+) : Parcelable
