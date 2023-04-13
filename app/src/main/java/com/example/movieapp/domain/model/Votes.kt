@@ -1,5 +1,9 @@
 package com.example.movieapp.domain.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class Votes(
     val await: Int,
     val filmCritics: Int,
@@ -7,4 +11,4 @@ data class Votes(
     val kp: String,
     val russianFilmCritics: Int,
     val tmdb: Int
-)
+) : Parcelable

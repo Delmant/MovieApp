@@ -1,9 +1,11 @@
 package com.example.movieapp.domain.model
 
-import com.example.movieapp.domain.model.Teaser
-import com.example.movieapp.domain.model.Trailer
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 
 data class Videos(
     val teasers: List<Teaser>,
     val trailers: List<Trailer>
-)
+) : Parcelable
