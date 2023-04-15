@@ -1,20 +1,20 @@
 package com.example.movieapp.domain.repository
 
-import Movie
-import Person
+import com.example.movieapp.domain.model.Movie
+import com.example.movieapp.domain.model.Person
 import androidx.lifecycle.LiveData
 
 interface MovieRepository {
 
-    suspend fun getMovieById(id: Int): LiveData<Movie>
+     fun getMovieById(id: Int): LiveData<Movie>
 
-    suspend fun getRandomMovie(): LiveData<Movie>
+     fun getRandomMovie(): LiveData<Movie>
 
-    suspend fun getMovie(): LiveData<Movie>
+     fun getMovie(): LiveData<Movie>
 
-    suspend fun getMovieListByPage(): LiveData<List<Movie>>
+     fun getMovieListByPage(): LiveData<List<Movie>>
 
-    suspend fun getPersonById(): LiveData<Person>
+     fun getPersonById(): LiveData<Person>
 
-    suspend fun loadData()
+     fun loadData()
 }

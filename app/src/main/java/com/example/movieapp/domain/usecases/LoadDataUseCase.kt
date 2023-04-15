@@ -1,7 +1,8 @@
 package com.example.movieapp.domain.usecases
 
 import com.example.movieapp.domain.repository.MovieRepository
+import javax.inject.Inject
 
-class LoadDataUseCase(private val movieRepository: MovieRepository) {
-    suspend operator fun invoke() = movieRepository.loadData()
+class LoadDataUseCase @Inject constructor(private val movieRepository: MovieRepository) {
+     operator fun invoke() = movieRepository.loadData()
 }
