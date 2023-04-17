@@ -56,7 +56,9 @@ dependencies {
     annotationProcessor 'com.google.dagger:dagger-android-processor:2.15'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.35.1'
 
-    annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
+    implementation "org.mapstruct:mapstruct:1.5.4.Final"
+    testImplementation "org.testng:testng:6.10", "org.easytesting:fest-assert:1.4"
+    annotationProcessor "org.mapstruct:mapstruct-processor:1.5.4.Final"
 
     implementation 'com.github.bumptech.glide:glide:4.11.0'
 
