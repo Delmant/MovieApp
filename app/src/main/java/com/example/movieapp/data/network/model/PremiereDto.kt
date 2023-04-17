@@ -1,11 +1,9 @@
 package com.example.movieapp.data.network.model
 
+import com.example.movieapp.domain.model.Premiere
+import com.google.gson.annotations.SerializedName
+
 data class PremiereDto(
-    val bluray: String,
-    val cinema: String,
-    val country: String,
-    val digital: String,
-    val dvd: String,
-    val russia: String,
-    val world: String
+    @SerializedName("premiere")
+    val premiere: Premiere
 )

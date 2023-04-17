@@ -1,7 +1,9 @@
 package com.example.movieapp.data.network.model
 
+import com.example.movieapp.domain.model.Items
+import com.google.gson.annotations.SerializedName
+
 data class ItemDto(
-    val logoDto: LogoDto,
-    val name: String,
-    val url: String
+    @SerializedName("items")
+    val items: Items
 )

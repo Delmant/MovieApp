@@ -1,11 +1,9 @@
 package com.example.movieapp.data.network.model
 
+import com.example.movieapp.domain.model.Persons
+import com.google.gson.annotations.SerializedName
+
 data class PersonDto(
-    val description: String,
-    val enName: String,
-    val enProfession: String,
-    val id: Int,
-    val name: String,
-    val photo: String,
-    val profession: String
+    @SerializedName("persons")
+    val persons: Persons
 )

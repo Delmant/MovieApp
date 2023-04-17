@@ -4,6 +4,10 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class Watchability(
-    val items: List<Items>
+data class Teasers(
+    val name: String,
+    val site: String,
+    val size: Int,
+    val type: String,
+    val url: String
 ) : Parcelable

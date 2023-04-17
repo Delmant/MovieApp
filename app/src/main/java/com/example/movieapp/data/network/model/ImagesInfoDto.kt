@@ -1,7 +1,9 @@
 package com.example.movieapp.data.network.model
 
+import com.example.movieapp.domain.model.ImagesInfo
+import com.google.gson.annotations.SerializedName
+
 data class ImagesInfoDto(
-    val backdropsCount: Int,
-    val framesCount: Int,
-    val postersCount: Int
+    @SerializedName("imagesInfo")
+    val imagesInfo: ImagesInfo
 )

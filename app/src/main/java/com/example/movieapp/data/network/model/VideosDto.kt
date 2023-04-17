@@ -1,6 +1,9 @@
 package com.example.movieapp.data.network.model
 
+import com.example.movieapp.domain.model.Videos
+import com.google.gson.annotations.SerializedName
+
 data class VideosDto(
-    val teaserDtos: List<TeaserDto>,
-    val trailerDtos: List<TrailerDto>
+    @SerializedName("videos")
+    val videos: Videos
 )

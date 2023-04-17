@@ -1,10 +1,9 @@
 package com.example.movieapp.data.network.model
 
+import com.example.movieapp.domain.model.Rating
+import com.google.gson.annotations.SerializedName
+
 data class RatingDto(
-    val await: Double,
-    val filmCritics: Int,
-    val imdb: Double,
-    val kp: Double,
-    val russianFilmCritics: Double,
-    val tmdb: Double
+    @SerializedName("rating")
+    val rating: Rating
 )

@@ -1,6 +1,9 @@
 package com.example.movieapp.data.network.model
 
+import com.example.movieapp.domain.model.SeasonsInfo
+import com.google.gson.annotations.SerializedName
+
 data class SeasonsInfoDto(
-    val episodesCount: Int,
-    val number: Int
+    @SerializedName("seasonsInfo")
+    val seasonsInfo: SeasonsInfo
 )

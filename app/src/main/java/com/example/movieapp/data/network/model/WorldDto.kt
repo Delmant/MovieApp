@@ -1,6 +1,9 @@
 package com.example.movieapp.data.network.model
 
+import com.example.movieapp.domain.model.World
+import com.google.gson.annotations.SerializedName
+
 data class WorldDto(
-    val currency: String,
-    val value: Int
+    @SerializedName("world")
+    val world: World
 )

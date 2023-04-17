@@ -1,10 +1,9 @@
 package com.example.movieapp.data.network.model
 
+import com.example.movieapp.domain.model.Votes
+import com.google.gson.annotations.SerializedName
+
 data class VotesDto(
-    val await: Int,
-    val filmCritics: Int,
-    val imdb: String,
-    val kp: String,
-    val russianFilmCritics: Int,
-    val tmdb: Int
+    @SerializedName("votes")
+    val votes: Votes
 )

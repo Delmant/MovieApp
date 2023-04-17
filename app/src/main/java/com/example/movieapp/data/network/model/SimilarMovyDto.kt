@@ -1,10 +1,9 @@
 package com.example.movieapp.data.network.model
 
+import com.example.movieapp.domain.model.SimilarMovies
+import com.google.gson.annotations.SerializedName
+
 data class SimilarMovyDto(
-    val alternativeName: String,
-    val enName: String,
-    val id: Int,
-    val name: String,
-    val posterDto: PosterDto,
-    val type: String
+    @SerializedName("similarMovies")
+    val similarMovies: SimilarMovies
 )

@@ -1,7 +1,9 @@
 package com.example.movieapp.data.network.model
 
+import com.example.movieapp.domain.model.Fees
+import com.google.gson.annotations.SerializedName
+
 data class FeesDto(
-    val russiaDto: RussiaDto,
-    val usaDto: UsaDto,
-    val worldDto: WorldDto
+    @SerializedName("fees")
+    val fees: Fees
 )

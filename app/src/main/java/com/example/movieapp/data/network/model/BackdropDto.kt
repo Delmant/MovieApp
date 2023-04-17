@@ -1,6 +1,9 @@
 package com.example.movieapp.data.network.model
 
+import com.example.movieapp.domain.model.Backdrop
+import com.google.gson.annotations.SerializedName
+
 data class BackdropDto(
-    val previewUrl: String,
-    val url: String
+    @SerializedName("backdrop")
+    val backDrop: Backdrop
 )

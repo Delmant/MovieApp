@@ -1,5 +1,9 @@
 package com.example.movieapp.data.network.model
 
+import com.example.movieapp.domain.model.Watchability
+import com.google.gson.annotations.SerializedName
+
 data class WatchabilityDto(
-    val itemDtos: List<ItemDto>
+    @SerializedName("watchability")
+    val watchability: Watchability
 )

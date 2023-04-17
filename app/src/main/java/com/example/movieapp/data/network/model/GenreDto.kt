@@ -1,5 +1,9 @@
 package com.example.movieapp.data.network.model
 
+import com.example.movieapp.domain.model.Genres
+import com.google.gson.annotations.SerializedName
+
 data class GenreDto(
-    val name: String
+    @SerializedName("genres")
+    val genres: Genres
 )

@@ -4,8 +4,10 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class Fact(
-    val spoiler: Boolean,
+data class Trailers(
+    val name: String,
+    val site: String,
+    val size: Int,
     val type: String,
-    val value: String
+    val url: String
 ) : Parcelable

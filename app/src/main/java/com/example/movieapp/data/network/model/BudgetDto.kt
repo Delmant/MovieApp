@@ -1,6 +1,9 @@
 package com.example.movieapp.data.network.model
 
+import com.example.movieapp.domain.model.Budget
+import com.google.gson.annotations.SerializedName
+
 data class BudgetDto(
-    val currency: String,
-    val value: Int
+    @SerializedName("budget")
+    val budget: Budget
 )
