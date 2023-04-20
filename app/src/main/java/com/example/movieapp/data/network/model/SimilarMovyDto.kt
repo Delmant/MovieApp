@@ -6,4 +6,10 @@ import com.google.gson.annotations.SerializedName
 data class SimilarMovyDto(
     @SerializedName("similarMovies")
     val similarMovies: SimilarMovies
-)
+) {
+    companion object {
+        fun toEntity(similarMovyDto: SimilarMovyDto): SimilarMovies {
+            return similarMovyDto.similarMovies
+        }
+    }
+}

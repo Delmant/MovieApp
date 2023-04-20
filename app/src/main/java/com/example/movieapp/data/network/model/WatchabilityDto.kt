@@ -6,4 +6,10 @@ import com.google.gson.annotations.SerializedName
 data class WatchabilityDto(
     @SerializedName("watchability")
     val watchability: Watchability
-)
+) {
+    companion object {
+        fun toEntity(watchabilityDto: WatchabilityDto): Watchability {
+            return watchabilityDto.watchability
+        }
+    }
+}

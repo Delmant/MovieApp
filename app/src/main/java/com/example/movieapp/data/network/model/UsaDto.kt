@@ -6,4 +6,10 @@ import com.google.gson.annotations.SerializedName
 data class UsaDto(
     @SerializedName("usa")
     val usa: Usa
-)
+) {
+    companion object {
+        fun toEntity(usaDto: UsaDto): Usa {
+            return usaDto.usa
+        }
+    }
+}

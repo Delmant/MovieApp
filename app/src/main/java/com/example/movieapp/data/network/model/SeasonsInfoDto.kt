@@ -6,4 +6,10 @@ import com.google.gson.annotations.SerializedName
 data class SeasonsInfoDto(
     @SerializedName("seasonsInfo")
     val seasonsInfo: SeasonsInfo
-)
+) {
+    companion object {
+        fun toEntity(seasonsInfoDto: SeasonsInfoDto): SeasonsInfo {
+            return seasonsInfoDto.seasonsInfo
+        }
+    }
+}

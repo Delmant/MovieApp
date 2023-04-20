@@ -6,4 +6,10 @@ import com.google.gson.annotations.SerializedName
 data class VotesDto(
     @SerializedName("votes")
     val votes: Votes
-)
+) {
+    companion object {
+        fun toEntity(votesDto: VotesDto): Votes {
+            return votesDto.votes
+        }
+    }
+}

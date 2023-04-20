@@ -6,4 +6,10 @@ import com.google.gson.annotations.SerializedName
 data class ReviewInfoDto(
     @SerializedName("reviewInfo")
     val reviewInfo: ReviewInfo
-)
+) {
+    companion object {
+        fun toEntity(reviewInfoDto: ReviewInfoDto): ReviewInfo {
+            return reviewInfoDto.reviewInfo
+        }
+    }
+}

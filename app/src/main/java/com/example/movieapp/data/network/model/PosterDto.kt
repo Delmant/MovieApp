@@ -6,4 +6,10 @@ import com.google.gson.annotations.SerializedName
 data class PosterDto(
     @SerializedName("poster")
     val poster: Poster
-)
+) {
+    companion object {
+        fun toEntity(posterDto: PosterDto): Poster {
+            return posterDto.poster
+        }
+    }
+}
