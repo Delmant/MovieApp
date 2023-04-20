@@ -5,6 +5,13 @@ import com.google.gson.annotations.SerializedName
 
 data class FactDto(
     @SerializedName("facts")
-    val facts: Facts
+    val facts: Facts,
+    ) {
 
-)
+    companion object {
+
+        fun toEntity(factDto: FactDto): Facts {
+            return factDto.facts
+        }
+    }
+}

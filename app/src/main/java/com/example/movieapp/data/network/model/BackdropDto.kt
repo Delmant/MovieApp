@@ -6,4 +6,11 @@ import com.google.gson.annotations.SerializedName
 data class BackdropDto(
     @SerializedName("backdrop")
     val backDrop: Backdrop
-)
+) {
+    companion object {
+
+        fun toEntity(backdropDto: BackdropDto): Backdrop {
+            return backdropDto.backDrop
+        }
+    }
+}

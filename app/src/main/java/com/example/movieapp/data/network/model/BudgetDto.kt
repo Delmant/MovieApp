@@ -5,5 +5,11 @@ import com.google.gson.annotations.SerializedName
 
 data class BudgetDto(
     @SerializedName("budget")
-    val budget: Budget
-)
+    val budget: Budget,
+) {
+    companion object {
+        fun toEntity(budgetDto: BudgetDto): Budget {
+            return budgetDto.budget
+        }
+    }
+}
