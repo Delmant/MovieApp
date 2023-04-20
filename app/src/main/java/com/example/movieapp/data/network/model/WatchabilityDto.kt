@@ -1,15 +1,8 @@
 package com.example.movieapp.data.network.model
 
-import com.example.movieapp.domain.model.Watchability
 import com.google.gson.annotations.SerializedName
 
 data class WatchabilityDto(
-    @SerializedName("watchability")
-    val watchability: Watchability
-) {
-    companion object {
-        fun toEntity(watchabilityDto: WatchabilityDto): Watchability {
-            return watchabilityDto.watchability
-        }
-    }
-}
+    @SerializedName("items")
+    val itemDtos: List<ItemDto>
+)

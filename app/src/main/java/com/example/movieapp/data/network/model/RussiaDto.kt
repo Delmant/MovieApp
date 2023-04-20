@@ -1,15 +1,10 @@
 package com.example.movieapp.data.network.model
 
-import com.example.movieapp.domain.model.Russia
 import com.google.gson.annotations.SerializedName
 
 data class RussiaDto(
-    @SerializedName("russia")
-    val russia: Russia
-) {
-    companion object {
-        fun toEntity(russiaDto: RussiaDto): Russia {
-            return russiaDto.russia
-        }
-    }
-}
+    @SerializedName("value")
+    val value: Int,
+    @SerializedName("currency")
+    val currency: String
+)

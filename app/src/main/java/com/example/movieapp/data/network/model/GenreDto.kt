@@ -1,16 +1,8 @@
 package com.example.movieapp.data.network.model
 
-import com.example.movieapp.domain.model.Genres
 import com.google.gson.annotations.SerializedName
 
 data class GenreDto(
-    @SerializedName("genres")
-    val genres: Genres
-) {
-    companion object {
-
-        fun toEntity(genreDto: GenreDto): Genres {
-            return genreDto.genres
-        }
-    }
-}
+    @SerializedName("name")
+    val name: String
+)

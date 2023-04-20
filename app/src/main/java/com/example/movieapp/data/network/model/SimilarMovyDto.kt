@@ -1,15 +1,18 @@
 package com.example.movieapp.data.network.model
 
-import com.example.movieapp.domain.model.SimilarMovies
 import com.google.gson.annotations.SerializedName
 
 data class SimilarMovyDto(
-    @SerializedName("similarMovies")
-    val similarMovies: SimilarMovies
-) {
-    companion object {
-        fun toEntity(similarMovyDto: SimilarMovyDto): SimilarMovies {
-            return similarMovyDto.similarMovies
-        }
-    }
-}
+    @SerializedName("id")
+    val id: Int,
+    @SerializedName("name")
+    val name: String,
+    @SerializedName("enName")
+    val enName: String,
+    @SerializedName("alternativeName")
+    val alternativeName: String,
+    @SerializedName("type")
+    val type: String,
+    @SerializedName("poster")
+    val posterDto: PosterDto,
+)

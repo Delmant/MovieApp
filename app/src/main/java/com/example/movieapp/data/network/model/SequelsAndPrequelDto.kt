@@ -1,15 +1,18 @@
 package com.example.movieapp.data.network.model
 
-import com.example.movieapp.domain.model.SequelsAndPrequels
 import com.google.gson.annotations.SerializedName
 
 data class SequelsAndPrequelDto(
-    @SerializedName("sequelsAndPrequels")
-    val sequelsAndPrequels: SequelsAndPrequels
-) {
-    companion object {
-        fun toEntity(sequelsAndPrequelDto: SequelsAndPrequelDto): SequelsAndPrequels {
-            return sequelsAndPrequelDto.sequelsAndPrequels
-        }
-    }
-}
+    @SerializedName("id")
+    val id: Int,
+    @SerializedName("name")
+    val name: String,
+    @SerializedName("enName")
+    val enName: String,
+    @SerializedName("alternativeName")
+    val alternativeName: String,
+    @SerializedName("type")
+    val type: String,
+    @SerializedName("poster")
+    val posterDto: PosterDto
+)
