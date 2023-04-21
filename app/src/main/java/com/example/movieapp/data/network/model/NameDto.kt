@@ -1,5 +1,6 @@
 package com.example.movieapp.data.network.model
 
+import com.example.movieapp.domain.model.Names
 import com.google.gson.annotations.SerializedName
 
 data class NameDto(
@@ -9,4 +10,14 @@ data class NameDto(
     val language: String,
     @SerializedName("type")
     val type: String
-)
+) {
+    companion object {
+        fun toEntity(dto: NameDto): Names {
+            return Names(
+                name = dto.name,
+                language = dto.language,
+                type = dto.type
+            )
+        }
+    }
+}

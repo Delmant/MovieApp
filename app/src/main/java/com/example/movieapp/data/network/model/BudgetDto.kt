@@ -4,12 +4,17 @@ import com.example.movieapp.domain.model.Budget
 import com.google.gson.annotations.SerializedName
 
 data class BudgetDto(
-    @SerializedName("budget")
-    val budget: Budget,
+    @SerializedName("value")
+    val value: Int?,
+    @SerializedName("currency")
+    val currency: String?
 ) {
     companion object {
-        fun toEntity(budgetDto: BudgetDto): Budget {
-            return budgetDto.budget
+        fun toEntity(dto: BudgetDto): Budget {
+            return Budget(
+                value = dto.value ?: -1,
+                currency = dto.currency ?: ""
+            )
         }
     }
 }

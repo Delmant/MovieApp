@@ -28,7 +28,7 @@ data class MovieDto(
     @SerializedName("id")
     val id: Int,
     @SerializedName("imagesInfo")
-    val imagesInfoDto: ImagesInfoDto,
+    val imagesInfoDto: ImagesInfoDto?,
     @SerializedName("logo")
     val logoDto: LogoDto,
     @SerializedName("movieLength")

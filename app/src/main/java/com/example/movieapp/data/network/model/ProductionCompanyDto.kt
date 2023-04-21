@@ -1,5 +1,6 @@
 package com.example.movieapp.data.network.model
 
+import com.example.movieapp.domain.model.ProductionCompanies
 import com.google.gson.annotations.SerializedName
 
 data class ProductionCompanyDto(
@@ -9,4 +10,14 @@ data class ProductionCompanyDto(
     val url: String,
     @SerializedName("previewUrl")
     val previewUrl: String
-)
+) {
+    companion object {
+        fun toEntity(dto: ProductionCompanyDto): ProductionCompanies {
+            return ProductionCompanies(
+                name = dto.name,
+                url = dto.url,
+                previewUrl = dto.previewUrl
+            )
+        }
+    }
+}

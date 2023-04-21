@@ -4,12 +4,17 @@ import com.example.movieapp.domain.model.World
 import com.google.gson.annotations.SerializedName
 
 data class WorldDto(
-    @SerializedName("world")
-    val world: World
+    @SerializedName("value")
+    val value: Int,
+    @SerializedName("currency")
+    val currency: String,
 ) {
     companion object {
-        fun toEntity(worldDto: WorldDto): World {
-            return worldDto.world
+        fun toEntity(dto: WorldDto): World {
+            return World(
+                value = dto.value,
+                currency = dto.currency
+            )
         }
     }
 }
