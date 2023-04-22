@@ -5,27 +5,29 @@ import com.google.gson.annotations.SerializedName
 
 data class RatingDto(
     @SerializedName("kp")
-    val kp: Double,
+    val kp: Double?,
     @SerializedName("imdb")
-    val imdb: Double,
+    val imdb: Double?,
     @SerializedName("tmdb")
-    val tmdb: Double,
+    val tmdb: Double?,
     @SerializedName("filmCritics")
-    val filmCritics: Double,
+    val filmCritics: Double?,
     @SerializedName("russianFilmCritics")
-    val russianFilmCritics: Double,
+    val russianFilmCritics: Double?,
     @SerializedName("await")
-    val await: Double
+    val await: Double?
 ) {
     companion object {
+
+        val empty = RatingDto(-1.0, -1.0, -1.0, -1.0, -1.0, -1.0)
         fun toEntity(dto: RatingDto): Rating {
             return Rating(
-                kp = dto.kp,
-                imdb = dto.imdb,
-                tmdb = dto.tmdb,
-                filmCritics = dto.filmCritics,
-                russianFilmCritics = dto.russianFilmCritics,
-                await = dto.await
+                kp = dto.kp ?: -1.0,
+                imdb = dto.imdb ?: -1.0,
+                tmdb = dto.tmdb ?: -1.0,
+                filmCritics = dto.filmCritics?: -1.0,
+                russianFilmCritics = dto.russianFilmCritics ?: -1.0,
+                await = dto.await ?: -1.0
             )
         }
     }

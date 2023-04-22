@@ -5,15 +5,17 @@ import com.google.gson.annotations.SerializedName
 
 data class UsaDto(
     @SerializedName("value")
-    val value: Int,
+    val value: Int?,
     @SerializedName("currency")
-    val currency: String
+    val currency: String?
 ) {
     companion object {
+
+        val empty = UsaDto(-1, "")
         fun toEntity(dto: UsaDto): Usa {
             return Usa(
-                value = dto.value,
-                currency = dto.currency
+                value = dto.value ?: -1,
+                currency = dto.currency ?: ""
             )
         }
     }

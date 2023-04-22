@@ -5,15 +5,17 @@ import com.google.gson.annotations.SerializedName
 
 data class ReleaseYearDto(
     @SerializedName("start")
-    val start: Int,
+    val start: Int?,
     @SerializedName("end")
-    val end: Int
+    val end: Int?
 ) {
     companion object {
+
+        val empty = ReleaseYearDto(-1, -1)
         fun toEntity(dto: ReleaseYearDto): ReleaseYears {
             return ReleaseYears(
-                start = dto.start,
-                end = dto.end
+                start = dto.start ?: -1,
+                end = dto.end ?: -1
             )
         }
     }

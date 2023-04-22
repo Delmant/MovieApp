@@ -15,6 +15,8 @@ data class FeesDto(
     val usaDto: UsaDto?,
 ) {
     companion object {
+
+        val empty = FeesDto(WorldDto.empty, RussiaDto.empty, UsaDto.empty)
         fun toEntity(dto: FeesDto): Fees {
             return Fees(
                 world = if(dto.worldDto == null) {World("", -1)} else WorldDto.toEntity(dto.worldDto),

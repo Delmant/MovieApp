@@ -9,9 +9,11 @@ data class ExternalIdDto(
     @SerializedName("imdb")
     val imdb: String?,
     @SerializedName("tmdb")
-    val tmdb: Int?
+    val tmdb: Int?,
 ) {
     companion object {
+
+        val empty = ExternalIdDto("", "", -1)
         fun toEntity(dto: ExternalIdDto): ExternalId {
             return ExternalId(
                 kpHD = dto.kpHD ?: "",

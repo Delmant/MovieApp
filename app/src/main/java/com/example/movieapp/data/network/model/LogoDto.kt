@@ -9,6 +9,8 @@ data class LogoDto(
     val url: String?
 ) {
     companion object {
+
+        val empty = LogoDto("")
         fun toEntity(dto: LogoDto): Logo {
             return Logo(
                 url = dto.url ?: ""

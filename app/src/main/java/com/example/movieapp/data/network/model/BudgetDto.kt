@@ -10,6 +10,8 @@ data class BudgetDto(
     val currency: String?
 ) {
     companion object {
+
+        val empty = BudgetDto(-1, "")
         fun toEntity(dto: BudgetDto): Budget {
             return Budget(
                 value = dto.value ?: -1,

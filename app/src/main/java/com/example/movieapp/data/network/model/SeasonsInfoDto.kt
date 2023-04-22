@@ -5,15 +5,17 @@ import com.google.gson.annotations.SerializedName
 
 data class SeasonsInfoDto(
     @SerializedName("number")
-    val number: Int,
+    val number: Int?,
     @SerializedName("episodesCount")
-    val episodesCount: Int
+    val episodesCount: Int?
 ) {
     companion object {
+
+        val empty = SeasonsInfoDto(-1, -1)
         fun toEntity(dto: SeasonsInfoDto): SeasonsInfo {
             return SeasonsInfo(
-                number = dto.number,
-                episodesCount = dto.episodesCount
+                number = dto.number ?: -1,
+                episodesCount = dto.episodesCount ?: -1
             )
         }
     }

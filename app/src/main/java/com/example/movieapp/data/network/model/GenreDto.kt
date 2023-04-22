@@ -9,6 +9,8 @@ data class GenreDto(
     val name: String?
 ) {
     companion object {
+
+        val empty = GenreDto("")
         fun toEntity(dto: GenreDto): Genres {
             return Genres(
                 name = dto.name ?: ""

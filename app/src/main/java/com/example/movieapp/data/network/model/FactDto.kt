@@ -12,6 +12,8 @@ data class FactDto(
     val spoiler: Boolean?
 ) {
     companion object {
+
+        val empty = FactDto("", "",  false)
         fun toEntity(dto: FactDto): Facts {
             return Facts(
                 spoiler = dto.spoiler ?: false,

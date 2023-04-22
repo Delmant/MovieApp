@@ -5,24 +5,26 @@ import com.google.gson.annotations.SerializedName
 
 data class TrailerDto(
     @SerializedName("url")
-    val url: String,
+    val url: String?,
     @SerializedName("name")
-    val name: String,
+    val name: String?,
     @SerializedName("site")
-    val site: String,
+    val site: String?,
     @SerializedName("type")
-    val type: String,
+    val type: String?,
     @SerializedName("size")
-    val size: Int
+    val size: Int?
 ) {
     companion object {
+
+        val empty = TrailerDto("", "", "", "", -1)
         fun toEntity(dto: TrailerDto): Trailers {
             return Trailers(
-                url = dto.url,
-                name = dto.name,
-                size = dto.size,
-                type = dto.type,
-                site = dto.site
+                url = dto.url ?: "",
+                name = dto.name ?: "",
+                size = dto.size ?: -1,
+                type = dto.type ?: "",
+                site = dto.site ?: ""
             )
         }
     }

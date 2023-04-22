@@ -5,30 +5,32 @@ import com.google.gson.annotations.SerializedName
 
 data class PersonDto(
     @SerializedName("id")
-    val id: Int,
+    val id: Int?,
     @SerializedName("photo")
-    val photo: String,
+    val photo: String?,
     @SerializedName("name")
-    val name: String,
+    val name: String?,
     @SerializedName("enName")
-    val enName: String,
+    val enName: String?,
     @SerializedName("description")
-    val description: String,
+    val description: String?,
     @SerializedName("profession")
-    val profession: String,
+    val profession: String?,
     @SerializedName("enProfession")
-    val enProfession: String,
+    val enProfession: String?,
 ) {
     companion object {
+
+        val empty = PersonDto(-1, "", "", "", "", "", "")
         fun toEntity(dto: PersonDto): Persons {
             return Persons(
-                id = dto.id,
-                photo = dto.photo,
-                name = dto.name,
-                enName = dto.enName,
-                description = dto.description,
-                profession = dto.profession,
-                enProfession = dto.enProfession
+                id = dto.id ?: -1,
+                photo = dto.photo ?: "",
+                name = dto.name ?: "",
+                enName = dto.enName ?: "",
+                description = dto.description ?: "",
+                profession = dto.profession ?: "",
+                enProfession = dto.enProfession ?: ""
             )
         }
     }

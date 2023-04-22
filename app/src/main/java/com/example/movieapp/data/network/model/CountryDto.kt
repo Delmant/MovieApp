@@ -8,6 +8,8 @@ data class CountryDto(
     val name: String?
 ) {
     companion object {
+
+        val empty = CountryDto("")
         fun toEntity(dto: CountryDto): Country {
             return Country(
                 name = dto.name ?: ""

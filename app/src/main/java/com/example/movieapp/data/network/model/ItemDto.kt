@@ -9,9 +9,11 @@ data class ItemDto(
     @SerializedName("logo")
     val logoDto: LogoDto?,
     @SerializedName("url")
-    val url: String?
+    val url: String?,
 ) {
     companion object {
+
+        val empty = ItemDto("", LogoDto(""), "")
         fun toEntity(dto: ItemDto): Items {
             return Items(
                 name = dto.name ?: "",
