@@ -23,9 +23,12 @@
             />
     </com.google.android.material.card.MaterialCardView>
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:id="@+id/tv_actor_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines= "23444"
+        android:scrollHorizontally="false"
         android:text="Генри Голдинг"
-        android:textSize="18sp"
+        android:textSize="16sp"
         />
 </LinearLayout>

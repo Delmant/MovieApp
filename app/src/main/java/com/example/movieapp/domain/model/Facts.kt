@@ -4,7 +4,8 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class ReleaseYear(
-    val end: Int,
-    val start: Int
+data class Facts(
+    val spoiler: Boolean,
+    val type: String,
+    val value: String
 ) : Parcelable

@@ -4,11 +4,8 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class SequelsAndPrequel(
-    val alternativeName: String,
-    val enName: String,
-    val id: Int,
+data class Names(
+    val language: String,
     val name: String,
-    val poster: Poster,
     val type: String
 ) : Parcelable

@@ -5,6 +5,6 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class Budget(
-    val currency: String,
-    val value: Int
+    val value: Int,
+    val currency: String
 ): Parcelable

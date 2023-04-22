@@ -1,7 +1,25 @@
 package com.example.movieapp.data.network.model
 
+import com.example.movieapp.domain.model.Items
+import com.google.gson.annotations.SerializedName
+
 data class ItemDto(
-    val logoDto: LogoDto,
-    val name: String,
-    val url: String
-)
+    @SerializedName("name")
+    val name: String?,
+    @SerializedName("logo")
+    val logoDto: LogoDto?,
+    @SerializedName("url")
+    val url: String?,
+) {
+    companion object {
+
+        val empty = ItemDto("", LogoDto(""), "")
+        fun toEntity(dto: ItemDto): Items {
+            return Items(
+                name = dto.name ?: "",
+                logo = LogoDto.toEntity(dto.logoDto ?: LogoDto("")),
+                url = dto.url ?: ""
+            )
+        }
+    }
+}

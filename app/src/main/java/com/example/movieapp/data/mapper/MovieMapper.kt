@@ -1,38 +1,10 @@
 package com.example.movieapp.data.mapper
 
 
-import Backdrop
-import Budget
-import Country
-import ExternalId
-import Fact
-import Fees
-import Genre
-import ImagesInfo
-import Item
-import Logo
-import Movie
-import Name
-import Person
-import Poster
-import Premiere
-import ProductionCompany
-import Rating
-import ReleaseYear
-import ReviewInfo
-import Russia
-import SeasonsInfo
-import SequelsAndPrequel
-import SimilarMovy
-import Teaser
-import Trailer
-import Usa
-import Videos
-import Votes
-import Watchability
-import World
 import com.example.movieapp.data.network.model.*
+import com.example.movieapp.domain.model.*
 import javax.inject.Inject
+
 
 class MovieMapper @Inject constructor() {
 
@@ -46,25 +18,25 @@ class MovieMapper @Inject constructor() {
             description = movieDto.description,
             enName = movieDto.enName,
             externalId = mapExternalIdDtoToExternalEntity(movieDto.externalIdDto),
-            facts = mapListFactsDtoToFactsEntity(movieDto.factsDto),
+            facts = mapListFactsDtoToFactsEntity(movieDto.factDtos),
             id = movieDto.id,
             imagesInfo = mapImagesInfoDtoToImagesInfoEntity(movieDto.imagesInfoDto),
             logo = mapLogoDtoToLogoEntity(movieDto.logoDto),
             movieLength = movieDto.movieLength,
             name = movieDto.name,
             fees = mapFeesDtoToFeesEntity(movieDto.feesDto),
-            genres = mapListGenreDtoToListGenreEntity(movieDto.genresDto),
-            names = mapListNameDtoToListNameEntity(movieDto.namesDto),
-            persons = mapListPersonDtoToListPersonEntity(movieDto.personsDto),
+            genres = mapListGenreDtoToListGenreEntity(movieDto.genreDtos),
+            names = mapListNameDtoToListNameEntity(movieDto.nameDtos),
+            persons = mapListPersonDtoToListPersonEntity(movieDto.personDtos),
             poster = mapPosterDtoToPosterEntity(movieDto.posterDto),
             premiere = mapPremierDtoToPremierEntity(movieDto.premiereDto),
             productionCompanies = mapListProductionCompanyDtoToProductionCompanyEntity(movieDto.productionCompanies),
             rating = mapRatingDtoToRatingEntity(movieDto.ratingDto),
             ratingMpaa = movieDto.ratingMpaa,
-            releaseYears = mapListReleaseYearDtoToListReleaseYearEntity(movieDto.releaseYearsDto),
+            releaseYears = mapListReleaseYearDtoToListReleaseYearEntity(movieDto.releaseYearDtos),
             reviewInfo = mapReviewInfoDtoToReviewInfoEntity(movieDto.reviewInfoDto),
             seasonsInfo = mapListSeasonInfoDtoToListSeasonInfoEntity(movieDto.seasonsInfoDto),
-            sequelsAndPrequels = mapListSequelsAndPrequelDtoToListSequelsAndPrequelEntity(movieDto.sequelsAndPrequelsDto),
+            sequelsAndPrequels = mapListSequelsAndPrequelDtoToListSequelsAndPrequelEntity(movieDto.sequelsAndPrequelDtos),
             shortDescription = movieDto.shortDescription,
             similarMovies = mapListSimilarMovyDtoToListSimilarMovyEntity(movieDto.similarMovies),
             slogan = movieDto.slogan,
@@ -81,17 +53,21 @@ class MovieMapper @Inject constructor() {
     }
 
     private fun mapBackDropDtoToBackDropEntity(backdropDto: BackdropDto): Backdrop {
-        return Backdrop(
-            previewUrl = backdropDto.previewUrl,
-            url = backdropDto.url
-        )
+        if(backdropDto.url != null && backdropDto.previewUrl != null) {
+            return Backdrop(
+                previewUrl = backdropDto.previewUrl,
+                url = backdropDto.url
+            )
+        }
+        return Backdrop("", "")
     }
 
     private fun mapBudgetDtoToBudgetEntity(budgetDto: BudgetDto): Budget {
-        return Budget(
-            currency = budgetDto.currency,
-            value = budgetDto.value
-        )
+        return if (budgetDto.currency != null) {
+            Budget(currency = budgetDto.currency, value = budgetDto.value)
+        } else {
+            Budget(currency = "USD", value = budgetDto.value)
+        }
     }
 
     private fun mapListCountriesDtoToListCountriesEntity(
@@ -114,14 +90,14 @@ class MovieMapper @Inject constructor() {
         )
     }
 
-    private fun mapListFactsDtoToFactsEntity(factsDto: List<FactDto>): List<Fact> {
+    private fun mapListFactsDtoToFactsEntity(factsDto: List<FactDto>): List<Facts> {
         return factsDto.map {
             mapFactDtoToFactEntity(it)
         }
     }
 
-    private fun mapFactDtoToFactEntity(factDto: FactDto): Fact {
-        return Fact(
+    private fun mapFactDtoToFactEntity(factDto: FactDto): Facts {
+        return Facts(
             spoiler = factDto.spoiler,
             value = factDto.value,
             type = factDto.type
@@ -171,38 +147,38 @@ class MovieMapper @Inject constructor() {
         )
     }
 
-    private fun mapListGenreDtoToListGenreEntity(genres: List<GenreDto>): List<Genre> {
+    private fun mapListGenreDtoToListGenreEntity(genres: List<GenreDto>): List<Genres> {
         return genres.map {
             mapGenreDtoToGenreEntity(it)
         }
     }
 
-    private fun mapGenreDtoToGenreEntity(genreDto: GenreDto): Genre {
-        return Genre(name = genreDto.name)
+    private fun mapGenreDtoToGenreEntity(genreDto: GenreDto): Genres {
+        return Genres(name = genreDto.name)
     }
 
-    private fun mapListNameDtoToListNameEntity(names: List<NameDto>): List<Name> {
+    private fun mapListNameDtoToListNameEntity(names: List<NameDto>): List<Names> {
         return names.map {
             mapNameDtoToNameEntity(it)
         }
     }
 
-    private fun mapNameDtoToNameEntity(nameDto: NameDto): Name {
-        return Name(
+    private fun mapNameDtoToNameEntity(nameDto: NameDto): Names {
+        return Names(
             language = nameDto.language,
             name = nameDto.name,
             type = nameDto.type
         )
     }
 
-    private fun mapListPersonDtoToListPersonEntity(persons: List<PersonDto>): List<Person> {
+    private fun mapListPersonDtoToListPersonEntity(persons: List<PersonDto>): List<Persons> {
         return persons.map {
             mapPersonDtoToPersonEntity(it)
         }
     }
 
-    private fun mapPersonDtoToPersonEntity(personDto: PersonDto): Person {
-        return Person(
+    private fun mapPersonDtoToPersonEntity(personDto: PersonDto): Persons {
+        return Persons(
             description = personDto.description,
             name = personDto.name,
             enName = personDto.enName,
@@ -234,7 +210,7 @@ class MovieMapper @Inject constructor() {
 
     private fun mapListProductionCompanyDtoToProductionCompanyEntity(
         productionCompanies: List<ProductionCompanyDto>,
-    ): List<ProductionCompany> {
+    ): List<ProductionCompanies> {
         return productionCompanies.map {
             mapProductionCompanyDtoToProductionCompanyEntity(it)
         }
@@ -242,8 +218,8 @@ class MovieMapper @Inject constructor() {
 
     private fun mapProductionCompanyDtoToProductionCompanyEntity(
         productionCompanyDto: ProductionCompanyDto,
-    ): ProductionCompany {
-        return ProductionCompany(
+    ): ProductionCompanies {
+        return ProductionCompanies(
             name = productionCompanyDto.name,
             url = productionCompanyDto.url,
             previewUrl = productionCompanyDto.previewUrl
@@ -257,20 +233,20 @@ class MovieMapper @Inject constructor() {
             kp = ratingDto.kp,
             imdb = ratingDto.imdb,
             russianFilmCritics = ratingDto.russianFilmCritics,
-            filmCritics = ratingDto.filmCritics
+            filmCritics = ratingDto.filmCritics.toInt()
         )
     }
 
     private fun mapListReleaseYearDtoToListReleaseYearEntity(
         releaseYears: List<ReleaseYearDto>,
-    ): List<ReleaseYear> {
+    ): List<ReleaseYears> {
         return releaseYears.map {
             mapReleaseYearDtoToReleaseYearEntity(it)
         }
     }
 
-    private fun mapReleaseYearDtoToReleaseYearEntity(releaseYearDto: ReleaseYearDto): ReleaseYear {
-        return ReleaseYear(
+    private fun mapReleaseYearDtoToReleaseYearEntity(releaseYearDto: ReleaseYearDto): ReleaseYears {
+        return ReleaseYears(
             end = releaseYearDto.end,
             start = releaseYearDto.start
         )
@@ -301,7 +277,7 @@ class MovieMapper @Inject constructor() {
 
     private fun mapListSequelsAndPrequelDtoToListSequelsAndPrequelEntity(
         sequelsAndPrequels: List<SequelsAndPrequelDto>,
-    ): List<SequelsAndPrequel> {
+    ): List<SequelsAndPrequels> {
         return sequelsAndPrequels.map {
             mapSequelsAndPrequelDtoToSequelsAndPrequelEntity(it)
         }
@@ -309,8 +285,8 @@ class MovieMapper @Inject constructor() {
 
     private fun mapSequelsAndPrequelDtoToSequelsAndPrequelEntity(
         sequelsAndPrequelDto: SequelsAndPrequelDto,
-    ): SequelsAndPrequel {
-        return SequelsAndPrequel(
+    ): SequelsAndPrequels {
+        return SequelsAndPrequels(
             alternativeName = sequelsAndPrequelDto.alternativeName,
             name = sequelsAndPrequelDto.name,
             enName = sequelsAndPrequelDto.enName,
@@ -322,14 +298,14 @@ class MovieMapper @Inject constructor() {
 
     private fun mapListSimilarMovyDtoToListSimilarMovyEntity(
         similarMovies: List<SimilarMovyDto>,
-    ): List<SimilarMovy> {
+    ): List<SimilarMovies> {
         return similarMovies.map {
             mapSimilarMovyDtoToSimilarMovyEntity(it)
         }
     }
 
-    private fun mapSimilarMovyDtoToSimilarMovyEntity(similarMovyDto: SimilarMovyDto): SimilarMovy {
-        return SimilarMovy(
+    private fun mapSimilarMovyDtoToSimilarMovyEntity(similarMovyDto: SimilarMovyDto): SimilarMovies {
+        return SimilarMovies(
             alternativeName = similarMovyDto.alternativeName,
             name = similarMovyDto.name,
             enName = similarMovyDto.enName,
@@ -346,14 +322,14 @@ class MovieMapper @Inject constructor() {
         )
     }
 
-    private fun mapListTeaserDtoToListTeaserEntity(teasers: List<TeaserDto>): List<Teaser> {
+    private fun mapListTeaserDtoToListTeaserEntity(teasers: List<TeaserDto>): List<Teasers> {
         return teasers.map {
             mapTeaserDtoToTeaserEntity(it)
         }
     }
 
-    private fun mapTeaserDtoToTeaserEntity(teaserDto: TeaserDto): Teaser {
-        return Teaser(
+    private fun mapTeaserDtoToTeaserEntity(teaserDto: TeaserDto): Teasers {
+        return Teasers(
             name = teaserDto.name,
             type = teaserDto.type,
             url = teaserDto.url,
@@ -362,14 +338,14 @@ class MovieMapper @Inject constructor() {
         )
     }
 
-    private fun mapListTrailerDtoToListTrailerEntity(trailers: List<TrailerDto>): List<Trailer> {
+    private fun mapListTrailerDtoToListTrailerEntity(trailers: List<TrailerDto>): List<Trailers> {
         return trailers.map {
             mapTrailerDtoToTrailerEntity(it)
         }
     }
 
-    private fun mapTrailerDtoToTrailerEntity(trailerDto: TrailerDto): Trailer {
-        return Trailer(
+    private fun mapTrailerDtoToTrailerEntity(trailerDto: TrailerDto): Trailers {
+        return Trailers(
             name = trailerDto.name,
             type = trailerDto.type,
             url = trailerDto.url,
@@ -395,14 +371,14 @@ class MovieMapper @Inject constructor() {
         )
     }
 
-    private fun mapListItemDtoToListItemEntity(items: List<ItemDto>): List<Item> {
+    private fun mapListItemDtoToListItemEntity(items: List<ItemDto>): List<Items> {
         return items.map {
             mapItemDtoToItemEntity(it)
         }
     }
 
-    private fun mapItemDtoToItemEntity(item: ItemDto): Item {
-        return Item(
+    private fun mapItemDtoToItemEntity(item: ItemDto): Items {
+        return Items(
             logo = mapLogoDtoToLogoEntity(item.logoDto),
             name = item.name,
             url = item.name

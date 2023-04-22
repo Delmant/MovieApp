@@ -1,5 +1,19 @@
 package com.example.movieapp.data.network.model
 
+import com.example.movieapp.domain.model.Country
+import com.google.gson.annotations.SerializedName
+
 data class CountryDto(
-    val name: String
-)
+    @SerializedName("name")
+    val name: String?
+) {
+    companion object {
+
+        val empty = CountryDto("")
+        fun toEntity(dto: CountryDto): Country {
+            return Country(
+                name = dto.name ?: ""
+            )
+        }
+    }
+}

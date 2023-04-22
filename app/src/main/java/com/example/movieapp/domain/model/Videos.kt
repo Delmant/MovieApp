@@ -6,6 +6,6 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 
 data class Videos(
-    val teasers: List<Teaser>,
-    val trailers: List<Trailer>
+    val teasers: List<Teasers>,
+    val trailers: List<Trailers>
 ) : Parcelable

@@ -4,10 +4,11 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class Teaser(
+data class SimilarMovies(
+    val alternativeName: String,
+    val enName: String,
+    val id: Int,
     val name: String,
-    val site: String,
-    val size: Int,
-    val type: String,
-    val url: String
+    val poster: Poster,
+    val type: String
 ) : Parcelable
