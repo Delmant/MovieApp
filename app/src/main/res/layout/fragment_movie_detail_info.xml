@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent" android:layout_height="wrap_content" tools:context=".presentation.movie_detail_fragment.MovieDetailFragment">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -16,8 +11,43 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+
             android:adjustViewBounds="true"
             android:src="@drawable/back"
+            />
+
+        <View
+            android:id="@+id/v_shadow_transit"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:layout_weight="5"
+            android:background="@drawable/shadow"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/guideline_movieImg_separate"
+            />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineForBackButtonStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.05" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineForBackButtonTop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.05" />
+
+        <ImageView
+            android:id="@+id/btn_close"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/guidelineForBackButtonTop"
+            app:layout_constraintStart_toStartOf="@id/guidelineForBackButtonStart"
+            android:src="@drawable/baseline_arrow_back_24"
             />
 
         <androidx.constraintlayout.widget.Guideline
@@ -25,150 +55,234 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.3" />
+            app:layout_constraintGuide_percent="0.38" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_helper"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            app:layout_constraintGuide_percent="1" />
+            app:layout_constraintGuide_percent="1.0" />
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cv_background"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cl_first_info"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@color/black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="@id/guideline_movieImg_separate">
 
-            app:layout_constraintHeight_percent="0.7"
-            app:layout_constraintTop_toBottomOf="@id/iv_movie"
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.05" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineNameStart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.15" />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineNameEnd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.85" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.95" />
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="@id/guidelineNameStart"
+                app:layout_constraintEnd_toEndOf="@id/guidelineNameEnd"
+                android:text="Призрак в доспехах: Синдром одиночки"
+                android:textSize="23sp"
+                android:fontFamily="@font/montserrat_black"
+                android:textColor="@color/dark_blue"
+                android:maxLines="3"
+                android:singleLine="false"
+                android:layout_marginTop="10dp"
+                app:layout_constrainedWidth="true"
+                android:paddingBottom="13sp"
+                android:gravity="center"
+                style="@style/MaterialAlertDialog.Material3.Title.Text"
+                app:layout_constraintHorizontal_bias="0.5" />
+
+            <TextView
+                android:id="@+id/tv_title_en"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ghost in the shell"
+                android:textSize="16sp"
+                android:textColor="@color/grey"
+                app:layout_constraintTop_toBottomOf="@id/tv_title"
+                app:layout_constraintStart_toStartOf="@id/guideline4"
+                app:layout_constraintEnd_toEndOf="@id/guideline5"
+                app:layout_constraintHorizontal_bias="0.6"
+                />
+
+            <TextView
+                android:id="@+id/tv_votes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="60k"
+                android:textSize="16sp"
+                android:textColor="@color/grey"
+                app:layout_constraintTop_toBottomOf="@id/tv_title"
+                app:layout_constraintEnd_toStartOf="@id/tv_title_en"
+
+                />
+
+            <TextView
+                android:id="@+id/tv_kp_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="8.0"
+                android:textSize="16sp"
+                android:textColor="@color/grey"
+                android:layout_marginEnd="5dp"
+                app:layout_constraintTop_toBottomOf="@id/tv_title"
+
+                app:layout_constraintEnd_toStartOf="@id/tv_votes"
+
+                />
+
+            <TextView
+                android:id="@+id/tv_year_and_genres"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1995, аниме, мультфильм"
+                android:textSize="16sp"
+                android:textColor="@color/grey"
+                android:layout_marginEnd="5dp"
+                app:layout_constraintTop_toBottomOf="@id/tv_title_en"
+
+                app:layout_constraintStart_toStartOf="@id/guideline4"
+                app:layout_constraintEnd_toEndOf="@id/guideline5"
+
+                />
+
+            <TextView
+                android:id="@+id/tv_country_length_pg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Япония, 1ч 22 мин, 16+"
+                android:textSize="16sp"
+                android:textColor="@color/grey"
+                android:layout_marginEnd="5dp"
+
+                app:layout_constraintTop_toBottomOf="@id/tv_year_and_genres"
+
+                app:layout_constraintStart_toStartOf="@id/guideline4"
+                app:layout_constraintEnd_toEndOf="@id/guideline5"
+
+                />
+
+            <LinearLayout
+                android:id="@+id/ll_buttons"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/tv_country_length_pg"
+                android:orientation="horizontal"
+                android:padding="15dp"
+                app:layout_constraintStart_toStartOf="@id/guideline4"
+                app:layout_constraintEnd_toEndOf="@id/guideline5"
+                >
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_play_trailer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Трейлер"
+                    android:textSize="14dp"
+                    app:icon="@drawable/baseline_play_arrow_24"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:textColor="@color/white"
+                    android:layout_marginEnd="20dp"
+                    app:cornerRadius="17dp"
+                    app:backgroundTint="@color/dark_blue"
+                    style="@style/Widget.Material3.Button"/>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/baseline_bookmark_border_24"
+                    />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_actors"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="В ролях: Райан Гослинг, Кэри Малиган, Брайан Крэнстон, Альберт Брукс и другие"
+                android:textSize="13sp"
+                android:layout_marginStart="7dp"
+                app:layout_goneMarginEnd="7dp"
+
+                app:layout_constrainedWidth="true"
+                android:gravity="center"
+                android:textColor="@color/grey"
+                android:layout_marginEnd="5dp"
+                app:layout_constraintTop_toBottomOf="@id/ll_buttons"
+                android:paddingBottom="50dp"
+                app:layout_constraintStart_toStartOf="@id/guideline4"
+                app:layout_constraintEnd_toEndOf="@id/guideline5"
+
+                />
+
+            <TextView
+                android:id="@+id/tv_description_text_short"
+                android:layout_width="0sp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/tv_bg"
+                android:letterSpacing="0.07"
+                android:text="@string/desc"
+                android:textColor="#262626"
+                android:autoSizeMinTextSize="13sp"
+                android:autoSizeMaxTextSize="26sp"
+
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_actors" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintTop_toBottomOf="@id/cl_first_info"
             app:layout_constraintStart_toStartOf="parent"
-
-
-            app:cardCornerRadius="16dp"
-            app:cardElevation="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@color/white"
             >
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+            <TextView
+                android:id="@+id/tv_description_text"
+                android:layout_width="0sp"
+                android:layout_height="wrap_content"
+                android:letterSpacing="0.07"
+                android:text="@string/desc"
+                android:textColor="@color/black"
+                android:autoSizeMinTextSize="13sp"
+                android:autoSizeMaxTextSize="26sp"
 
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/guideline4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintGuide_percent="0.05" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="parent" />
 
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/guideline5"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintGuide_percent="0.95" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <TextView
-                    android:id="@+id/tv_title"
-                    android:layout_width="0sp"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="@id/guideline4"
-                    app:layout_constraintEnd_toEndOf="@id/guideline5"
-                    android:text="Джентельмены"
-                    android:textSize="26sp"
-                    android:textColor="@color/black"
-                    android:layout_marginTop="20dp"
-                    android:paddingBottom="13sp"
-                    style="@style/MaterialAlertDialog.Material3.Title.Text"
-                    />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_rating"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:layout_constraintBottom_toBottomOf=""
-                    app:layout_constraintEnd_toEndOf="@id/guideline5"
-                    app:layout_constraintStart_toStartOf="@id/guideline4"
-                    app:layout_constraintTop_toBottomOf="@id/tv_title"
-                    tools:listitem="@layout/rating_item"
-
-                    />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_genre"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:layout_constraintBottom_toBottomOf=""
-                    app:layout_constraintEnd_toEndOf="@id/guideline5"
-                    app:layout_constraintStart_toStartOf="@id/guideline4"
-                    app:layout_constraintTop_toBottomOf="@id/rv_rating"
-                    tools:listitem="@layout/genre_item" />
-
-                <TextView
-                    android:id="@+id/tv_description"
-                    android:layout_width="0sp"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="@id/rv_genre"
-                    app:layout_constraintStart_toStartOf="@id/guideline4"
-                    app:layout_constraintEnd_toEndOf="@id/guideline5"
-                    android:text="Описание"
-                    android:textSize="20sp"
-                    android:textColor="@color/black"
-                    android:layout_marginTop="60dp"
-                    style="@style/MaterialAlertDialog.Material3.Title.Text"
-                    />
-
-                <TextView
-                    android:id="@+id/tv_description_text"
-                    android:layout_width="0sp"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toTopOf="@id/tv_description"
-                    app:layout_constraintStart_toStartOf="@id/guideline4"
-                    app:layout_constraintEnd_toEndOf="@id/guideline5"
-                    android:text="@string/desc"
-                    android:textSize="16sp"
-                    android:layout_marginTop="35dp"
-                    android:letterSpacing="0.07"
-                    />
-
-                <TextView
-                    android:id="@+id/tv_cast"
-                    android:layout_width="0sp"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@id/tv_description_text"
-                    app:layout_constraintStart_toStartOf="@id/guideline4"
-                    app:layout_constraintEnd_toEndOf="@id/guideline5"
-                    android:text="Актёрский состав"
-                    android:textSize="20sp"
-                    android:textColor="@color/black"
-                    android:layout_marginTop="20dp"
-                    style="@style/MaterialAlertDialog.Material3.Title.Text"
-                    />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_actor"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:layout_constraintBottom_toBottomOf=""
-                    app:layout_constraintEnd_toEndOf="@id/guideline5"
-                    app:layout_constraintStart_toStartOf="@id/guideline4"
-                    app:layout_constraintTop_toBottomOf="@id/tv_cast"
-                    tools:listitem="@layout/actor_item" />
-
-                <androidx.constraintlayout.widget.Barrier
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:barrierDirection="top"
-                    tools:layout_editor_absoluteX="152dp"
-                    tools:layout_editor_absoluteY="429dp" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </com.google.android.material.card.MaterialCardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

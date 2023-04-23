@@ -1,16 +1,16 @@
 package com.example.movieapp.presentation.rv
 
-import Movie
+
 import androidx.recyclerview.widget.DiffUtil
-import com.example.movieapp.data.network.model.MovieDto
+import com.example.movieapp.domain.model.Movie
 
-object MovieDiffCallback: DiffUtil.ItemCallback<MovieDto>() {
+object MovieDiffCallback: DiffUtil.ItemCallback<Movie>() {
 
-    override fun areItemsTheSame(oldItem: MovieDto, newItem: MovieDto): Boolean {
+    override fun areItemsTheSame(oldItem: Movie, newItem: Movie): Boolean {
         return oldItem.id == newItem.id
     }
 
-    override fun areContentsTheSame(oldItem: MovieDto, newItem: MovieDto): Boolean {
+    override fun areContentsTheSame(oldItem: Movie, newItem: Movie): Boolean {
         return oldItem == newItem
     }
 }

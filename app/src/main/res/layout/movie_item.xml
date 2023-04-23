@@ -1,20 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    app:cardCornerRadius="8dp"
-    app:cardElevation="4dp"
-    app:cardUseCompatPadding="true"
-    >
-    <ImageView
-        android:id="@+id/iv_movie"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:scaleType="center"
-        android:src="@drawable/poster_test"
+    android:padding="7dp"
+    android:orientation="vertical">
+    <com.google.android.material.card.MaterialCardView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp"
+        app:cardUseCompatPadding="true"
+        >
+        <ImageView
+            android:id="@+id/iv_movie"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:scaleType="center"
+            android:src="@drawable/t"
+            />
+    </com.google.android.material.card.MaterialCardView>
+    <TextView
+        android:id="@+id/tv_movie_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:maxLines= "23444"
+        android:textColor="@color/black"
+        android:fontFamily="@font/montserrat_medium"
+        android:scrollHorizontally="false"
+        android:text="Генри Голдинг"
+        android:textSize="16sp"
         />
-
-</com.google.android.material.card.MaterialCardView>
+</LinearLayout>

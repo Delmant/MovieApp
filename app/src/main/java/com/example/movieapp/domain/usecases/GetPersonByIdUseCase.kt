@@ -5,5 +5,5 @@ import javax.inject.Inject
 
 class GetPersonByIdUseCase @Inject constructor(private val repository: MovieRepository) {
 
-     operator fun invoke() = repository.getPersonById()
+     suspend operator fun invoke() = repository.getPersonById()
 }

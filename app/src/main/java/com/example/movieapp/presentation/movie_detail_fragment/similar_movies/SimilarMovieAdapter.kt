@@ -1,4 +1,4 @@
-package com.example.movieapp.presentation.rv
+package com.example.movieapp.presentation.movie_detail_fragment.similar_movies
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,25 +6,25 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.bumptech.glide.Glide
 import com.example.movieapp.databinding.MovieItemBinding
-import com.example.movieapp.domain.model.Movie
+import com.example.movieapp.domain.model.SimilarMovies
 
 
-class MovieAdapter(
+class SimilarMovieAdapter(
     private val context: Context
-) : ListAdapter<Movie, MovieViewHolder >(MovieDiffCallback) {
+) : ListAdapter<SimilarMovies, SimilarMovieViewHolder >(SimilarMovieDiffCallback) {
 
     var listener: OnItemClickListener? = null
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SimilarMovieViewHolder {
         val binding = MovieItemBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
         )
         binding.root.setOnClickListener {  }
-        return MovieViewHolder(binding)
+        return SimilarMovieViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: MovieViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: SimilarMovieViewHolder, position: Int) {
         val movie = getItem(position)
         with(holder.binding) {
             with(movie) {
@@ -40,6 +40,6 @@ class MovieAdapter(
     }
 
     interface OnItemClickListener {
-        fun onItemClick(data: Movie)
+        fun onItemClick(data: SimilarMovies)
     }
 }

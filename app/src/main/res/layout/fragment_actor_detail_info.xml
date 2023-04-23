@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/black"
+   >
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.05" />
+
+
+    <ImageView
+        android:id="@+id/btn_close"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/guidelineTop"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        android:src="@drawable/baseline_arrow_back_24"
+        />
+
+    <com.google.android.material.card.MaterialCardView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintStart_toStartOf="@id/guidelineStart"
+        app:layout_constraintTop_toBottomOf="@id/btn_close"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="0.05"
+        app:layout_constraintHorizontal_bias="0"
+        >
+        <ImageView
+            android:id="@+id/iv_actor"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:scaleType="center"
+            android:src="@drawable/t"
+            />
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+        android:id="@+id/tv_actor_name_ru"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Генри\nГолдинг"
+        android:textColor="@color/dark_blue"
+        android:fontFamily="@font/montserrat_black"
+        android:textSize="30dp"
+        app:layout_constraintStart_toStartOf="@id/guidelineName"
+        app:layout_constraintTop_toBottomOf="@id/btn_close"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:layout_constraintVertical_bias="0.05"
+        app:layout_constraintHorizontal_bias="0.8"
+        />
+
+    <TextView
+        android:id="@+id/tv_actor_name_en"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Genry Golding"
+        android:textColor="@color/dark_blue"
+        android:fontFamily="@font/montserrat_medium"
+        android:textSize="15dp"
+        app:layout_constraintStart_toStartOf="@id/guidelineName"
+        app:layout_constraintTop_toBottomOf="@id/tv_actor_name_ru"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:layout_constraintVertical_bias="0.01"
+        app:layout_constraintHorizontal_bias="0.8"
+        />
+
+    <TextView
+        android:id="@+id/tv_profession"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Актёр, режисёр"
+        android:textColor="@color/dark_blue"
+        android:fontFamily="@font/montserrat_medium"
+        android:textSize="15dp"
+        app:layout_constraintStart_toStartOf="@id/guidelineName"
+        app:layout_constraintTop_toBottomOf="@id/tv_actor_name_en"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:layout_constraintVertical_bias="0.02"
+        app:layout_constraintHorizontal_bias="0.8"
+        />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="189dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
