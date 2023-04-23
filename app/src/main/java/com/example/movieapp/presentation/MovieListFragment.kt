@@ -5,8 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
+import com.example.movieapp.R
 import com.example.movieapp.databinding.MovieListBinding
 import com.example.movieapp.domain.model.Movie
+import com.example.movieapp.presentation.movie_detail_fragment.MovieDetailFragment
+import com.example.movieapp.presentation.rv.MovieAdapter
 import java.lang.RuntimeException
 
 class MovieListFragment : Fragment() {
@@ -18,10 +22,31 @@ class MovieListFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View? {
         _binding = MovieListBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val movie = requireArguments().get(MOVIE_KEY_WORD)
+        val list = mutableListOf<Movie>()
+        repeat(20) {
+            list.add(movie as Movie)
+        }
+        val adapter = MovieAdapter(requireContext())
+        binding.rvMovies.adapter = adapter
+        binding.rvMovies.layoutManager = GridLayoutManager(requireContext(), 4)
+        adapter.submitList(list)
+        adapter.listener = object : MovieAdapter.OnItemClickListener {
+            override fun onItemClick(data: Movie) {
+                fragmentManager?.beginTransaction()
+                    ?.add(R.id.fragment_container, MovieDetailFragment.newInstance(movie as Movie))
+                    ?.addToBackStack(null)?.commit()
+            }
+
+        }
     }
 
     override fun onDestroyView() {

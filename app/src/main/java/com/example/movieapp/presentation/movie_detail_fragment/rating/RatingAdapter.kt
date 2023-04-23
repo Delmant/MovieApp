@@ -19,7 +19,7 @@ class RatingAdapter(val list: List<String>): RecyclerView.Adapter<RatingViewHold
         val item = list[position]
         with(holder.binding) {
             with(item) {
-                holder.binding.rating.text = item
+
             }
         }
     }

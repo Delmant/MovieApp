@@ -5,5 +5,5 @@ import javax.inject.Inject
 
 class GetMovieByIdUseCase @Inject constructor(private val movieRepository: MovieRepository) {
 
-     operator fun invoke(id: Int) = movieRepository.getMovieById(id)
+     suspend operator fun invoke(id: Int) = movieRepository.getMovieById(id)
 }
