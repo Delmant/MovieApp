@@ -28,8 +28,9 @@ import com.example.movieapp.data.network.model.WatchabilityDto
 import com.example.movieapp.domain.model.ImagesInfo
 import com.example.movieapp.domain.model.Movie
 import com.example.movieapp.domain.model.Watchability
+import javax.inject.Inject
 
-class MovieMapper {
+class MovieMapper @Inject constructor() {
 
     fun toEntity(dto: MovieDto): Movie {
         return Movie(
