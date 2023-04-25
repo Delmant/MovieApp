@@ -11,6 +11,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
+        android:name=".presentation.MovieApp"
         android:theme="@style/Theme.MovieApp"
         tools:targetApi="31">
         <activity

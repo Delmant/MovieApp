@@ -9,8 +9,9 @@ import dagger.multibindings.IntoMap
 @Module
 interface ViewModelModule {
 
-    @IntoMap
-    @ViewModelKey(ViewModelKey::class)
     @Binds
+    @IntoMap
+    @ViewModelKey(MovieDetailViewModel::class)
     fun bindMovieDetailViewModel(impl: MovieDetailViewModel): ViewModel
+
 }
