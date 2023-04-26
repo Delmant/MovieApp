@@ -3,25 +3,15 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:padding="7dp"
+    android:paddingEnd="7dp"
     android:orientation="vertical">
-    <com.google.android.material.card.MaterialCardView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="4dp"
-        app:cardUseCompatPadding="true"
-        >
-        <ImageView
-            android:id="@+id/iv_movie"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:scaleType="center"
-            android:src="@drawable/t"
-            />
-    </com.google.android.material.card.MaterialCardView>
+    <ImageView
+        android:id="@+id/iv_movie"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:scaleType="center"
+        android:src="@drawable/t"
+        />
     <TextView
         android:id="@+id/tv_actor_name"
         android:layout_width="match_parent"
@@ -29,6 +19,8 @@
         android:maxLines= "23444"
         android:scrollHorizontally="false"
         android:text="Генри Голдинг"
-        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:fontFamily="@font/montserrat_medium"
+        android:textSize="13sp"
         />
 </LinearLayout>

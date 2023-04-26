@@ -2,7 +2,7 @@ package com.example.movieapp.presentation.rv
 
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.movieapp.domain.model.Movie
+import com.example.movieapp.domain.model.movie.Movie
 
 object MovieDiffCallback: DiffUtil.ItemCallback<Movie>() {
 

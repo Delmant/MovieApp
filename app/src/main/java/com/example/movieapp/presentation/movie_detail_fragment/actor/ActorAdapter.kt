@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.movieapp.databinding.ActorItemBinding
-import com.example.movieapp.domain.model.Persons
+import com.example.movieapp.domain.model.movie.Persons
 
 class ActorAdapter(
     val list: List<Persons>,

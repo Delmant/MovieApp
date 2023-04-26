@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.movieapp.databinding.FragmentActorDetailInfoBinding
-import com.example.movieapp.domain.model.Persons
+import com.example.movieapp.domain.model.movie.Persons
 import java.lang.RuntimeException
 
 class ActorDetailFragment: Fragment() {
