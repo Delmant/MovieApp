@@ -1,7 +1,7 @@
-package com.example.movieapp.data.network.model
+package com.example.movieapp.data.network.model.movie_dto
 
 
-import com.example.movieapp.domain.model.Logo
+import com.example.movieapp.domain.model.movie.Logo
 import com.google.gson.annotations.SerializedName
 
 data class LogoDto(

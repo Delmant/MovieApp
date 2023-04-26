@@ -1,6 +1,6 @@
-package com.example.movieapp.data.network.model
+package com.example.movieapp.data.network.model.movie_dto
 
-import com.example.movieapp.domain.model.ProductionCompanies
+import com.example.movieapp.domain.model.movie.ProductionCompanies
 import com.google.gson.annotations.SerializedName
 
 data class ProductionCompanyDto(
