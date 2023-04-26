@@ -1,33 +1,34 @@
 package com.example.movieapp.data.mapper
 
-import com.example.movieapp.data.network.model.BackdropDto
-import com.example.movieapp.data.network.model.BudgetDto
-import com.example.movieapp.data.network.model.CountryDto
-import com.example.movieapp.data.network.model.ExternalIdDto
-import com.example.movieapp.data.network.model.FactDto
-import com.example.movieapp.data.network.model.FeesDto
-import com.example.movieapp.data.network.model.GenreDto
-import com.example.movieapp.data.network.model.ImagesInfoDto
-import com.example.movieapp.data.network.model.ItemDto
-import com.example.movieapp.data.network.model.LogoDto
-import com.example.movieapp.data.network.model.MovieDto
-import com.example.movieapp.data.network.model.NameDto
-import com.example.movieapp.data.network.model.PersonDto
-import com.example.movieapp.data.network.model.PosterDto
-import com.example.movieapp.data.network.model.PremiereDto
-import com.example.movieapp.data.network.model.ProductionCompanyDto
-import com.example.movieapp.data.network.model.RatingDto
-import com.example.movieapp.data.network.model.ReleaseYearDto
-import com.example.movieapp.data.network.model.ReviewInfoDto
-import com.example.movieapp.data.network.model.SeasonsInfoDto
-import com.example.movieapp.data.network.model.SequelsAndPrequelDto
-import com.example.movieapp.data.network.model.SimilarMovyDto
-import com.example.movieapp.data.network.model.VideosDto
-import com.example.movieapp.data.network.model.VotesDto
-import com.example.movieapp.data.network.model.WatchabilityDto
-import com.example.movieapp.domain.model.ImagesInfo
-import com.example.movieapp.domain.model.Movie
-import com.example.movieapp.domain.model.Watchability
+import com.example.movieapp.data.network.model.image_dto.ImageDto
+import com.example.movieapp.data.network.model.image_dto.ImageListDto
+import com.example.movieapp.data.network.model.movie_dto.BackdropDto
+import com.example.movieapp.data.network.model.movie_dto.BudgetDto
+import com.example.movieapp.data.network.model.movie_dto.CountryDto
+import com.example.movieapp.data.network.model.movie_dto.ExternalIdDto
+import com.example.movieapp.data.network.model.movie_dto.FactDto
+import com.example.movieapp.data.network.model.movie_dto.FeesDto
+import com.example.movieapp.data.network.model.movie_dto.GenreDto
+import com.example.movieapp.data.network.model.movie_dto.ImagesInfoDto
+import com.example.movieapp.data.network.model.movie_dto.LogoDto
+import com.example.movieapp.data.network.model.movie_dto.MovieDto
+import com.example.movieapp.data.network.model.movie_dto.NameDto
+import com.example.movieapp.data.network.model.movie_dto.PersonDto
+import com.example.movieapp.data.network.model.movie_dto.PosterDto
+import com.example.movieapp.data.network.model.movie_dto.PremiereDto
+import com.example.movieapp.data.network.model.movie_dto.ProductionCompanyDto
+import com.example.movieapp.data.network.model.movie_dto.RatingDto
+import com.example.movieapp.data.network.model.movie_dto.ReleaseYearDto
+import com.example.movieapp.data.network.model.movie_dto.ReviewInfoDto
+import com.example.movieapp.data.network.model.movie_dto.SeasonsInfoDto
+import com.example.movieapp.data.network.model.movie_dto.SequelsAndPrequelDto
+import com.example.movieapp.data.network.model.movie_dto.SimilarMovyDto
+import com.example.movieapp.data.network.model.movie_dto.VideosDto
+import com.example.movieapp.data.network.model.movie_dto.VotesDto
+import com.example.movieapp.data.network.model.movie_dto.WatchabilityDto
+import com.example.movieapp.domain.model.image.ImageList
+import com.example.movieapp.domain.model.movie.Movie
+import com.example.movieapp.domain.model.movie.Watchability
 import javax.inject.Inject
 
 class MovieMapper @Inject constructor() {
@@ -97,6 +98,14 @@ class MovieMapper @Inject constructor() {
                 WatchabilityDto.empty
             }) as Watchability,
             year = dto.year ?: -1
+        )
+    }
+
+    fun imageListDtoToImageListEntity(imageListDto: ImageListDto): ImageList {
+        return ImageList(
+            imageList = imageListDto.imageList.map {
+                ImageDto.toEntity(it)
+            }
         )
     }
 }
