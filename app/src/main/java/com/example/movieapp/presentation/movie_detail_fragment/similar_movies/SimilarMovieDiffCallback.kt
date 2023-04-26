@@ -2,8 +2,7 @@ package com.example.movieapp.presentation.movie_detail_fragment.similar_movies
 
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.movieapp.domain.model.Movie
-import com.example.movieapp.domain.model.SimilarMovies
+import com.example.movieapp.domain.model.movie.SimilarMovies
 
 object SimilarMovieDiffCallback: DiffUtil.ItemCallback<SimilarMovies>() {
 

@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.bumptech.glide.Glide
 import com.example.movieapp.databinding.MovieItemBinding
-import com.example.movieapp.domain.model.SimilarMovies
+import com.example.movieapp.domain.model.movie.SimilarMovies
 
 
 class SimilarMovieAdapter(
@@ -32,6 +32,7 @@ class SimilarMovieAdapter(
                     .load("https://st.kp.yandex.net/images/film_big/${movie.id}.jpg")
                     .into(ivMovie)
                 tvMovieName.text = movie.name
+                tvType.text = movie.type
             }
             root.setOnClickListener {
                 listener?.onItemClick(movie)

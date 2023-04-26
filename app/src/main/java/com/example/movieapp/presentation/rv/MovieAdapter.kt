@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.bumptech.glide.Glide
 import com.example.movieapp.databinding.MovieItemBinding
-import com.example.movieapp.domain.model.Movie
+import com.example.movieapp.domain.model.movie.Movie
 
 
 class MovieAdapter(
@@ -34,12 +34,12 @@ class MovieAdapter(
                 tvMovieName.text = movie.name
             }
             root.setOnClickListener {
-                listener?.onItemClick(movie)
+                listener?.onItemClick(movie.id)
             }
         }
     }
 
     interface OnItemClickListener {
-        fun onItemClick(data: Movie)
+        fun onItemClick(movieId: Int)
     }
 }

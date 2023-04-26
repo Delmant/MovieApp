@@ -1,13 +1,12 @@
 package com.example.movieapp.data
 
 
-import com.example.movieapp.domain.model.Persons
+import com.example.movieapp.domain.model.movie.Persons
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
 import com.example.movieapp.data.mapper.MovieMapper
 import com.example.movieapp.data.network.ApiService
-import com.example.movieapp.domain.model.*
+import com.example.movieapp.domain.model.image.ImageList
+import com.example.movieapp.domain.model.movie.Movie
 
 import com.example.movieapp.domain.repository.MovieRepository
 import javax.inject.Inject
@@ -17,11 +16,14 @@ class MovieRepositoryImpl @Inject constructor(
     val movieMapper: MovieMapper
 ): MovieRepository {
 
-    override suspend fun getMovieById(id: Int): LiveData<Movie> {
-        val movie = movieMapper.toEntity(apiService.getMovieById(id))
-        val liveData = MutableLiveData<Movie>()
-        liveData.value = movie
-        return liveData
+
+
+    override suspend fun getMovieById(id: Int): Movie {
+        return movieMapper.toEntity(apiService.getMovieById(id))
+    }
+
+    override suspend fun getImageByMovieId(id: Int): ImageList {
+        return movieMapper.imageListDtoToImageListEntity(apiService.getImageByMovieId(id, "frame"))
     }
 
     override suspend fun getRandomMovie(): LiveData<Movie> {

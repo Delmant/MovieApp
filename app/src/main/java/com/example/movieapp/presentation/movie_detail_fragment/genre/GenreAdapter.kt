@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.databinding.GenreItemBinding
-import com.example.movieapp.domain.model.Genres
+import com.example.movieapp.domain.model.movie.Genres
 
 class GenreAdapter(
     private val items: List<Genres>
