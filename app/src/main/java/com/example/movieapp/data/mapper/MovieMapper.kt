@@ -1,5 +1,9 @@
 package com.example.movieapp.data.mapper
 
+import com.example.movieapp.data.network.model.actor_dto.ActorDto
+import com.example.movieapp.data.network.model.actor_dto.BirthPlaceDto
+import com.example.movieapp.data.network.model.actor_dto.MovieActDto
+import com.example.movieapp.data.network.model.actor_dto.ProfessionDto
 import com.example.movieapp.data.network.model.image_dto.ImageDto
 import com.example.movieapp.data.network.model.image_dto.ImageListDto
 import com.example.movieapp.data.network.model.movie_dto.BackdropDto
@@ -26,8 +30,11 @@ import com.example.movieapp.data.network.model.movie_dto.SimilarMovyDto
 import com.example.movieapp.data.network.model.movie_dto.VideosDto
 import com.example.movieapp.data.network.model.movie_dto.VotesDto
 import com.example.movieapp.data.network.model.movie_dto.WatchabilityDto
+import com.example.movieapp.domain.model.actor.Actor
+import com.example.movieapp.domain.model.actor.BirthPlace
 import com.example.movieapp.domain.model.image.ImageList
 import com.example.movieapp.domain.model.movie.Movie
+import com.example.movieapp.domain.model.movie.Persons
 import com.example.movieapp.domain.model.movie.Watchability
 import javax.inject.Inject
 
@@ -106,6 +113,29 @@ class MovieMapper @Inject constructor() {
             imageList = imageListDto.imageList.map {
                 ImageDto.toEntity(it)
             }
+        )
+    }
+
+    fun actorDtoToActorEntity(actorDto: ActorDto): Actor {
+        return Actor(
+            age = actorDto.age ?: -1,
+            birthPlace = actorDto.birthPlaceDto?.map { BirthPlaceDto.toEntity(it) } ?: listOf<BirthPlace>(),
+            birthday = actorDto.birthday ?: "",
+            countAwards = actorDto.countAwards ?: -1,
+            death = actorDto.death ?: "",
+            deathPlace = actorDto.deathPlace ?: "",
+            enName = actorDto.enName ?: "",
+            facts = actorDto.factDtos?.map { com.example.movieapp.data.network.model.actor_dto.FactDto.toEntity(it) } ?: listOf(),
+            growth = actorDto.growth ?: -1,
+            id = actorDto.id ?: -1,
+            isParse = actorDto.isParse ?: false,
+            movies = actorDto.movies?.map { MovieActDto.toEntity(it) } ?: listOf(),
+            name = actorDto.name ?: "",
+            photo = actorDto.photo ?: "",
+            profession = actorDto.professionDto?.map { ProfessionDto.toEntity(it) } ?: listOf(),
+            sex = actorDto.sex ?: "",
+            spouses = actorDto.spouses ?: listOf(),
+            updatedAt = actorDto.updatedAt ?: ""
         )
     }
 }
