@@ -25,7 +25,7 @@ class GenreAdapter(
        val item = items[position]
         with(holder.binding) {
             with(item) {
-
+                tvGenre.text = item.name
             }
         }
     }
