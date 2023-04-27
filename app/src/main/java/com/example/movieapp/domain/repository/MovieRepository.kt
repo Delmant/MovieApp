@@ -3,6 +3,7 @@ package com.example.movieapp.domain.repository
 import com.example.movieapp.domain.model.movie.Movie
 import com.example.movieapp.domain.model.movie.Persons
 import androidx.lifecycle.LiveData
+import com.example.movieapp.domain.model.actor.Actor
 import com.example.movieapp.domain.model.image.ImageList
 
 interface MovieRepository {
@@ -17,7 +18,7 @@ interface MovieRepository {
 
      suspend fun getMovieListByPage(): LiveData<List<Movie>>
 
-     suspend fun getPersonById(): LiveData<Persons>
+     suspend fun getPersonById(id: Int): Actor
 
      suspend fun loadData()
 }
