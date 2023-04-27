@@ -5,6 +5,7 @@ import com.example.movieapp.domain.model.movie.Persons
 import androidx.lifecycle.LiveData
 import com.example.movieapp.data.mapper.MovieMapper
 import com.example.movieapp.data.network.ApiService
+import com.example.movieapp.domain.model.actor.Actor
 import com.example.movieapp.domain.model.image.ImageList
 import com.example.movieapp.domain.model.movie.Movie
 
@@ -14,8 +15,7 @@ import javax.inject.Inject
 class MovieRepositoryImpl @Inject constructor(
     val apiService: ApiService,
     val movieMapper: MovieMapper
-): MovieRepository {
-
+) : MovieRepository {
 
 
     override suspend fun getMovieById(id: Int): Movie {
@@ -38,8 +38,8 @@ class MovieRepositoryImpl @Inject constructor(
         TODO("Not yet implemented")
     }
 
-    override suspend fun getPersonById(): LiveData<Persons> {
-        TODO("Not yet implemented")
+    override suspend fun getPersonById(id: Int): Actor {
+        return movieMapper.actorDtoToActorEntity(apiService.getPersonById(id))
     }
 
     override suspend fun loadData() {
