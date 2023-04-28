@@ -1,5 +1,5 @@
 package com.example.movieapp.domain.model.actor
 
-data class Fact (
+class DeathPlace (
     val value: String
 )
