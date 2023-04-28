@@ -14,7 +14,7 @@ data class ActorDto(
     @SerializedName("death")
     val death: String?,
     @SerializedName("deathPlace")
-    val deathPlace: String?,
+    val deathPlace: List<DeathPlaceDto>?,
     @SerializedName("enName")
     val enName: String?,
     @SerializedName("facts")
@@ -35,8 +35,8 @@ data class ActorDto(
     val professionDto: List<ProfessionDto>?,
     @SerializedName("sex")
     val sex: String?,
-    @SerializedName("spouses")
-    val spouses: List<String>?,
+//    @SerializedName("spouses")
+//    val spouses: List<SpousesDto>?,
     @SerializedName("updatedAt")
     val updatedAt: String?
 )
