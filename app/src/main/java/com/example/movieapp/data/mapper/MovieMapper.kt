@@ -2,6 +2,7 @@ package com.example.movieapp.data.mapper
 
 import com.example.movieapp.data.network.model.actor_dto.ActorDto
 import com.example.movieapp.data.network.model.actor_dto.BirthPlaceDto
+import com.example.movieapp.data.network.model.actor_dto.DeathPlaceDto
 import com.example.movieapp.data.network.model.actor_dto.MovieActDto
 import com.example.movieapp.data.network.model.actor_dto.ProfessionDto
 import com.example.movieapp.data.network.model.image_dto.ImageDto
@@ -30,12 +31,15 @@ import com.example.movieapp.data.network.model.movie_dto.SimilarMovyDto
 import com.example.movieapp.data.network.model.movie_dto.VideosDto
 import com.example.movieapp.data.network.model.movie_dto.VotesDto
 import com.example.movieapp.data.network.model.movie_dto.WatchabilityDto
+import com.example.movieapp.data.network.model.movie_list_dto.MovieListDto
 import com.example.movieapp.domain.model.actor.Actor
+import com.example.movieapp.domain.model.actor.ActorFact
 import com.example.movieapp.domain.model.actor.BirthPlace
 import com.example.movieapp.domain.model.image.ImageList
+import com.example.movieapp.domain.model.movie.Facts
 import com.example.movieapp.domain.model.movie.Movie
-import com.example.movieapp.domain.model.movie.Persons
 import com.example.movieapp.domain.model.movie.Watchability
+import com.example.movieapp.domain.model.movie_list.MovieList
 import javax.inject.Inject
 
 class MovieMapper @Inject constructor() {
@@ -119,13 +123,18 @@ class MovieMapper @Inject constructor() {
     fun actorDtoToActorEntity(actorDto: ActorDto): Actor {
         return Actor(
             age = actorDto.age ?: -1,
-            birthPlace = actorDto.birthPlaceDto?.map { BirthPlaceDto.toEntity(it) } ?: listOf<BirthPlace>(),
+            birthPlace = actorDto.birthPlaceDto?.map { BirthPlaceDto.toEntity(it) }
+                ?: listOf<BirthPlace>(),
             birthday = actorDto.birthday ?: "",
             countAwards = actorDto.countAwards ?: -1,
             death = actorDto.death ?: "",
-            deathPlace = actorDto.deathPlace ?: "",
+            deathPlace = actorDto.deathPlace?.map { DeathPlaceDto.toEntity(it) } ?: listOf(),
             enName = actorDto.enName ?: "",
-            facts = actorDto.factDtos?.map { com.example.movieapp.data.network.model.actor_dto.FactDto.toEntity(it) } ?: listOf(),
+            actorFacts = actorDto.factDtos?.map {
+                com.example.movieapp.data.network.model.actor_dto.FactDto.toEntity(
+                    it
+                )
+            } ?: listOf(),
             growth = actorDto.growth ?: -1,
             id = actorDto.id ?: -1,
             isParse = actorDto.isParse ?: false,
@@ -134,8 +143,20 @@ class MovieMapper @Inject constructor() {
             photo = actorDto.photo ?: "",
             profession = actorDto.professionDto?.map { ProfessionDto.toEntity(it) } ?: listOf(),
             sex = actorDto.sex ?: "",
-            spouses = actorDto.spouses ?: listOf(),
+//            spouses = actorDto.spouses?.let { SpousesDto.toEntity(it) },
             updatedAt = actorDto.updatedAt ?: ""
+        )
+    }
+
+    fun actorFactListToFactsList(list: List<ActorFact>): List<Facts> {
+        return list.map {
+            ActorFact.toFacts(it)
+        }
+    }
+
+    fun movieListDtoToMovieList(movieListDto: MovieListDto): MovieList {
+        return MovieList(
+            list = movieListDto.list.map { toEntity(it) }
         )
     }
 }
