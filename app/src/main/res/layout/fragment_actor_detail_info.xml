@@ -1,114 +1,199 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/black"
-   >
+    android:background="@color/white">
 
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineStart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.05" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineTop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.05" />
-
-
-    <ImageView
-        android:id="@+id/btn_close"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/guidelineTop"
-        app:layout_constraintStart_toStartOf="@id/guidelineStart"
-        android:src="@drawable/baseline_arrow_back_24"
-        />
-
-    <com.google.android.material.card.MaterialCardView
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white">
+
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineStart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.05" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineTop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.05" />
+
+
+            <ImageView
+                android:id="@+id/btn_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/baseline_arrow_back_24"
+                app:layout_constraintStart_toStartOf="@id/guidelineStart"
+                app:layout_constraintTop_toTopOf="@id/guidelineTop" />
+
+            <ImageView
+                android:id="@+id/iv_actor"
+                android:layout_width="150dp"
+                android:layout_height="200dp"
+                android:scaleType="center"
+                android:src="@drawable/t"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="@id/guidelineStart"
+                app:layout_constraintTop_toBottomOf="@id/btn_close"
+                app:layout_constraintVertical_bias="0.01" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="@id/guidelineName"
+                app:layout_constraintTop_toTopOf="@id/iv_actor">
+
+
+                <TextView
+                    android:id="@+id/tv_actor_name_ru"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_black"
+                    android:paddingBottom="7dp"
+                    android:text="Генри\nГолдинг"
+                    android:textColor="@color/dark_blue"
+
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/tv_actor_name_en"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:paddingBottom="7dp"
+                    android:text="Genry Golding"
+                    android:textColor="@color/dark_blue"
+                    android:textSize="15dp" />
+
+                <TextView
+                    android:id="@+id/tv_profession"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:paddingBottom="7dp"
+                    android:text="Актёр, режисёр"
+                    android:textColor="@color/dark_blue"
+                    android:textSize="13dp" />
+
+                <TextView
+                    android:id="@+id/tv_data_of_birth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:paddingBottom="7dp"
+                    android:text="14 ноября 1962"
+                    android:textColor="@color/dark_blue"
+                    android:textSize="13dp" />
+
+                <TextView
+                    android:id="@+id/tv_age_and_growth"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:paddingBottom="7dp"
+                    android:text="60 лет 1.64 м"
+                    android:textColor="@color/dark_blue"
+                    android:textSize="13dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/iv_actor">
+
+                <TextView
+                    android:id="@+id/tv_fact_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_black"
+                    android:letterSpacing="0.07"
+                    android:paddingStart="13dp"
+                    android:paddingTop="13dp"
+                    android:paddingBottom="6dp"
+                    android:text="Знаете ли вы, что..."
+                    android:textColor="@color/black"
+                    android:textSize="20dp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_fact"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="13dp"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/facts_item" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_black"
+                    android:letterSpacing="0.07"
+                    android:paddingStart="13dp"
+                    android:paddingTop="13dp"
+                    android:paddingBottom="6dp"
+                    android:text="Работы"
+                    android:textColor="@color/black"
+                    android:textSize="20dp" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_seq_movies"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/actor_movies_item" />
+
+
+            </LinearLayout>
+
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guidelineName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="189dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="4dp"
-        app:cardUseCompatPadding="true"
-        app:layout_constraintStart_toStartOf="@id/guidelineStart"
-        app:layout_constraintTop_toBottomOf="@id/btn_close"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintVertical_bias="0.05"
-        app:layout_constraintHorizontal_bias="0"
-        >
-        <ImageView
-            android:id="@+id/iv_actor"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:scaleType="center"
-            android:src="@drawable/t"
-            />
-    </com.google.android.material.card.MaterialCardView>
+        android:layout_centerInParent="true"
 
-    <TextView
-        android:id="@+id/tv_actor_name_ru"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Генри\nГолдинг"
-        android:textColor="@color/dark_blue"
-        android:fontFamily="@font/montserrat_black"
-        android:textSize="30dp"
-        app:layout_constraintStart_toStartOf="@id/guidelineName"
-        app:layout_constraintTop_toBottomOf="@id/btn_close"
-        app:layout_constraintBottom_toBottomOf="parent"
-
-        app:layout_constraintVertical_bias="0.05"
-        app:layout_constraintHorizontal_bias="0.8"
         />
 
-    <TextView
-        android:id="@+id/tv_actor_name_en"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Genry Golding"
-        android:textColor="@color/dark_blue"
-        android:fontFamily="@font/montserrat_medium"
-        android:textSize="15dp"
-        app:layout_constraintStart_toStartOf="@id/guidelineName"
-        app:layout_constraintTop_toBottomOf="@id/tv_actor_name_ru"
-        app:layout_constraintBottom_toBottomOf="parent"
 
-        app:layout_constraintVertical_bias="0.01"
-        app:layout_constraintHorizontal_bias="0.8"
-        />
-
-    <TextView
-        android:id="@+id/tv_profession"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Актёр, режисёр"
-        android:textColor="@color/dark_blue"
-        android:fontFamily="@font/montserrat_medium"
-        android:textSize="15dp"
-        app:layout_constraintStart_toStartOf="@id/guidelineName"
-        app:layout_constraintTop_toBottomOf="@id/tv_actor_name_en"
-        app:layout_constraintBottom_toBottomOf="parent"
-
-        app:layout_constraintVertical_bias="0.02"
-        app:layout_constraintHorizontal_bias="0.8"
-        />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="189dp" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
