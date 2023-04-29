@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background = "@color/white"
+    >
 <ScrollView
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -14,6 +20,7 @@
         android:orientation="vertical"
         android:background="@color/white"
         >
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/container1"
             xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -32,7 +39,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:paddingBottom="50dp"
                 android:adjustViewBounds="true"
-                android:src="@drawable/back"
+                tools:src="@drawable/back"
                 />
 
             <View
@@ -75,7 +82,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.38" />
+                app:layout_constraintGuide_percent="0.45" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline_helper"
@@ -123,29 +130,30 @@
 
                 <TextView
                     android:id="@+id/tv_title"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="@id/guidelineNameStart"
                     app:layout_constraintEnd_toEndOf="@id/guidelineNameEnd"
-                    android:text="Призрак в доспехах: Синдром одиночки"
+                    tools:text="Призрак в доспехах: Синдром одиночки"
+                    android:textAlignment="center"
                     android:textSize="23sp"
                     android:fontFamily="@font/montserrat_black"
                     android:textColor="@color/dark_blue"
-                    android:maxLines="3"
+                    android:maxLines="6"
                     android:singleLine="false"
                     android:layout_marginTop="10dp"
                     app:layout_constrainedWidth="true"
                     android:paddingBottom="13sp"
                     android:gravity="center"
                     style="@style/MaterialAlertDialog.Material3.Title.Text"
-                    app:layout_constraintHorizontal_bias="0.5" />
+                     />
 
                 <TextView
                     android:id="@+id/tv_title_en"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Ghost in the shell"
+                    tools:text="Ghost in the shell"
                     android:textSize="16sp"
                     android:textColor="@color/grey"
                     app:layout_constraintTop_toBottomOf="@id/tv_title"
@@ -158,7 +166,7 @@
                     android:id="@+id/tv_votes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="60k"
+                    tools:text="60k"
                     android:textSize="16sp"
                     android:textColor="@color/grey"
                     app:layout_constraintTop_toBottomOf="@id/tv_title"
@@ -170,7 +178,7 @@
                     android:id="@+id/tv_kp_rating"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="8.0"
+                    tools:text="8.0"
                     android:textSize="16sp"
                     android:textColor="@color/grey"
                     android:layout_marginEnd="5dp"
@@ -184,7 +192,7 @@
                     android:id="@+id/tv_year_and_genres"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="1995, аниме, мультфильм"
+                    tools:text="1995, аниме, мультфильм"
                     android:textSize="16sp"
                     android:textColor="@color/grey"
                     android:layout_marginEnd="5dp"
@@ -199,11 +207,11 @@
                     android:id="@+id/tv_country_length_pg"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Япония, 1ч 22 мин, 16+"
+                    tools:text="Япония, 1ч 22 мин, 16+"
                     android:textSize="16sp"
                     android:textColor="@color/grey"
                     android:layout_marginEnd="5dp"
-
+                    android:text="Япония, 1ч 22 мин, 16+"
                     app:layout_constraintTop_toBottomOf="@id/tv_year_and_genres"
 
                     app:layout_constraintStart_toStartOf="@id/guideline4"
@@ -231,8 +239,9 @@
                         android:fontFamily="@font/montserrat_bold"
                         android:textColor="@color/white"
                         android:layout_marginEnd="20dp"
-                        app:cornerRadius="17dp"
-                        app:backgroundTint="@color/dark_blue"
+                        app:cornerRadius="20dp"
+                        android:background="@drawable/btn_gradient"
+                        app:backgroundTint="@null"
                         style="@style/Widget.Material3.Button"/>
 
                     <ImageView
@@ -246,7 +255,7 @@
                     android:id="@+id/tv_actors"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="В ролях: Райан Гослинг, Кэри Малиган, Брайан Крэнстон, Альберт Брукс и другие"
+                    tools:text="В ролях: Райан Гослинг, Кэри Малиган, Брайан Крэнстон, Альберт Брукс и другие"
                     android:textSize="13sp"
                     android:layout_marginStart="7dp"
                     app:layout_goneMarginEnd="7dp"
@@ -284,13 +293,89 @@
                 android:layout_height="wrap_content"
                 android:letterSpacing="0.07"
                 android:padding="13dp"
-                android:text="@string/desc"
+                tools:text="@string/desc"
                 android:textSize="13dp"
                 android:textColor="@color/black"
 
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tv_genre_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:letterSpacing="0.07"
+                android:paddingTop="13dp"
+                android:paddingStart="13dp"
+                android:paddingBottom="6dp"
+                android:text="Жанры"
+                android:fontFamily="@font/montserrat_black"
+                android:textSize="20dp"
+                android:textColor="@color/black"
+
+                app:layout_constraintStart_toStartOf="parent"
+
+                app:layout_constraintTop_toBottomOf="@id/tv_description_text" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_genre"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="13dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_genre_title"
+                tools:listitem="@layout/genre_item" />
+
+
+            <TextView
+                android:id="@+id/tv_image_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:letterSpacing="0.07"
+                android:paddingTop="13dp"
+                android:paddingStart="13dp"
+                android:paddingBottom="6dp"
+                android:text="Изображения"
+                android:fontFamily="@font/montserrat_black"
+                android:textSize="20dp"
+                android:textColor="@color/black"
+
+                app:layout_constraintStart_toStartOf="parent"
+
+                app:layout_constraintTop_toBottomOf="@id/rv_genre" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_image"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="13dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_image_title"
+                tools:listitem="@layout/image_item" />
+
+            <TextView
+                android:id="@+id/tv_rating_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:letterSpacing="0.07"
+                android:paddingTop="13dp"
+                android:paddingStart="13dp"
+                android:paddingBottom="6dp"
+                android:text="Рейтинг"
+                android:fontFamily="@font/montserrat_black"
+                android:textSize="20dp"
+                android:textColor="@color/black"
+
+                app:layout_constraintStart_toStartOf="parent"
+
+                app:layout_constraintTop_toBottomOf="@id/rv_image" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rv_rating"
@@ -301,12 +386,131 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_description_text"
-                tools:listitem="@layout/rating_item" />
+                app:layout_constraintTop_toBottomOf="@id/tv_rating_title"
+                tools:listitem="@layout/rating_votes_item" />
+
+            <TextView
+                android:id="@+id/tv_actor_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:letterSpacing="0.07"
+                android:paddingTop="13dp"
+                android:paddingStart="13dp"
+                android:paddingBottom="6dp"
+                android:text="Актёры"
+                android:fontFamily="@font/montserrat_black"
+                android:textSize="20dp"
+                android:textColor="@color/black"
+
+                app:layout_constraintStart_toStartOf="parent"
+
+                app:layout_constraintTop_toBottomOf="@id/rv_rating" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_actor"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="13dp"
+                android:orientation="horizontal"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_actor_title"
+                tools:listitem="@layout/actor_item" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintTop_toBottomOf="@id/rv_actor"
+                app:layout_constraintStart_toStartOf="parent"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:letterSpacing="0.07"
+                    android:paddingTop="13dp"
+                    android:paddingStart="13dp"
+                    android:paddingBottom="6dp"
+                    android:text="Знаете ли вы, что..."
+                    android:fontFamily="@font/montserrat_black"
+                    android:textSize="20dp"
+                    android:textColor="@color/black"
+                    />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_fact"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="13dp"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/facts_item"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:letterSpacing="0.07"
+                    android:paddingTop="13dp"
+                    android:paddingStart="13dp"
+                    android:paddingBottom="6dp"
+                    android:text="Сиквелы и приквелы"
+                    android:fontFamily="@font/montserrat_black"
+                    android:textSize="20dp"
+                    android:textColor="@color/black"
+                    />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_seq_movies"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="13dp"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/movie_item"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:letterSpacing="0.07"
+                    android:paddingTop="20dp"
+                    android:paddingStart="13dp"
+                    android:paddingBottom="6dp"
+                    android:text="Похожие фильмы"
+                    android:fontFamily="@font/montserrat_black"
+                    android:textSize="20dp"
+                    android:textColor="@color/black"
+                    />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_similar_movies"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="13dp"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/movie_item"
+                    />
+
+            </LinearLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     </LinearLayout>
 
+
 </ScrollView>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+
+      />
+
+
+</RelativeLayout>
