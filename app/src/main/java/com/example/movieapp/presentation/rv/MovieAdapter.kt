@@ -31,7 +31,7 @@ class MovieAdapter(
                 Glide.with(context)
                     .load("https://st.kp.yandex.net/images/film_big/${movie.id}.jpg")
                     .into(ivMovie)
-                tvMovieName.text = movie.name
+                tvMovieName.text = movie.name.ifEmpty { movie.alternativeName }
             }
             root.setOnClickListener {
                 listener?.onItemClick(movie.id)

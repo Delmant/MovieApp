@@ -11,9 +11,12 @@ import com.example.movieapp.domain.model.image.Image
 import com.example.movieapp.presentation.movie_detail_fragment.actor.ActorViewHolder
 
 class ImageAdapter(
+    val movieId: Int,
     val list: List<Image>,
     val context: Context
-) : RecyclerView.Adapter<ImageViewHolder>(){
+) : RecyclerView.Adapter<ImageViewHolder>() {
+
+    var listener: ImageAdapter.OnItemClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder {
         val binding = ImageItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -29,6 +32,9 @@ class ImageAdapter(
                     .into(ivImage)
 
             }
+            root.setOnClickListener {
+                listener?.onClick(movieId)
+            }
         }
     }
 
@@ -36,5 +42,8 @@ class ImageAdapter(
         return list.size
     }
 
+    interface OnItemClickListener {
+        fun onClick(movieId: Int)
+    }
 
 }
