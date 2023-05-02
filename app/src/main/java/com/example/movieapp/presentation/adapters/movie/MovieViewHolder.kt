@@ -1,4 +1,4 @@
-package com.example.movieapp.presentation.rv
+package com.example.movieapp.presentation.adapters.movie
 
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.databinding.MovieItemBinding

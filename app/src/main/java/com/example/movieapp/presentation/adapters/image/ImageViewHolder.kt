@@ -1,4 +1,4 @@
-package com.example.movieapp.presentation.movie_detail_fragment.image
+package com.example.movieapp.presentation.adapters.image
 
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.databinding.ImageItemBinding

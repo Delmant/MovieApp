@@ -1,4 +1,4 @@
-package com.example.movieapp.presentation.rv
+package com.example.movieapp.presentation.adapters.movie
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -11,7 +11,7 @@ import com.example.movieapp.domain.model.movie.Movie
 
 class MovieAdapter(
     private val context: Context
-) : ListAdapter<Movie, MovieViewHolder >(MovieDiffCallback) {
+) : ListAdapter<Movie, MovieViewHolder>(MovieDiffCallback) {
 
     var listener: OnItemClickListener? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieViewHolder {

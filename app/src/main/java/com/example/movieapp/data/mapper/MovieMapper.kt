@@ -32,6 +32,8 @@ import com.example.movieapp.data.network.model.movie_dto.VideosDto
 import com.example.movieapp.data.network.model.movie_dto.VotesDto
 import com.example.movieapp.data.network.model.movie_dto.WatchabilityDto
 import com.example.movieapp.data.network.model.movie_list_dto.MovieListDto
+import com.example.movieapp.data.network.model.review_dto.ReviewDto
+import com.example.movieapp.data.network.model.review_dto.ReviewListDto
 import com.example.movieapp.domain.model.actor.Actor
 import com.example.movieapp.domain.model.actor.ActorFact
 import com.example.movieapp.domain.model.actor.BirthPlace
@@ -40,6 +42,7 @@ import com.example.movieapp.domain.model.movie.Facts
 import com.example.movieapp.domain.model.movie.Movie
 import com.example.movieapp.domain.model.movie.Watchability
 import com.example.movieapp.domain.model.movie_list.MovieList
+import com.example.movieapp.domain.model.review.ReviewList
 import javax.inject.Inject
 
 class MovieMapper @Inject constructor() {
@@ -54,23 +57,24 @@ class MovieMapper @Inject constructor() {
             description = dto.description ?: "",
             enName = dto.enName ?: "",
             externalId = ExternalIdDto.toEntity(dto.externalIdDto ?: ExternalIdDto.empty),
-            facts = dto.factDtos.map { FactDto.toEntity(it ?: FactDto.empty) },
+            facts = dto.factDtos?.map { FactDto.toEntity(it ?: FactDto.empty) } ?: emptyList(),
             fees = FeesDto.toEntity(dto.feesDto ?: FeesDto.empty),
-            genres = dto.genreDtos.map { GenreDto.toEntity(it ?: GenreDto.empty) },
+            genres = dto.genreDtos?.map { GenreDto.toEntity(it ?: GenreDto.empty) } ?: emptyList(),
             id = dto.id ?: -1,
             imagesInfo = ImagesInfoDto.toEntity(dto.imagesInfoDto ?: ImagesInfoDto.empty),
             logo = LogoDto.toEntity(dto.logoDto ?: LogoDto.empty),
             movieLength = dto.movieLength ?: -1,
             name = dto.name ?: "",
-            names = dto.nameDtos.map { NameDto.toEntity(it ?: NameDto.empty) },
-            persons = dto.personDtos.map { PersonDto.toEntity(it ?: PersonDto.empty) },
+            names = dto.nameDtos?.map { NameDto.toEntity(it ?: NameDto.empty) } ?: emptyList(),
+            persons = dto.personDtos?.map { PersonDto.toEntity(it ?: PersonDto.empty) }
+                ?: emptyList(),
             poster = PosterDto.toEntity(dto.posterDto ?: PosterDto.empty),
             premiere = PremiereDto.toEntity(dto.premiereDto ?: PremiereDto.empty),
-            productionCompanies = dto.productionCompanies.map {
+            productionCompanies = dto.productionCompanies?.map {
                 ProductionCompanyDto.toEntity(
                     it ?: ProductionCompanyDto.empty
                 )
-            },
+            } ?: emptyList(),
             rating = RatingDto.toEntity(dto.ratingDto ?: RatingDto.empty),
             ratingMpaa = dto.ratingMpaa ?: "",
             releaseYears = if (dto.releaseYearDtos != null) {
@@ -79,22 +83,22 @@ class MovieMapper @Inject constructor() {
                 emptyList()
             },
             reviewInfo = ReviewInfoDto.toEntity(dto.reviewInfoDto ?: ReviewInfoDto.empty),
-            seasonsInfo = dto.seasonsInfoDto.map {
+            seasonsInfo = dto.seasonsInfoDto?.map {
                 SeasonsInfoDto.toEntity(
                     it ?: SeasonsInfoDto.empty
                 )
-            },
-            sequelsAndPrequels = dto.sequelsAndPrequelDtos.map {
+            } ?: emptyList(),
+            sequelsAndPrequels = dto.sequelsAndPrequelDtos?.map {
                 SequelsAndPrequelDto.toEntity(
                     it ?: SequelsAndPrequelDto.empty
                 )
-            },
+            } ?: emptyList(),
             shortDescription = dto.shortDescription ?: "",
-            similarMovies = dto.similarMovies.map {
+            similarMovies = dto.similarMovies?.map {
                 SimilarMovyDto.toEntity(
                     it ?: SimilarMovyDto.empty
                 )
-            },
+            } ?: emptyList(),
             slogan = dto.slogan ?: "",
             status = dto.status ?: "",
             top10 = dto.top10 ?: -1,
@@ -108,7 +112,11 @@ class MovieMapper @Inject constructor() {
             } else {
                 WatchabilityDto.empty
             }) as Watchability,
-            year = dto.year ?: -1
+            year = dto.year ?: -1,
+            isSeries = dto.isSeries ?: false,
+            seriesLength = dto.seriesLength ?: -1,
+            totalSeriesLength = dto.totalSeriesLength ?: -1,
+            ticketsOnSale = dto.ticketsOnSale ?: false
         )
     }
 
@@ -157,6 +165,12 @@ class MovieMapper @Inject constructor() {
     fun movieListDtoToMovieList(movieListDto: MovieListDto): MovieList {
         return MovieList(
             list = movieListDto.list.map { toEntity(it) }
+        )
+    }
+
+    fun reviewListDtoToReviewList(reviewListDto: ReviewListDto): ReviewList {
+        return ReviewList(
+            list = reviewListDto.list.map { ReviewDto.toEntity(it) }
         )
     }
 }

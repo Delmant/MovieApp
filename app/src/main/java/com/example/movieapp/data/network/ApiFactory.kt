@@ -5,7 +5,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiFactory {
 
-    private const val BASE_URL = "https://api.kinopoisk.dev/v1/"
+    private const val BASE_URL = "https://api.kinopoisk.dev/"
 
     private val retrofit =
         Retrofit.Builder()

@@ -1,4 +1,16 @@
 <resources>
     <string name="app_name">MovieApp</string>
     <string name="desc">Один ушлый американец ещё со студенческих лет приторговывал наркотиками, а теперь придумал схему нелегального обогащения с использованием поместий обедневшей английской аристократии и очень неплохо на этом разбогател. Другой пронырливый журналист приходит к Рэю, правой руке американца, и предлагает тому купить киносценарий, в котором подробно описаны преступления его босса при участии других представителей лондонского криминального мира — партнёра-еврея, китайской диаспоры, чернокожих спортсменов и даже русского олигарха.</string>
+    <string name="enum_month_january">Январь</string>
+    <string name="enum_month_february">Февраль</string>
+    <string name="enum_month_march">Март</string>
+    <string name="enum_month_april">Апрель</string>
+    <string name="enum_month_may">Май</string>
+    <string name="enum_month_june">Июнь</string>
+    <string name="enum_month_july">Июль</string>
+    <string name="enum_month_august">Август</string>
+    <string name="enum_month_september">Сентябрь</string>
+    <string name="enum_month_october">Октябрь</string>
+    <string name="enum_month_november">Ноябрь</string>
+    <string name="enum_month_december">Декабрь</string>
 </resources>

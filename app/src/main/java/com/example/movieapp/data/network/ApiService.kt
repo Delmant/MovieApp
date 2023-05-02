@@ -4,6 +4,8 @@ import com.example.movieapp.data.network.model.actor_dto.ActorDto
 import com.example.movieapp.data.network.model.image_dto.ImageListDto
 import com.example.movieapp.data.network.model.movie_dto.MovieDto
 import com.example.movieapp.data.network.model.movie_dto.PersonDto
+import com.example.movieapp.data.network.model.movie_list_dto.MovieListDto
+import com.example.movieapp.data.network.model.review_dto.ReviewListDto
 import com.google.gson.JsonObject
 import retrofit2.http.GET
 import retrofit2.http.Headers
@@ -20,7 +22,7 @@ interface ApiService {
     suspend fun getRandomMovie(
     ): MovieDto
 
-    @GET("movie/{PATH_PARAM_ID}")
+    @GET("v1.3/movie/{PATH_PARAM_ID}")
     @Headers(
         MEDIA_TYPE,
         API_KEY
@@ -39,7 +41,7 @@ interface ApiService {
         @Query(PAGE_PARAM_LIMIT) pageLimit: Int
     ): JsonObject
 
-    @GET("image")
+    @GET("v1/image")
     @Headers(
         MEDIA_TYPE,
         API_KEY
@@ -49,7 +51,7 @@ interface ApiService {
         @Query(IMAGE_PARAM_TYPE) type: String
     ): ImageListDto
 
-    @GET("person/{PATH_PERSON_ID}")
+    @GET("v1/person/{PATH_PERSON_ID}")
     @Headers(
         MEDIA_TYPE,
         API_KEY
@@ -57,6 +59,15 @@ interface ApiService {
     suspend fun getPersonById(
         @Path(PATH_PERSON_ID) personId: Int
     ): ActorDto
+
+    @GET("v1/review")
+    @Headers(
+        Companion.MEDIA_TYPE,
+        Companion.API_KEY
+    )
+    suspend fun getReviewByMovieId(
+        @Query(REVIEW_PARAM_MOVIE_ID) movieId: Int
+    ): ReviewListDto
 
 
 
@@ -70,5 +81,8 @@ interface ApiService {
         private const val PAGE_PARAM_LIMIT = "limit"
         private const val IMAGE_PARAM_MOVIE_ID = "movieId"
         private const val IMAGE_PARAM_TYPE = "type"
+        private const val REVIEW_PARAM_MOVIE_ID = "movieId"
+
+        private const val QUERY_PERSON_ID = "persons.id"
     }
 }

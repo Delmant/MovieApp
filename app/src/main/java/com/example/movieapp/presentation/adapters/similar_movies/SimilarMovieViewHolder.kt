@@ -1,4 +1,4 @@
-package com.example.movieapp.presentation.movie_detail_fragment.similar_movies
+package com.example.movieapp.presentation.adapters.similar_movies
 
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.databinding.MovieItemBinding

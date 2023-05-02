@@ -8,7 +8,7 @@ import com.bumptech.glide.Glide
 import com.example.movieapp.databinding.ImageDetailItemBinding
 import com.example.movieapp.databinding.ImageItemBinding
 import com.example.movieapp.domain.model.image.Image
-import com.example.movieapp.presentation.movie_detail_fragment.image.ImageViewHolder
+import com.example.movieapp.presentation.adapters.image.ImageViewHolder
 
 class ImageDetailAdapter(
     val list: List<Image>,

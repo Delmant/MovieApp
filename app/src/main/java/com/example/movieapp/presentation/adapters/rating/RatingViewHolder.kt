@@ -1,4 +1,4 @@
-package com.example.movieapp.presentation.movie_detail_fragment.rating
+package com.example.movieapp.presentation.adapters.rating
 
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding

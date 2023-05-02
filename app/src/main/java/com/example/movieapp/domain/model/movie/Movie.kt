@@ -43,5 +43,9 @@ data class Movie(
     val videos: Videos,
     val votes: Votes,
     val watchability: Watchability,
-    val year: Int
+    val year: Int,
+    val ticketsOnSale: Boolean,
+    val totalSeriesLength: Int,
+    val seriesLength: Int,
+    val isSeries: Boolean
 ) : Parcelable

@@ -16,7 +16,7 @@ import com.example.movieapp.databinding.ImageDetailItemBinding
 import com.example.movieapp.presentation.MovieApp
 import com.example.movieapp.presentation.ViewModelFactory
 import com.example.movieapp.presentation.image_detail_fragment.adapter.ImageDetailAdapter
-import com.example.movieapp.presentation.movie_detail_fragment.image.ImageAdapter
+import com.example.movieapp.presentation.adapters.image.ImageAdapter
 import javax.inject.Inject
 
 class ImageDetailFragment : Fragment() {
@@ -52,10 +52,12 @@ class ImageDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val args = requireArguments().getInt(EXTRA_MOVIE_ID)
+        val position = requireArguments().getInt(EXTRA_IMAGE_POSITION)
         viewModel.getMovieById(args)
         viewModel.movieLiveDataImages.observe(viewLifecycleOwner) {
             val adapter = ImageDetailAdapter(it.imageList, requireContext())
             binding.vpViewPager.adapter = adapter
+            binding.vpViewPager.setCurrentItem(position, false)
         }
 
     }
@@ -68,11 +70,13 @@ class ImageDetailFragment : Fragment() {
     companion object {
 
         private const val EXTRA_MOVIE_ID = "movie_id"
+        private const val EXTRA_IMAGE_POSITION = "image_position"
 
-        fun newInstance(movieId: Int): ImageDetailFragment {
+        fun newInstance(movieId: Int, position: Int): ImageDetailFragment {
             return ImageDetailFragment().apply {
                 arguments = Bundle().apply {
                     putInt(EXTRA_MOVIE_ID, movieId)
+                    putInt(EXTRA_IMAGE_POSITION, position)
                 }
             }
         }
