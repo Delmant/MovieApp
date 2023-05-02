@@ -1,6 +1,7 @@
 package com.example.movieapp.data
 
 
+import android.util.Log
 import com.example.movieapp.domain.model.movie.Persons
 import androidx.lifecycle.LiveData
 import com.example.movieapp.data.mapper.MovieMapper
@@ -8,6 +9,8 @@ import com.example.movieapp.data.network.ApiService
 import com.example.movieapp.domain.model.actor.Actor
 import com.example.movieapp.domain.model.image.ImageList
 import com.example.movieapp.domain.model.movie.Movie
+import com.example.movieapp.domain.model.movie_list.MovieList
+import com.example.movieapp.domain.model.review.ReviewList
 
 import com.example.movieapp.domain.repository.MovieRepository
 import javax.inject.Inject
@@ -19,6 +22,7 @@ class MovieRepositoryImpl @Inject constructor(
 
 
     override suspend fun getMovieById(id: Int): Movie {
+        Log.d("Json", "${apiService.getReviewByMovieId(id)}")
         return movieMapper.toEntity(apiService.getMovieById(id))
     }
 
@@ -40,6 +44,10 @@ class MovieRepositoryImpl @Inject constructor(
 
     override suspend fun getPersonById(id: Int): Actor {
         return movieMapper.actorDtoToActorEntity(apiService.getPersonById(id))
+    }
+
+    override suspend fun getReviewByMovieId(id: Int): ReviewList {
+        return movieMapper.reviewListDtoToReviewList(apiService.getReviewByMovieId(id))
     }
 
     override suspend fun loadData() {

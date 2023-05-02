@@ -1,4 +1,4 @@
-package com.example.movieapp.presentation.actor_detail_fragment.actor_movies
+package com.example.movieapp.presentation.adapters.actor_movies
 
 
 import android.view.LayoutInflater
@@ -13,7 +13,7 @@ class ActorMoviesAdapter(
     val list: List<MovieAct>
 ) : RecyclerView.Adapter<ActorMoviesViewHolder>() {
 
-    var listener: ActorMoviesAdapter.OnItemClickListener? = null
+    var listener: OnItemClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActorMoviesViewHolder {
         val binding =

@@ -1,4 +1,4 @@
-package com.example.movieapp.presentation.movie_detail_fragment.fact
+package com.example.movieapp.presentation.adapters.fact
 
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.databinding.FactsItemBinding

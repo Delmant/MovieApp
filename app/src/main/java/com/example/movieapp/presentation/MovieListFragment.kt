@@ -8,9 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.movieapp.R
 import com.example.movieapp.databinding.MovieListBinding
-import com.example.movieapp.domain.model.Movie
+import com.example.movieapp.domain.model.movie.Movie
 import com.example.movieapp.presentation.movie_detail_fragment.MovieDetailFragment
-import com.example.movieapp.presentation.rv.MovieAdapter
+import com.example.movieapp.presentation.adapters.movie.MovieAdapter
 import java.lang.RuntimeException
 
 class MovieListFragment : Fragment() {
@@ -40,9 +40,9 @@ class MovieListFragment : Fragment() {
         binding.rvMovies.layoutManager = GridLayoutManager(requireContext(), 4)
         adapter.submitList(list)
         adapter.listener = object : MovieAdapter.OnItemClickListener {
-            override fun onItemClick(data: Movie) {
+            override fun onItemClick(movieId: Int) {
                 fragmentManager?.beginTransaction()
-                    ?.add(R.id.fragment_container, MovieDetailFragment.newInstance(movie as Movie))
+                    ?.add(R.id.fragment_container, MovieDetailFragment.newInstance(movieId))
                     ?.addToBackStack(null)?.commit()
             }
 

@@ -20,11 +20,11 @@ data class MovieDto(
     @SerializedName("externalId")
     val externalIdDto: ExternalIdDto?,
     @SerializedName("facts")
-    val factDtos: List<FactDto?>,
+    val factDtos: List<FactDto?>?,
     @SerializedName("fees")
     val feesDto: FeesDto?,
     @SerializedName("genres")
-    val genreDtos: List<GenreDto?>,
+    val genreDtos: List<GenreDto?>?,
     @SerializedName("id")
     val id: Int?,
     @SerializedName("imagesInfo")
@@ -36,15 +36,15 @@ data class MovieDto(
     @SerializedName("name")
     val name: String?,
     @SerializedName("names")
-    val nameDtos: List<NameDto?>,
+    val nameDtos: List<NameDto?>?,
     @SerializedName("persons")
-    val personDtos: List<PersonDto?>,
+    val personDtos: List<PersonDto?>?,
     @SerializedName("poster")
     val posterDto: PosterDto?,
     @SerializedName("premiere")
     val premiereDto: PremiereDto?,
     @SerializedName("productionCompanies")
-    val productionCompanies: List<ProductionCompanyDto?>,
+    val productionCompanies: List<ProductionCompanyDto?>?,
     @SerializedName("rating")
     val ratingDto: RatingDto?,
     @SerializedName("ratingMpaa")
@@ -54,13 +54,13 @@ data class MovieDto(
     @SerializedName("reviewInfo")
     val reviewInfoDto: ReviewInfoDto?,
     @SerializedName("seasonsInfo")
-    val seasonsInfoDto: List<SeasonsInfoDto?>,
+    val seasonsInfoDto: List<SeasonsInfoDto?>?,
     @SerializedName("sequelsAndPrequels")
-    val sequelsAndPrequelDtos: List<SequelsAndPrequelDto?>,
+    val sequelsAndPrequelDtos: List<SequelsAndPrequelDto?>?,
     @SerializedName("shortDescription")
     val shortDescription: String?,
     @SerializedName("similarMovies")
-    val similarMovies: List<SimilarMovyDto?>,
+    val similarMovies: List<SimilarMovyDto?>?,
     @SerializedName("slogan")
     val slogan: String?,
     @SerializedName("status")
@@ -80,5 +80,14 @@ data class MovieDto(
     @SerializedName("watchability")
     val watchabilityDto: WatchabilityDto?,
     @SerializedName("year")
-    val year: Int?
+    val year: Int?,
+    @SerializedName("ticketsOnSale")
+    val ticketsOnSale: Boolean?,
+    @SerializedName("totalSeriesLength")
+    val totalSeriesLength: Int?,
+    @SerializedName("seriesLength")
+    val seriesLength: Int?,
+    @SerializedName("isSeries")
+    val isSeries: Boolean?
+
 )

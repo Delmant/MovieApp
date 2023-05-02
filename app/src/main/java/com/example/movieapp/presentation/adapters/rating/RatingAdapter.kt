@@ -1,4 +1,4 @@
-package com.example.movieapp.presentation.movie_detail_fragment.rating
+package com.example.movieapp.presentation.adapters.rating
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

@@ -5,6 +5,8 @@ import com.example.movieapp.domain.model.movie.Persons
 import androidx.lifecycle.LiveData
 import com.example.movieapp.domain.model.actor.Actor
 import com.example.movieapp.domain.model.image.ImageList
+import com.example.movieapp.domain.model.movie_list.MovieList
+import com.example.movieapp.domain.model.review.ReviewList
 
 interface MovieRepository {
 
@@ -19,6 +21,8 @@ interface MovieRepository {
      suspend fun getMovieListByPage(): LiveData<List<Movie>>
 
      suspend fun getPersonById(id: Int): Actor
+
+     suspend fun getReviewByMovieId(id: Int): ReviewList
 
      suspend fun loadData()
 }

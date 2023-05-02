@@ -1,4 +1,4 @@
-package com.example.movieapp.presentation.movie_detail_fragment.image
+package com.example.movieapp.presentation.adapters.image
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import com.bumptech.glide.Glide
 import com.example.movieapp.databinding.ActorItemBinding
 import com.example.movieapp.databinding.ImageItemBinding
 import com.example.movieapp.domain.model.image.Image
-import com.example.movieapp.presentation.movie_detail_fragment.actor.ActorViewHolder
+import com.example.movieapp.presentation.adapters.actor.ActorViewHolder
 
 class ImageAdapter(
     val movieId: Int,
@@ -16,7 +16,7 @@ class ImageAdapter(
     val context: Context
 ) : RecyclerView.Adapter<ImageViewHolder>() {
 
-    var listener: ImageAdapter.OnItemClickListener? = null
+    var listener: OnItemClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder {
         val binding = ImageItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -33,7 +33,7 @@ class ImageAdapter(
 
             }
             root.setOnClickListener {
-                listener?.onClick(movieId)
+                listener?.onClick(movieId, position)
             }
         }
     }
@@ -43,7 +43,7 @@ class ImageAdapter(
     }
 
     interface OnItemClickListener {
-        fun onClick(movieId: Int)
+        fun onClick(movieId: Int, position: Int)
     }
 
 }

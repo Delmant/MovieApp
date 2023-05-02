@@ -6,7 +6,7 @@
     android:background="@color/black"
     >
 
-    <ImageView
+    <com.github.chrisbanes.photoview.PhotoView
         android:id="@+id/iv_image_detail"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

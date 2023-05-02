@@ -1,4 +1,4 @@
-package com.example.movieapp.presentation.movie_detail_fragment.similar_movies
+package com.example.movieapp.presentation.adapters.similar_movies
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -11,7 +11,7 @@ import com.example.movieapp.domain.model.movie.SimilarMovies
 
 class SimilarMovieAdapter(
     private val context: Context
-) : ListAdapter<SimilarMovies, SimilarMovieViewHolder >(SimilarMovieDiffCallback) {
+) : ListAdapter<SimilarMovies, SimilarMovieViewHolder>(SimilarMovieDiffCallback) {
 
     var listener: OnItemClickListener? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SimilarMovieViewHolder {

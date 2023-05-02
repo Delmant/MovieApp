@@ -1,18 +1,18 @@
-package com.example.movieapp.presentation.movie_detail_fragment.fact
+package com.example.movieapp.presentation.adapters.fact
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.databinding.FactsItemBinding
 import com.example.movieapp.domain.model.movie.Facts
-import com.example.movieapp.presentation.movie_detail_fragment.actor.ActorAdapter
+import com.example.movieapp.presentation.adapters.actor.ActorAdapter
 
 
 class FactAdapter(
     private val items: List<Facts>
 ) : RecyclerView.Adapter<FactViewHolder>() {
 
-    var listener: FactAdapter.OnItemClickListener? = null
+    var listener: OnItemClickListener? = null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FactViewHolder {
         val binding = FactsItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return FactViewHolder((binding))

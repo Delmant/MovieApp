@@ -8,17 +8,19 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
+import com.example.movieapp.R
 import com.example.movieapp.databinding.FragmentActorDetailInfoBinding
 import com.example.movieapp.domain.model.actor.MovieAct
+import com.example.movieapp.domain.model.actor.Profession
 import com.example.movieapp.domain.model.movie.Facts
 import com.example.movieapp.domain.model.movie.Persons
 import com.example.movieapp.domain.model.movie.SimilarMovies
 import com.example.movieapp.presentation.MovieApp
 import com.example.movieapp.presentation.ViewModelFactory
-import com.example.movieapp.presentation.actor_detail_fragment.actor_movies.ActorMoviesAdapter
+import com.example.movieapp.presentation.adapters.actor_movies.ActorMoviesAdapter
 import com.example.movieapp.presentation.movie_detail_fragment.MovieDetailFragment
-import com.example.movieapp.presentation.movie_detail_fragment.fact.FactAdapter
-import com.example.movieapp.presentation.movie_detail_fragment.similar_movies.SimilarMovieAdapter
+import com.example.movieapp.presentation.adapters.fact.FactAdapter
+import com.example.movieapp.presentation.adapters.similar_movies.SimilarMovieAdapter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -75,6 +77,10 @@ class ActorDetailFragment : Fragment() {
                 setupActorPhoto(it.photo)
                 setupFactsRv(viewModel.convertFactsList(it.actorFacts))
                 setupActorMovie(it.movies)
+                setupActorProfession(it.profession)
+                setupAgeAndGrowth(it.age, it.growth)
+                setupDateOfBirthActor(it.birthday)
+
                 binding.progressBar.visibility = View.GONE
                 binding.container.visibility = View.VISIBLE
 
@@ -86,6 +92,26 @@ class ActorDetailFragment : Fragment() {
     private fun setupActorMovie(list: List<MovieAct>) {
         val adapter = ActorMoviesAdapter(list)
         binding.rvSeqMovies.adapter = adapter
+        adapter.listener = object : ActorMoviesAdapter.OnItemClickListener {
+            override fun onItemClick(movieId: Int) {
+                parentFragmentManager.beginTransaction()
+                    .add(R.id.fragment_container, MovieDetailFragment.newInstance(movieId))
+                    .addToBackStack(null)?.commit()
+            }
+
+        }
+    }
+
+    private fun setupDateOfBirthActor(birthday: String) {
+        binding.tvDataOfBirth.text = viewModel.parseActorDateOfBirth(birthday)
+    }
+
+    private fun setupAgeAndGrowth(age: Int, growth: Int) {
+        binding.tvAgeAndGrowth.text = viewModel.setupAgeAndGrowth(age, growth)
+    }
+
+    private fun setupActorProfession(list: List<Profession>) {
+        binding.tvProfession.text = viewModel.parseActorProfession(list)
     }
 
     private fun setupActorName(nameRu: String, nameEn: String) {

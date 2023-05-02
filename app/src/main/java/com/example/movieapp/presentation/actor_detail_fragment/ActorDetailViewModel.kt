@@ -4,18 +4,18 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.movieapp.R
 import com.example.movieapp.data.mapper.MovieMapper
 import com.example.movieapp.domain.model.actor.Actor
 import com.example.movieapp.domain.model.actor.ActorFact
+import com.example.movieapp.domain.model.actor.Profession
 import com.example.movieapp.domain.model.movie.Facts
-import com.example.movieapp.domain.model.movie.Movie
-import com.example.movieapp.domain.model.movie.SimilarMovies
 import com.example.movieapp.domain.usecases.GetMovieByIdUseCase
 import com.example.movieapp.domain.usecases.GetPersonByIdUseCase
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class ActorDetailViewModel @Inject constructor (
+class ActorDetailViewModel @Inject constructor(
     private val getPersonByIdUseCase: GetPersonByIdUseCase,
     private val mapper: MovieMapper,
     private val getMovieByIdUseCase: GetMovieByIdUseCase
@@ -28,7 +28,19 @@ class ActorDetailViewModel @Inject constructor (
         viewModelScope.launch {
             val person = getPersonByIdUseCase.invoke(id)
             _personLiveData.value = person
+
         }
+    }
+
+    fun parseActorDateOfBirth(date: String): String {
+        if (date.isEmpty()) return ""
+        val splitString = date.split("-")
+        val year = splitString[0]
+        val month = Month.getMonth(splitString[1])
+        val day = if (splitString[1].contains("0"))
+            splitString[1].replace("0", "")
+        else splitString[1]
+        return "$day $month $year"
     }
 
     fun convertFactsList(list: List<ActorFact>): List<Facts> {
@@ -40,16 +52,54 @@ class ActorDetailViewModel @Inject constructor (
         return name.replace(" ", "\n")
     }
 
-    fun movieListToSequelsList(list: List<Movie>): List<SimilarMovies> {
-        return list.map {
-            SimilarMovies(
-                alternativeName = it.alternativeName,
-                enName = it.enName,
-                id = it.id,
-                name = it.name,
-                poster = it.poster,
-                type = it.type
-            )
+    fun parseActorProfession(list: List<Profession>): String {
+        var actorProfession = ""
+        list.forEachIndexed { index, prof ->
+            actorProfession += if (index == list.size - 1)
+                prof.value
+            else {
+                "${prof.value}, "
+            }
+        }
+        return actorProfession
+    }
+
+    fun setupAgeAndGrowth(age: Int, growth: Int): String {
+        val ageString = if (age > 0) "$age ${parseActorAge(age)} " else ""
+        val growthString = if (growth > 0) "$growth м" else ""
+        return ageString + growthString
+    }
+
+    private fun parseActorAge(age: Int): String {
+        val ageRegex = Regex("[2-4]")
+        val lastNumber = age.toString().last().toString()
+        return when {
+            lastNumber.matches(ageRegex) -> "года"
+            lastNumber.contains("1") -> "год"
+            else -> "лет"
+        }
+    }
+
+    enum class Month(val monthNumber: String) {
+        Января("01"),
+        Февраля("02"),
+        Марта("03"),
+        Апреля("04"),
+        Мая("05"),
+        Июня("06"),
+        Июля("07"),
+        Августа("08"),
+        Сентября("09"),
+        Октября("10"),
+        Ноября("11"),
+        Декабря("12");
+
+        companion object {
+            fun getMonth(monthNumber: String): Month {
+                return values().find { it.monthNumber == monthNumber }
+                    ?: throw IllegalArgumentException("Invalid month number: $monthNumber")
+
+            }
         }
     }
 }
