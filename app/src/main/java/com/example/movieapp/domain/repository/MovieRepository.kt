@@ -12,6 +12,8 @@ interface MovieRepository {
 
      suspend fun getMovieById(id: Int): Movie
 
+     suspend fun getSearchResult(name: String): MovieList
+
      suspend fun getImageByMovieId(id: Int): ImageList
 
      suspend fun getRandomMovie(): LiveData<Movie>

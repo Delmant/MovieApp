@@ -64,22 +64,6 @@ class ActorDetailViewModel @Inject constructor(
         return actorProfession
     }
 
-    fun setupAgeAndGrowth(age: Int, growth: Int): String {
-        val ageString = if (age > 0) "$age ${parseActorAge(age)} " else ""
-        val growthString = if (growth > 0) "$growth м" else ""
-        return ageString + growthString
-    }
-
-    private fun parseActorAge(age: Int): String {
-        val ageRegex = Regex("[2-4]")
-        val lastNumber = age.toString().last().toString()
-        return when {
-            lastNumber.matches(ageRegex) -> "года"
-            lastNumber.contains("1") -> "год"
-            else -> "лет"
-        }
-    }
-
     enum class Month(val monthNumber: String) {
         Января("01"),
         Февраля("02"),

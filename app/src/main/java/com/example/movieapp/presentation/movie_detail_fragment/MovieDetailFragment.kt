@@ -1,6 +1,7 @@
 package com.example.movieapp.presentation.movie_detail_fragment
 
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -106,9 +107,13 @@ class MovieDetailFragment : Fragment() {
             setupVotes(it.votes)
             setupRating(it.rating)
             setupYearAndGenres(it.year, it.genres)
-            setupCountryLengthAndPg(it.countries, if(it.isSeries) {it.totalSeriesLength} else it.movieLength, it.ageRating)
+            setupCountryLengthAndPg(
+                it.countries, if (it.isSeries) {
+                    it.totalSeriesLength
+                } else it.movieLength, it.ageRating
+            )
             setupNames(it.name, it.alternativeName)
-            setupFactsRv(viewModel.parseFacts(it.facts))
+            setupFactsRv(parseFacts(it.facts))
             binding.scrollview.visibility = View.VISIBLE
             binding.progressBar.visibility = View.GONE
         }
@@ -141,6 +146,17 @@ class MovieDetailFragment : Fragment() {
         }
     }
 
+    private fun parseFacts(facts: List<Facts>): List<Facts> {
+        val removeHtmlFacts = facts.map {
+            it.copy(value = it.value.replace(Regex("<.*?>"), ""))
+
+        }
+        val removeAppFacts = removeHtmlFacts.map {
+            it.copy(value = it.value.replace(Regex("&.*?;"), ""))
+        }
+        return removeAppFacts
+    }
+
     private fun setupFactsRv(facts: List<Facts>) {
         val adapter = FactAdapter(facts)
         binding.rvFact.adapter = adapter
@@ -171,24 +187,57 @@ class MovieDetailFragment : Fragment() {
     }
 
     private fun setupCountryLengthAndPg(country: List<Country>, movieLength: Int, ageRating: Int) {
-        binding.tvCountryLengthPg.text = viewModel.parseCountryLengthAndPg(
+        binding.tvCountryLengthPg.text = parseCountryLengthAndPg(
             country, movieLength, ageRating
         )
     }
 
+    fun parseCountryLengthAndPg(listCountry: List<Country>, length: Int, ageRating: Int): String {
+        return "${listCountry[0].name}, ${parseMovieLength(length)}, $ageRating+"
+    }
+
+    private fun parseMovieLength(length: Int): String {
+        if (length < SIXTY_MINUTES) return "$length ${resources.getString(R.string.minutes_short)}"
+        val h = length / SIXTY_MINUTES
+        val m = length % SIXTY_MINUTES
+        return "$h ${resources.getString(R.string.hour_short)} $m ${resources.getString(R.string.minutes_short)}"
+    }
+
     private fun setupYearAndGenres(year: Int, genres: List<Genres>) {
-        binding.tvYearAndGenres.text = viewModel.parseYearAndGenres(
+        binding.tvYearAndGenres.text = parseYearAndGenres(
             year, genres
         )
     }
 
+    private fun parseYearAndGenres(year: Int, genres: List<Genres>): String {
+        return "$year, ${genres[0].name}, ${genres[1].name}"
+    }
+
     private fun setupRating(rating: Rating) {
-        binding.tvKpRating.text = viewModel.parseRating(rating.kp)
-        binding.tvKpRating.setTextColor(viewModel.setupRatingColor(rating.kp))
+        binding.tvKpRating.text = parseRating(rating.kp)
+        binding.tvKpRating.setTextColor(setupRatingColor(rating.kp))
+    }
+
+    private fun parseRating(rating: Double): String {
+        return rating.toString().substring(0, 3) + " "
+    }
+
+    private fun setupRatingColor(rating: Double): Int {
+        if (rating >= 7.0) return Color.GREEN
+        if (rating <= 4.5) return Color.RED
+        return Color.GRAY
     }
 
     private fun setupVotes(votes: Votes) {
-        binding.tvVotes.text = viewModel.parseVotes(votes.kp)
+        binding.tvVotes.text = parseVotes(votes.kp)
+    }
+
+    private fun parseVotes(votes: String): String {
+        if (votes.length > 3) return votes.substring(0, votes.length - 3) + "k "
+        if (votes.length > 4) return votes.substring(0, votes.length - 6) + "k "
+        if (votes.length > 5) return votes.substring(0, votes.length - 9) + "k "
+        if (votes.length > 6) return votes.substring(0, votes.length - 12) + "k "
+        return "$votes "
     }
 
     private fun setupDescription(desc: String) {
@@ -196,7 +245,18 @@ class MovieDetailFragment : Fragment() {
     }
 
     private fun setupPersons(persons: List<Persons>) {
-        binding.tvActors.text = viewModel.parsePersons(persons)
+        binding.tvActors.text = parsePersons(persons)
+    }
+
+    private fun parsePersons(list: List<Persons>): String {
+        val castTitle = resources.getString(R.string.cast_title)
+        return String.format(
+            castTitle,
+            list[0].name,
+            list[1].name,
+            list[2].name,
+            list[3].name
+        )
     }
 
     private fun setupPoster(poster: Poster) {
@@ -212,8 +272,22 @@ class MovieDetailFragment : Fragment() {
     }
 
     private fun setupRatingRv(rating: Rating, votes: Votes) {
-        val adapter = RatingAdapter(viewModel.makePairRatingAndVotes(rating, votes))
+        val adapter = RatingAdapter(makePairRatingAndVotes(rating, votes))
         binding.rvRating.adapter = adapter
+    }
+
+    private fun makePairRatingAndVotes(
+        rating: Rating,
+        votes: Votes,
+    ): List<Pair<String, Pair<String, String>>> {
+        return listOf(
+            resources.getString(R.string.rating_kinopoisk) to Pair(rating.kp.toString(), votes.kp),
+            resources.getString(R.string.rating_imdb) to Pair(rating.imdb.toString(), votes.imdb),
+            resources.getString(R.string.rating_critics) to Pair(
+                rating.filmCritics.toString(),
+                votes.filmCritics.toString()
+            )
+        )
     }
 
     private fun setupActorRv(list: List<Persons>) {
@@ -268,6 +342,7 @@ class MovieDetailFragment : Fragment() {
     companion object {
 
         private const val EXTRA_MOVIE_ID = "movie_id"
+        private const val SIXTY_MINUTES = 60
 
         fun newInstance(movieId: Int): MovieDetailFragment {
             return MovieDetailFragment().apply {

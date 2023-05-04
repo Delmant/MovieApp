@@ -34,7 +34,7 @@ class ActorDetailFragment : Fragment() {
 
     private lateinit var viewModel: ActorDetailViewModel
 
-    var _bindng: FragmentActorDetailInfoBinding? = null
+    private var _bindng: FragmentActorDetailInfoBinding? = null
     val binding: FragmentActorDetailInfoBinding
         get() = _bindng ?: throw RuntimeException("")
 
@@ -107,7 +107,23 @@ class ActorDetailFragment : Fragment() {
     }
 
     private fun setupAgeAndGrowth(age: Int, growth: Int) {
-        binding.tvAgeAndGrowth.text = viewModel.setupAgeAndGrowth(age, growth)
+        binding.tvAgeAndGrowth.text = parseAgeAndGrowth(age, growth)
+    }
+
+    private fun parseAgeAndGrowth(age: Int, growth: Int): String {
+        val ageString = if (age > 0) "$age ${parseActorAge(age)} " else ""
+        val growthString = if (growth > 0) "$growth м" else ""
+        return ageString + growthString
+    }
+
+    private fun parseActorAge(age: Int): String {
+        val ageRegex = Regex("[2-4]")
+        val lastNumber = age.toString().last().toString()
+        return when {
+            lastNumber.matches(ageRegex) -> resources.getString(R.string.years)
+            lastNumber.contains("1") -> resources.getString(R.string.year)
+            else -> resources.getString(R.string.age)
+        }
     }
 
     private fun setupActorProfession(list: List<Profession>) {
