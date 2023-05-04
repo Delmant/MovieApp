@@ -22,8 +22,11 @@ class MovieRepositoryImpl @Inject constructor(
 
 
     override suspend fun getMovieById(id: Int): Movie {
-        Log.d("Json", "${apiService.getReviewByMovieId(id)}")
         return movieMapper.toEntity(apiService.getMovieById(id))
+    }
+
+    override suspend fun getSearchResult(name: String): MovieList {
+        return movieMapper.movieListDtoToMovieList(apiService.getSearchResult(name))
     }
 
     override suspend fun getImageByMovieId(id: Int): ImageList {
