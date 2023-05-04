@@ -61,7 +61,8 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
 
-
+    implementation "com.airbnb.android:epoxy:5.1.2"
+    kapt "com.airbnb.android:epoxy-processor:5.1.2"
 
     kapt("org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.3.0")
 
