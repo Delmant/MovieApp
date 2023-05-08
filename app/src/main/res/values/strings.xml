@@ -13,4 +13,13 @@
     <string name="enum_month_october">Октябрь</string>
     <string name="enum_month_november">Ноябрь</string>
     <string name="enum_month_december">Декабрь</string>
+    <string name="cast_title">В ролях: %1$s, %2$s, %3$s, %4$s и другие</string>
+    <string name="rating_kinopoisk">Рейтинг кинопоиска</string>
+    <string name="rating_imdb">Рейтинг imdb</string>
+    <string name="rating_critics">Рейттинг мировых критиков</string>
+    <string name="minutes_short">мин</string>
+    <string name="hour_short">ч</string>
+    <string name="years">года</string>
+    <string name="age">лет</string>
+    <string name="year">год</string>
 </resources>

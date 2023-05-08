@@ -449,6 +449,7 @@
                     >
 
                     <TextView
+                        android:id="@+id/tv_fact_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:letterSpacing="0.07"
@@ -496,6 +497,7 @@
                         tools:listitem="@layout/review_mini_item" />
 
                     <TextView
+                        android:id="@+id/tv_sequels_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:letterSpacing="0.07"
@@ -519,6 +521,7 @@
                         />
 
                     <TextView
+                        android:id="@+id/tv_similar_title"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:letterSpacing="0.07"
