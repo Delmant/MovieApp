@@ -24,7 +24,7 @@ interface MovieRepository {
 
      suspend fun getPersonById(id: Int): Actor
 
-     suspend fun getReviewByMovieId(id: Int): ReviewList
+     suspend fun getReviewByMovieId(id: Int, page: Int): ReviewList
 
      suspend fun loadData()
 }
