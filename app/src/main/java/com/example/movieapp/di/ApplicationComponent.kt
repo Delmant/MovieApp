@@ -7,6 +7,8 @@ import com.example.movieapp.presentation.actor_detail_fragment.ActorDetailFragme
 import com.example.movieapp.presentation.image_detail_fragment.ImageDetailFragment
 import com.example.movieapp.presentation.movie_detail_fragment.MovieDetailFragment
 import com.example.movieapp.presentation.review_detail_fragment.ReviewDetailFragment
+import com.example.movieapp.presentation.review_list_fragment.ReviewListFragment
+import com.example.movieapp.presentation.search_fragment.SearchFragment
 import dagger.BindsInstance
 import dagger.Component
 import dagger.Provides
@@ -23,6 +25,10 @@ interface ApplicationComponent {
     fun inject(fragment: ImageDetailFragment)
 
     fun inject(fragment: ReviewDetailFragment)
+
+    fun inject(fragment: ReviewListFragment)
+
+    fun inject(fragment: SearchFragment)
 
     fun inject(application: MovieApp)
 
