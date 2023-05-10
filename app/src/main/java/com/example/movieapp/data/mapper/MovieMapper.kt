@@ -170,7 +170,8 @@ class MovieMapper @Inject constructor() {
 
     fun reviewListDtoToReviewList(reviewListDto: ReviewListDto): ReviewList {
         return ReviewList(
-            list = reviewListDto.list.map { ReviewDto.toEntity(it) }
+            list = reviewListDto.list.map { ReviewDto.toEntity(it) },
+            pages = reviewListDto.pages
         )
     }
 }
