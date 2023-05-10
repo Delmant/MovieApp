@@ -6,6 +6,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:paddingEnd="13dp"
+    android:paddingBottom="13dp"
     >
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/container"
