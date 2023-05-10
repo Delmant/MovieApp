@@ -49,8 +49,8 @@ class MovieRepositoryImpl @Inject constructor(
         return movieMapper.actorDtoToActorEntity(apiService.getPersonById(id))
     }
 
-    override suspend fun getReviewByMovieId(id: Int): ReviewList {
-        return movieMapper.reviewListDtoToReviewList(apiService.getReviewByMovieId(id))
+    override suspend fun getReviewByMovieId(id: Int, page: Int): ReviewList {
+        return movieMapper.reviewListDtoToReviewList(apiService.getReviewByMovieId(id, page))
     }
 
     override suspend fun loadData() {

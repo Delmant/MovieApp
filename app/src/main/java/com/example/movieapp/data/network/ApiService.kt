@@ -31,6 +31,15 @@ interface ApiService {
         @Path(PATH_PARAM_ID) id: Int
     ): MovieDto
 
+    @GET("v1.3/movie")
+    @Headers(
+        MEDIA_TYPE,
+        API_KEY
+    )
+    suspend fun getSearchResult(
+        @Query(SEARCH_PARAM_NAME) name: String
+    ): MovieListDto
+
     @GET("movie")
     @Headers(
         MEDIA_TYPE,
@@ -48,7 +57,8 @@ interface ApiService {
     )
     suspend fun getImageByMovieId(
         @Query(IMAGE_PARAM_MOVIE_ID) movieId: Int,
-        @Query(IMAGE_PARAM_TYPE) type: String
+        @Query(IMAGE_PARAM_TYPE) type1: String,
+        @Query(IMAGE_PARAM_TYPE) type2: String
     ): ImageListDto
 
     @GET("v1/person/{PATH_PERSON_ID}")
@@ -66,9 +76,9 @@ interface ApiService {
         Companion.API_KEY
     )
     suspend fun getReviewByMovieId(
-        @Query(REVIEW_PARAM_MOVIE_ID) movieId: Int
+        @Query(REVIEW_PARAM_MOVIE_ID) movieId: Int,
+        @Query(REVIEW_PARAM_PAGE_NUMBER) page: Int
     ): ReviewListDto
-
 
 
     companion object {
@@ -81,7 +91,11 @@ interface ApiService {
         private const val PAGE_PARAM_LIMIT = "limit"
         private const val IMAGE_PARAM_MOVIE_ID = "movieId"
         private const val IMAGE_PARAM_TYPE = "type"
+
         private const val REVIEW_PARAM_MOVIE_ID = "movieId"
+        private const val REVIEW_PARAM_PAGE_NUMBER = "page"
+
+        private const val SEARCH_PARAM_NAME = "name"
 
         private const val QUERY_PERSON_ID = "persons.id"
     }
