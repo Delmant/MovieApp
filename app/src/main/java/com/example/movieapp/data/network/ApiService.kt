@@ -57,7 +57,8 @@ interface ApiService {
     )
     suspend fun getImageByMovieId(
         @Query(IMAGE_PARAM_MOVIE_ID) movieId: Int,
-        @Query(IMAGE_PARAM_TYPE) type: String
+        @Query(IMAGE_PARAM_TYPE) type1: String,
+        @Query(IMAGE_PARAM_TYPE) type2: String
     ): ImageListDto
 
     @GET("v1/person/{PATH_PERSON_ID}")
