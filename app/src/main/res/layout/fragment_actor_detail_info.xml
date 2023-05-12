@@ -138,7 +138,7 @@
                     android:paddingStart="13dp"
                     android:paddingTop="13dp"
                     android:paddingBottom="6dp"
-                    android:text="Знаете ли вы, что..."
+                    android:text="@string/fact"
                     android:textColor="@color/black"
                     android:textSize="20dp" />
 
@@ -159,7 +159,7 @@
                     android:paddingStart="13dp"
                     android:paddingTop="13dp"
                     android:paddingBottom="6dp"
-                    android:text="Работы"
+                    android:text="@string/movies"
                     android:textColor="@color/black"
                     android:textSize="20dp" />
 
