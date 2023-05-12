@@ -32,6 +32,7 @@
     <string name="show_all">Все</string>
     <string name="sequels_and_prequels">Сиквелы и приквелы</string>
     <string name="similar_movies">Похожие фильмы</string>
+    <string name="interesting_fact">Интересный факт</string>
 
     <style name="btn_play_trailer">Трейлер</style>
 </resources>
