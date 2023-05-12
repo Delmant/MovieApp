@@ -22,4 +22,16 @@
     <string name="years">года</string>
     <string name="age">лет</string>
     <string name="year">год</string>
+    <string name="btn_play_trailer">Трейлер</string>
+    <string name="genre">Жанры</string>
+    <string name="image">Изображения</string>
+    <string name="rating">Рейтинг</string>
+    <string name="actor">Актёры</string>
+    <string name="fact">Знаете ли вы, что...</string>
+    <string name="review">Отзывы</string>
+    <string name="show_all">Все</string>
+    <string name="sequels_and_prequels">Сиквелы и приквелы</string>
+    <string name="similar_movies">Похожие фильмы</string>
+
+    <style name="btn_play_trailer">Трейлер</style>
 </resources>
