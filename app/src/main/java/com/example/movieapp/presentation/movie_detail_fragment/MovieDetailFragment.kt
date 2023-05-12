@@ -3,6 +3,7 @@ package com.example.movieapp.presentation.movie_detail_fragment
 import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -304,7 +305,7 @@ class MovieDetailFragment : Fragment() {
     }
 
     private fun setupSimilarRv(list: List<SimilarMovies>) {
-
+        binding.tvSimilarTitle.visibility = if(list.isEmpty()) View.GONE else View.VISIBLE
         val similarMoviesAdapter = SimilarMovieAdapter(requireContext())
         binding.rvSimilarMovies.adapter = similarMoviesAdapter
 
@@ -320,6 +321,7 @@ class MovieDetailFragment : Fragment() {
     }
 
     private fun setupSequelsRv(list: List<SequelsAndPrequels>) {
+        binding.tvSimilarTitle.visibility = if(list.isEmpty()) View.GONE else View.VISIBLE
         val sequelsAdapter = SimilarMovieAdapter(requireContext())
         binding.rvSeqMovies.adapter = sequelsAdapter
         sequelsAdapter.submitList(viewModel.similarToSequels(list))
