@@ -145,6 +145,11 @@ class MovieDetailFragment : Fragment() {
             }
 
         }
+        binding.tvReviewSeeAll.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .add(R.id.fragment_container, ReviewListFragment.newInstance(id, pages))
+                .addToBackStack(null).commit()
+        }
     }
 
     private fun parseFacts(facts: List<Facts>): List<Facts> {
