@@ -5,5 +5,6 @@ data class MovieAct (
     val general: Boolean,
     val id: Int,
     val name: String,
+    val alternativeName: String?,
     val rating: Double
 )
