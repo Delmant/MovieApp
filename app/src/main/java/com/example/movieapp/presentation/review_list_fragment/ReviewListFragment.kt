@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.movieapp.databinding.FragmentReviewListBinding
 import com.example.movieapp.presentation.MovieApp
 import com.example.movieapp.presentation.ViewModelFactory
-import com.example.movieapp.presentation.adapters.review_mini.ReviewMiniAdapter
+import com.example.movieapp.presentation.adapters.review_list.ReviewListAdapter
 import com.example.movieapp.presentation.adapters.review_page_number.ReviewPageNumberAdapter
 import javax.inject.Inject
 
@@ -61,7 +61,7 @@ class ReviewListFragment: Fragment() {
         viewModel?.getReview(id, START_PAGE)
 
         viewModel?.movieLiveDataReview?.observe(viewLifecycleOwner) {
-            val adapter = ReviewMiniAdapter(id, it.list)
+            val adapter = ReviewListAdapter(id, it.list)
             binding.rvReviewList.adapter = adapter
         }
 
@@ -73,7 +73,7 @@ class ReviewListFragment: Fragment() {
                 viewModel?.getReview(id, page)
 
                 viewModel?.movieLiveDataReview?.observe(viewLifecycleOwner) {
-                    val adapter = ReviewMiniAdapter(id, it.list)
+                    val adapter = ReviewListAdapter(id, it.list)
                     binding.rvReviewList.adapter = adapter
                 }
             }

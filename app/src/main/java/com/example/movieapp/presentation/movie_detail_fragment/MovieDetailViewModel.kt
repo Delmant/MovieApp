@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -46,7 +47,7 @@ class MovieDetailViewModel @Inject constructor(
         viewModelScope.launch {
             val movie = getMovieByIdUseCase.invoke(id)
             val image = getImageByMovieIdUseCase.invoke(id)
-            val review = getReviewByMovieIdUseCase.invoke(id)
+            val review = getReviewByMovieIdUseCase.invoke(id, START_PAGE_NUMBER_REVIEW)
             _movieLiveData.value = movie
             _movieLiveDataImages.value = image
             _movieLiveDataReview.value = review
@@ -85,6 +86,8 @@ class MovieDetailViewModel @Inject constructor(
     }
 
     companion object {
+
+        private const val START_PAGE_NUMBER_REVIEW = 1
         private const val YOUTUBE_KEY_WORD = "youtube"
     }
 }

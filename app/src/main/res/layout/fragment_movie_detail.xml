@@ -292,7 +292,7 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
                     android:id="@+id/container2"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
                     android:paddingBottom="60dp"
@@ -330,7 +330,7 @@
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_genre"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:padding="13dp"
@@ -360,7 +360,7 @@
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_image"
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:padding="13dp"
@@ -389,8 +389,8 @@
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_rating"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:orientation="horizontal"
                         android:padding="13dp"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -418,8 +418,8 @@
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_actor"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:orientation="horizontal"
                         android:padding="13dp"
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -429,7 +429,7 @@
                         tools:listitem="@layout/actor_item" />
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         app:layout_constraintStart_toStartOf="parent"
@@ -450,7 +450,7 @@
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/rv_fact"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
                             android:padding="13dp"
@@ -458,6 +458,7 @@
                             tools:listitem="@layout/facts_item" />
 
                         <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/review_container"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
 
@@ -496,7 +497,7 @@
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/rv_review"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:clipToPadding="false"
                             android:orientation="horizontal"
@@ -519,7 +520,7 @@
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/rv_seq_movies"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
                             android:padding="13dp"
@@ -541,7 +542,7 @@
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/rv_similar_movies"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
                             android:padding="13dp"
@@ -556,7 +557,6 @@
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-
     </ScrollView>
 
     <ProgressBar
@@ -566,6 +566,5 @@
         android:layout_centerInParent="true"
 
         />
-
 
 </RelativeLayout>

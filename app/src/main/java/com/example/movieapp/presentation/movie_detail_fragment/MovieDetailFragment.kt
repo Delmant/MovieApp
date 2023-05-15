@@ -38,10 +38,10 @@ import com.example.movieapp.presentation.adapters.rating.RatingAdapter
 import com.example.movieapp.presentation.adapters.review_mini.ReviewMiniAdapter
 import com.example.movieapp.presentation.adapters.similar_movies.SimilarMovieAdapter
 import com.example.movieapp.presentation.review_detail_fragment.ReviewDetailFragment
+import com.example.movieapp.presentation.review_list_fragment.ReviewListFragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.cancel
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class MovieDetailFragment : Fragment() {
@@ -93,7 +93,7 @@ class MovieDetailFragment : Fragment() {
             setupImageRvAndListener(id, it.imageList)
         }
         viewModel.movieLiveDataReview.observe(viewLifecycleOwner) {
-            setupReview(id, it.list)
+            setupReview(id, it.list, it.pages)
         }
         viewModel.movieLiveData.observe(viewLifecycleOwner) {
             setupPoster(it.poster)
@@ -110,7 +110,7 @@ class MovieDetailFragment : Fragment() {
             setupYearAndGenres(it.year, it.genres)
             setupCountryLengthAndPg(
                 it.countries, if (it.isSeries) {
-                    it.totalSeriesLength
+                    it.seriesLength
                 } else it.movieLength, it.ageRating
             )
             setupNames(it.name, it.alternativeName)
@@ -134,7 +134,8 @@ class MovieDetailFragment : Fragment() {
         }
     }
 
-    private fun setupReview(id: Int, list: List<Review>) {
+    private fun setupReview(id: Int, list: List<Review>, pages: Int) {
+        binding.reviewContainer.visibility = if(list.isEmpty()) View.GONE else View.VISIBLE
         val adapter = ReviewMiniAdapter(id, list)
         binding.rvReview.adapter = adapter
         adapter.listener = object : ReviewMiniAdapter.OnItemClickListener {
@@ -164,6 +165,7 @@ class MovieDetailFragment : Fragment() {
     }
 
     private fun setupFactsRv(facts: List<Facts>) {
+        binding.tvFactTitle.visibility = if(facts.isEmpty()) View.GONE else View.VISIBLE
         val adapter = FactAdapter(facts)
         binding.rvFact.adapter = adapter
         adapter.listener = object : FactAdapter.OnItemClickListener {
@@ -188,7 +190,7 @@ class MovieDetailFragment : Fragment() {
     }
 
     private fun setupNames(name: String, altName: String) {
-        binding.tvTitle.text = name
+        binding.tvTitle.text = name.ifEmpty { altName }
         binding.tvTitleEn.text = altName
     }
 
@@ -198,8 +200,8 @@ class MovieDetailFragment : Fragment() {
         )
     }
 
-    fun parseCountryLengthAndPg(listCountry: List<Country>, length: Int, ageRating: Int): String {
-        return "${listCountry[0].name}, ${parseMovieLength(length)}, $ageRating+"
+    private fun parseCountryLengthAndPg(listCountry: List<Country>, length: Int, ageRating: Int): String {
+         return "${listCountry[0].name}, ${parseMovieLength(length)}, $ageRating+"
     }
 
     private fun parseMovieLength(length: Int): String {
@@ -216,12 +218,13 @@ class MovieDetailFragment : Fragment() {
     }
 
     private fun parseYearAndGenres(year: Int, genres: List<Genres>): String {
-        return "$year, ${genres[0].name}, ${genres[1].name}"
+        return "$year, ${genres[0].name}${if(genres.size > 1) {", ${genres[1].name}"} else ""}"
     }
 
     private fun setupRating(rating: Rating) {
-        binding.tvKpRating.text = parseRating(rating.kp)
-        binding.tvKpRating.setTextColor(setupRatingColor(rating.kp))
+        val newRating = if(rating.kp > 0) {rating.kp} else rating.imdb
+        binding.tvKpRating.text = parseRating(newRating)
+        binding.tvKpRating.setTextColor(setupRatingColor(newRating))
     }
 
     private fun parseRating(rating: Double): String {
@@ -326,7 +329,8 @@ class MovieDetailFragment : Fragment() {
     }
 
     private fun setupSequelsRv(list: List<SequelsAndPrequels>) {
-        binding.tvSimilarTitle.visibility = if(list.isEmpty()) View.GONE else View.VISIBLE
+        Log.d("SEQ", list.toString())
+        binding.tvSequelsTitle.visibility = if(list.isEmpty()) View.GONE else View.VISIBLE
         val sequelsAdapter = SimilarMovieAdapter(requireContext())
         binding.rvSeqMovies.adapter = sequelsAdapter
         sequelsAdapter.submitList(viewModel.similarToSequels(list))

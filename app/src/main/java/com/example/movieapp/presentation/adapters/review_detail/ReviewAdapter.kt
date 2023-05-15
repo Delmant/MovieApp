@@ -1,4 +1,4 @@
-package com.example.movieapp.presentation.adapters.review
+package com.example.movieapp.presentation.adapters.review_detail
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
