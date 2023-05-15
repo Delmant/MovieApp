@@ -165,6 +165,7 @@ class MovieDetailFragment : Fragment() {
     }
 
     private fun setupFactsRv(facts: List<Facts>) {
+        binding.tvFactTitle.visibility = if(facts.isEmpty()) View.GONE else View.VISIBLE
         val adapter = FactAdapter(facts)
         binding.rvFact.adapter = adapter
         adapter.listener = object : FactAdapter.OnItemClickListener {
