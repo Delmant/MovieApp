@@ -28,9 +28,9 @@ class ActorMoviesAdapter(
     override fun onBindViewHolder(holder: ActorMoviesViewHolder, position: Int) {
         val item = list[position]
         with(holder.binding) {
-            tvMovieName.text = item.name
+            tvMovieName.text = item.name.ifEmpty { item.alternativeName }
             tvActorRole.text = item.description
-            tvMovieRating.text = item.rating.toString()
+            tvMovieRating.text = if(item.rating >= 0) item.rating.toString() else ""
             root.setOnClickListener {
                 listener?.onItemClick(item.id)
             }
