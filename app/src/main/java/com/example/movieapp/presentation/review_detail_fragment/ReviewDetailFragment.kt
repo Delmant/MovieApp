@@ -8,10 +8,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.movieapp.databinding.FragmentReviewDetailBinding
-import com.example.movieapp.databinding.ReviewItemBinding
 import com.example.movieapp.presentation.MovieApp
 import com.example.movieapp.presentation.ViewModelFactory
-import com.example.movieapp.presentation.adapters.review.ReviewAdapter
+import com.example.movieapp.presentation.adapters.review_detail.ReviewAdapter
 import javax.inject.Inject
 
 class ReviewDetailFragment : Fragment() {
