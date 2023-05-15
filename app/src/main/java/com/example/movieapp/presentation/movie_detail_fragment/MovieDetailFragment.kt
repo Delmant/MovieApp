@@ -134,7 +134,8 @@ class MovieDetailFragment : Fragment() {
         }
     }
 
-    private fun setupReview(id: Int, list: List<Review>) {
+    private fun setupReview(id: Int, list: List<Review>, pages: Int) {
+        binding.reviewContainer.visibility = if(list.isEmpty()) View.GONE else View.VISIBLE
         val adapter = ReviewMiniAdapter(id, list)
         binding.rvReview.adapter = adapter
         adapter.listener = object : ReviewMiniAdapter.OnItemClickListener {
