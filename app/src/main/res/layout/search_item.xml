@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="13dp">
+
+    <ImageView
+        android:id="@+id/iv_s_poster"
+        android:layout_width="50dp"
+        android:layout_height="75dp"
+        android:src="@drawable/poster_test"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_s_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat_black"
+        android:paddingLeft="7dp"
+        android:paddingBottom="7dp"
+        android:paddingRight="7dp"
+        android:text="Призрак в доспехах"
+        android:textColor="@color/black"
+        app:layout_constrainedWidth="true"
+        app:layout_constraintStart_toEndOf="@id/iv_s_poster"
+        app:layout_constraintEnd_toStartOf="@id/tv_s_rating"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_s_en_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="7dp"
+        android:text="Ghost in the shell"
+        app:layout_constraintStart_toEndOf="@id/iv_s_poster"
+        app:layout_constraintTop_toBottomOf="@id/tv_s_name" />
+
+    <TextView
+        android:id="@+id/tv_s_rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat_black"
+        android:text="8.5"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
