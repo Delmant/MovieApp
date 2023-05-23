@@ -1,9 +1,9 @@
 package com.example.movieapp.data.network
 
+import com.example.movieapp.data.network.model.settings_dto.SettingsValueDto
 import com.example.movieapp.data.network.model.actor_dto.ActorDto
 import com.example.movieapp.data.network.model.image_dto.ImageListDto
 import com.example.movieapp.data.network.model.movie_dto.MovieDto
-import com.example.movieapp.data.network.model.movie_dto.PersonDto
 import com.example.movieapp.data.network.model.movie_list_dto.MovieListDto
 import com.example.movieapp.data.network.model.review_dto.ReviewListDto
 import com.google.gson.JsonObject
@@ -80,7 +80,11 @@ interface ApiService {
         @Query(REVIEW_PARAM_PAGE_NUMBER) page: Int
     ): ReviewListDto
 
-
+    @GET("v1/movie/possible-values-by-field")
+    suspend fun getSettingsValue(
+        @Query(SETTINGS_PARAM_VALUE) field: String
+    ): List<SettingsValueDto>
+    
     companion object {
         private const val MEDIA_TYPE = "accept: application/json"
         private const val API_KEY = "X-API-KEY: A19YWK7-537M89V-MFJQD6P-FPV15RV"
@@ -91,6 +95,8 @@ interface ApiService {
         private const val PAGE_PARAM_LIMIT = "limit"
         private const val IMAGE_PARAM_MOVIE_ID = "movieId"
         private const val IMAGE_PARAM_TYPE = "type"
+
+        private const val SETTINGS_PARAM_VALUE = "field"
 
         private const val REVIEW_PARAM_MOVIE_ID = "movieId"
         private const val REVIEW_PARAM_PAGE_NUMBER = "page"
