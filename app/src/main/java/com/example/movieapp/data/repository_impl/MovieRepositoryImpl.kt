@@ -1,4 +1,4 @@
-package com.example.movieapp.data
+package com.example.movieapp.data.repository_impl
 
 
 import android.util.Log
@@ -11,6 +11,7 @@ import com.example.movieapp.domain.model.image.ImageList
 import com.example.movieapp.domain.model.movie.Movie
 import com.example.movieapp.domain.model.movie_list.MovieList
 import com.example.movieapp.domain.model.review.ReviewList
+import com.example.movieapp.domain.model.search_settings.SettingsValue
 
 import com.example.movieapp.domain.repository.MovieRepository
 import javax.inject.Inject
@@ -30,7 +31,7 @@ class MovieRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getImageByMovieId(id: Int): ImageList {
-        return movieMapper.imageListDtoToImageListEntity(apiService.getImageByMovieId(id, "frame"))
+        return movieMapper.imageListDtoToImageListEntity(apiService.getImageByMovieId(id, "screenshot", "still"))
     }
 
     override suspend fun getRandomMovie(): LiveData<Movie> {
@@ -55,5 +56,9 @@ class MovieRepositoryImpl @Inject constructor(
 
     override suspend fun loadData() {
         TODO("Not yet implemented")
+    }
+
+    override suspend fun getSettingsValue(value: String): List<SettingsValue> {
+        return movieMapper.settingsValueListDtoToSettingsValueList(apiService.getSettingsValue(value))
     }
 }

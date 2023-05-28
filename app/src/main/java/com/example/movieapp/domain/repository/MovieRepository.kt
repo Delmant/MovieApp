@@ -7,6 +7,7 @@ import com.example.movieapp.domain.model.actor.Actor
 import com.example.movieapp.domain.model.image.ImageList
 import com.example.movieapp.domain.model.movie_list.MovieList
 import com.example.movieapp.domain.model.review.ReviewList
+import com.example.movieapp.domain.model.search_settings.SettingsValue
 
 interface MovieRepository {
 
@@ -27,4 +28,6 @@ interface MovieRepository {
      suspend fun getReviewByMovieId(id: Int, page: Int): ReviewList
 
      suspend fun loadData()
+
+     suspend fun getSettingsValue(value: String): List<SettingsValue>
 }
