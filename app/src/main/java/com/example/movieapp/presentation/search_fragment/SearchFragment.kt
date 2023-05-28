@@ -1,7 +1,6 @@
 package com.example.movieapp.presentation.search_fragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +13,7 @@ import com.example.movieapp.presentation.MovieApp
 import com.example.movieapp.presentation.ViewModelFactory
 import com.example.movieapp.presentation.adapters.search.SearchAdapter
 import com.example.movieapp.presentation.movie_detail_fragment.MovieDetailFragment
+import com.example.movieapp.presentation.search_setting_fragment.SearchSettingsFragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -54,6 +54,14 @@ class SearchFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.ivSettings.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .hide(this)
+                .add(R.id.fragment_container, SearchSettingsFragment.newInstance())
+                .addToBackStack(null).commit()
+        }
+
         binding.progressBar.visibility = View.GONE
         binding.searchView.setOnQueryTextListener(object :
             androidx.appcompat.widget.SearchView.OnQueryTextListener {
