@@ -34,6 +34,7 @@ import com.example.movieapp.data.network.model.movie_dto.WatchabilityDto
 import com.example.movieapp.data.network.model.movie_list_dto.MovieListDto
 import com.example.movieapp.data.network.model.review_dto.ReviewDto
 import com.example.movieapp.data.network.model.review_dto.ReviewListDto
+import com.example.movieapp.data.network.model.settings_dto.SettingsValueDto
 import com.example.movieapp.domain.model.actor.Actor
 import com.example.movieapp.domain.model.actor.ActorFact
 import com.example.movieapp.domain.model.actor.BirthPlace
@@ -43,6 +44,7 @@ import com.example.movieapp.domain.model.movie.Movie
 import com.example.movieapp.domain.model.movie.Watchability
 import com.example.movieapp.domain.model.movie_list.MovieList
 import com.example.movieapp.domain.model.review.ReviewList
+import com.example.movieapp.domain.model.search_settings.SettingsValue
 import javax.inject.Inject
 
 class MovieMapper @Inject constructor() {
@@ -172,6 +174,20 @@ class MovieMapper @Inject constructor() {
         return ReviewList(
             list = reviewListDto.list.map { ReviewDto.toEntity(it) },
             pages = reviewListDto.pages
+        )
+    }
+
+    fun settingsValueListDtoToSettingsValueList(settingValueListDto: List<SettingsValueDto>)
+            : List<SettingsValue> {
+        return settingValueListDto.map {
+            settingsValueDtoToSettingsValue(it)
+        }
+    }
+
+    private fun settingsValueDtoToSettingsValue(settingsValueDto: SettingsValueDto): SettingsValue {
+        return SettingsValue(
+            name = settingsValueDto.name,
+            slug = settingsValueDto.slug
         )
     }
 }
