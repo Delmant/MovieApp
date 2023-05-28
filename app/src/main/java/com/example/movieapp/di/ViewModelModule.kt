@@ -7,6 +7,8 @@ import com.example.movieapp.presentation.movie_detail_fragment.MovieDetailViewMo
 import com.example.movieapp.presentation.review_detail_fragment.ReviewDetailViewModel
 import com.example.movieapp.presentation.review_list_fragment.ReviewListViewModel
 import com.example.movieapp.presentation.search_fragment.SearchViewModel
+import com.example.movieapp.presentation.search_setting_fragment.SearchSettingsViewModel
+import com.example.movieapp.presentation.search_settings_detail_fragment.SearchSettingsDetailViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
@@ -43,4 +45,14 @@ interface ViewModelModule {
     @IntoMap
     @ViewModelKey(ReviewListViewModel::class)
     fun bindReviewListViewModel(impl: ReviewListViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(SearchSettingsViewModel::class)
+    fun bindSearchSettingsViewModel(impl: SearchSettingsViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(SearchSettingsDetailViewModel::class)
+    fun bindSearchSettingsDetailViewModel(impl: SearchSettingsDetailViewModel): ViewModel
 }
