@@ -81,6 +81,10 @@ interface ApiService {
     ): ReviewListDto
 
     @GET("v1/movie/possible-values-by-field")
+    @Headers(
+        MEDIA_TYPE,
+        API_KEY
+    )
     suspend fun getSettingsValue(
         @Query(SETTINGS_PARAM_VALUE) field: String
     ): List<SettingsValueDto>
