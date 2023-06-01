@@ -187,7 +187,8 @@ class MovieMapper @Inject constructor() {
     private fun settingsValueDtoToSettingsValue(settingsValueDto: SettingsValueDto): SettingsValue {
         return SettingsValue(
             name = settingsValueDto.name,
-            slug = settingsValueDto.slug
+            slug = settingsValueDto.slug,
+            false
         )
     }
 }

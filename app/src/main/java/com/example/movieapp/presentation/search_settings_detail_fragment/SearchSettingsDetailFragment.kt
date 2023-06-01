@@ -1,6 +1,7 @@
 package com.example.movieapp.presentation.search_settings_detail_fragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.movieapp.databinding.FragmentSearchSettingDetailBinding
+import com.example.movieapp.domain.model.search_settings.SettingsValue
 import com.example.movieapp.presentation.MovieApp
 import com.example.movieapp.presentation.ViewModelFactory
 import com.example.movieapp.presentation.adapters.settings_value.SettingsValueAdapter
@@ -46,17 +48,23 @@ class SearchSettingsDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val arguments = requireArguments().getString(EXTRA_TYPE)
         binding.appBar.text.text = "Жанры"
         binding.appBar.ivBack.setOnClickListener {
             parentFragmentManager.popBackStack()
         }
-        binding.appBar.tvReset.setOnClickListener {
-            Toast.makeText(requireContext(), "Сброс", Toast.LENGTH_LONG).show()
-        }
-        viewModel?.getSettingsValue()
+        viewModel?.getSettingsValue(arguments ?: "")
         viewModel?.liveData?.observe(viewLifecycleOwner) {
             val adapter = SettingsValueAdapter(it)
             binding.rvValue.adapter = adapter
+            adapter.listener = object : SettingsValueAdapter.OnClick {
+                override fun onClick(list: List<SettingsValue>, position: Int) {
+                    list[position].isChoose = true
+                }
+            }
+            binding.appBar.tvReset.setOnClickListener {
+                adapter.resetList()
+            }
         }
     }
 
@@ -67,8 +75,14 @@ class SearchSettingsDetailFragment : Fragment() {
 
     companion object {
 
-        fun newInstance(): SearchSettingsDetailFragment {
-            return SearchSettingsDetailFragment()
+        private const val EXTRA_TYPE = "extra_type"
+
+        fun newInstance(type: String): SearchSettingsDetailFragment {
+            return SearchSettingsDetailFragment().apply {
+                arguments = Bundle().apply {
+                    putString(EXTRA_TYPE, type)
+                }
+            }
         }
     }
 }
