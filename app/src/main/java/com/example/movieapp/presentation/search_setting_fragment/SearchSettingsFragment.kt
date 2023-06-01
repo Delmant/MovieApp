@@ -63,14 +63,23 @@ class SearchSettingsFragment : Fragment() {
             val toText = value.toString().split(".")[0]
             binding.tvRatingChoose.text = if (toText == "0") "неважно" else "от $toText"
         }
+
         binding.tvGenreChoose.setOnClickListener {
             parentFragmentManager.beginTransaction()
-                .add(R.id.fragment_container, SearchSettingsDetailFragment.newInstance())
+                .add(R.id.fragment_container, SearchSettingsDetailFragment.newInstance(GENRE_ARGUMENT))
+                .addToBackStack(null).commit()
+        }
+        binding.tvCountryChoose.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .add(R.id.fragment_container, SearchSettingsDetailFragment.newInstance(COUNTRY_ARGUMENT))
                 .addToBackStack(null).commit()
         }
     }
 
     companion object {
+
+        private const val GENRE_ARGUMENT = "genres.name"
+        private const val COUNTRY_ARGUMENT = "countries.name"
 
         fun newInstance(): SearchSettingsFragment {
             return SearchSettingsFragment()
