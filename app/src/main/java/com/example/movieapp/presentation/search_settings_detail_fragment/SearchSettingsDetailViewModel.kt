@@ -16,9 +16,9 @@ class SearchSettingsDetailViewModel @Inject constructor(
     private var _liveData = MutableLiveData<List<SettingsValue>>()
     val liveData: LiveData<List<SettingsValue>> = _liveData
 
-    fun getSettingsValue() {
+    fun getSettingsValue(type: String) {
         viewModelScope.launch {
-            val settingsValue = getSettingsValueUseCase.invoke("genres.name")
+            val settingsValue = getSettingsValueUseCase.invoke(type)
             _liveData.value = settingsValue
         }
     }
