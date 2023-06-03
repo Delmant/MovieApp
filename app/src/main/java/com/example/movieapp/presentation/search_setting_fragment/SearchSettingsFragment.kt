@@ -1,21 +1,22 @@
 package com.example.movieapp.presentation.search_setting_fragment
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.NumberPicker
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.movieapp.R
-import com.example.movieapp.data.network.ApiFactory
 import com.example.movieapp.databinding.FragmentSearchSettingBinding
 import com.example.movieapp.presentation.MovieApp
 import com.example.movieapp.presentation.ViewModelFactory
 import com.example.movieapp.presentation.search_settings_detail_fragment.SearchSettingsDetailFragment
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import java.util.Calendar
 import javax.inject.Inject
 
 
@@ -66,13 +67,61 @@ class SearchSettingsFragment : Fragment() {
 
         binding.tvGenreChoose.setOnClickListener {
             parentFragmentManager.beginTransaction()
-                .add(R.id.fragment_container, SearchSettingsDetailFragment.newInstance(GENRE_ARGUMENT))
+                .add(
+                    R.id.fragment_container,
+                    SearchSettingsDetailFragment.newInstance(GENRE_ARGUMENT)
+                )
                 .addToBackStack(null).commit()
         }
         binding.tvCountryChoose.setOnClickListener {
             parentFragmentManager.beginTransaction()
-                .add(R.id.fragment_container, SearchSettingsDetailFragment.newInstance(COUNTRY_ARGUMENT))
+                .add(
+                    R.id.fragment_container,
+                    SearchSettingsDetailFragment.newInstance(COUNTRY_ARGUMENT)
+                )
                 .addToBackStack(null).commit()
+        }
+        binding.tvYearChoose.setOnClickListener {
+
+            val view = LayoutInflater.from(requireContext()).inflate(R.layout.number_picker, null)
+
+            val fromPicker = view.findViewById<NumberPicker>(R.id.from_picker)
+            val toPicker = view.findViewById<NumberPicker>(R.id.to_picker)
+
+
+
+            val currentYear = Calendar.getInstance().get(Calendar.YEAR)
+            val minYear = 1900
+            val maxYear = 2023
+
+            fromPicker.minValue = minYear
+            fromPicker.maxValue = maxYear
+            fromPicker.value = currentYear
+
+            toPicker.minValue = minYear
+            toPicker.maxValue = maxYear
+            toPicker.value = currentYear
+
+            fromPicker.setOnValueChangedListener { picker, oldVal, newVal ->
+                if(newVal >= toPicker.value) {
+                    toPicker.value = newVal
+                    toPicker.maxValue = newVal
+                }
+            }
+
+            toPicker.setOnValueChangedListener { picker, oldVal, newVal ->
+                fromPicker.maxValue = newVal
+            }
+
+
+            val dialog = AlertDialog.Builder(requireContext())
+                .setTitle("Год")
+                .setView(view)
+                .setPositiveButton("Выбрать") { dialogInterface: DialogInterface, i: Int ->
+                }
+                .setNegativeButton("Отмена", null)
+                .create()
+            dialog.show()
         }
     }
 
