@@ -66,12 +66,18 @@ class SearchSettingsFragment : Fragment() {
 
         binding.tvGenreChoose.setOnClickListener {
             parentFragmentManager.beginTransaction()
-                .add(R.id.fragment_container, SearchSettingsDetailFragment.newInstance(GENRE_ARGUMENT))
+                .add(
+                    R.id.fragment_container,
+                    SearchSettingsDetailFragment.newInstance(GENRE_ARGUMENT)
+                )
                 .addToBackStack(null).commit()
         }
         binding.tvCountryChoose.setOnClickListener {
             parentFragmentManager.beginTransaction()
-                .add(R.id.fragment_container, SearchSettingsDetailFragment.newInstance(COUNTRY_ARGUMENT))
+                .add(
+                    R.id.fragment_container,
+                    SearchSettingsDetailFragment.newInstance(COUNTRY_ARGUMENT)
+                )
                 .addToBackStack(null).commit()
         }
     }
