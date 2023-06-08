@@ -63,6 +63,14 @@ class SearchSettingsFragment : Fragment() {
         binding.appBar.tvReset.setOnClickListener {
             Toast.makeText(requireContext(), "Сброс", Toast.LENGTH_LONG).show()
         }
+        setupSlider()
+        setupGenreButtonLaunchChoose()
+        setupCountryButtonLaunchChoose()
+        setupYearChoose()
+        setupSaveButton()
+    }
+
+    private fun setupSlider() {
         binding.sliderRating.addOnChangeListener { slider, value, fromUser ->
             val toText = value.toString().split(".")[0]
             binding.tvRatingChoose.text = if (toText == "0") "неважно" else "от $toText"
@@ -71,7 +79,8 @@ class SearchSettingsFragment : Fragment() {
                 binding.sliderRating.value.toString()
             )
         }
-
+    }
+    private fun setupGenreButtonLaunchChoose() {
         binding.tvGenreChoose.setOnClickListener {
             parentFragmentManager.beginTransaction()
                 .add(
@@ -80,6 +89,9 @@ class SearchSettingsFragment : Fragment() {
                 )
                 .addToBackStack(null).commit()
         }
+    }
+
+    private fun setupCountryButtonLaunchChoose() {
         binding.tvCountryChoose.setOnClickListener {
             parentFragmentManager.beginTransaction()
                 .add(
@@ -88,49 +100,57 @@ class SearchSettingsFragment : Fragment() {
                 )
                 .addToBackStack(null).commit()
         }
+    }
+
+    private fun setupYearChoose() {
         binding.tvYearChoose.setOnClickListener {
 
             val view = LayoutInflater.from(requireContext()).inflate(R.layout.number_picker, null)
-
             val fromPicker = view.findViewById<NumberPicker>(R.id.from_picker)
             val toPicker = view.findViewById<NumberPicker>(R.id.to_picker)
 
-
             val currentYear = Calendar.getInstance().get(Calendar.YEAR)
-            val minYear = 1900
-            val maxYear = 2023
 
-            fromPicker.minValue = minYear
-            fromPicker.maxValue = maxYear
-            fromPicker.value = currentYear
-
-            toPicker.minValue = minYear
-            toPicker.maxValue = maxYear
-            toPicker.value = currentYear
-
-            fromPicker.setOnValueChangedListener { picker, oldVal, newVal ->
-                if (newVal >= toPicker.value) {
-                    toPicker.value = newVal
-                    toPicker.maxValue = newVal
-                }
-            }
-
-            toPicker.setOnValueChangedListener { picker, oldVal, newVal ->
-                fromPicker.maxValue = newVal
-            }
-
-
-            val dialog = AlertDialog.Builder(requireContext())
-                .setTitle("Год")
-                .setView(view)
-                .setPositiveButton("Выбрать") { dialogInterface: DialogInterface, i: Int ->
-                    val result = "${fromPicker.value} / ${toPicker.value}"
-                    searchSettingsViewModel?.saveSearchSettings(YEAR_KEY_WORD, result)
-                }
-                .setNegativeButton("Отмена", null)
-                .create()
-            dialog.show()
+            setupPicker(fromPicker, currentYear)
+            setupPicker(toPicker, currentYear)
+            pickerChangedListener(fromPicker, toPicker)
+            setupDialog(fromPicker, toPicker)
         }
+    }
+
+    private fun setupDialog(fromPicker: NumberPicker, toPicker: NumberPicker) {
+        val dialog = AlertDialog.Builder(requireContext())
+            .setTitle("Год")
+            .setView(view)
+            .setPositiveButton("Выбрать") { dialogInterface: DialogInterface, i: Int ->
+                val result = "${fromPicker.value} / ${toPicker.value}"
+                searchSettingsViewModel?.saveSearchSettings(YEAR_KEY_WORD, result)
+            }
+            .setNegativeButton("Отмена", null)
+            .create()
+        dialog.show()
+    }
+
+    private fun pickerChangedListener(fromPicker: NumberPicker, toPicker: NumberPicker) {
+        fromPicker.setOnValueChangedListener { _, _, newVal ->
+            if (newVal >= toPicker.value) {
+                toPicker.value = newVal
+                toPicker.maxValue = newVal
+            }
+        }
+
+        toPicker.setOnValueChangedListener { _, _, newVal ->
+            fromPicker.maxValue = newVal
+        }
+    }
+
+    private fun setupPicker(numberPicker: NumberPicker, currentYear: Int) {
+        numberPicker.value = currentYear
+        numberPicker.minValue = MIN_YEAR_PARAM
+        numberPicker.maxValue = MAX_YEAR_PARAM
+    }
+
+    private fun setupSaveButton() {
         binding.btnPlayTrailer.setOnClickListener {
             searchSettingsViewModel?.getSearchSettings()
         }
@@ -143,6 +163,9 @@ class SearchSettingsFragment : Fragment() {
 
         private const val YEAR_KEY_WORD = "year"
         private const val RATING_KEY_WORD = "rating"
+
+        private const val MIN_YEAR_PARAM = 1900
+        private const val MAX_YEAR_PARAM = 2023
 
         fun newInstance(): SearchSettingsFragment {
             return SearchSettingsFragment()
