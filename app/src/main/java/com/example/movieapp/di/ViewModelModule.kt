@@ -1,6 +1,7 @@
 package com.example.movieapp.di
 
 import androidx.lifecycle.ViewModel
+import com.example.movieapp.presentation.MainActivityViewModel
 import com.example.movieapp.presentation.actor_detail_fragment.ActorDetailViewModel
 import com.example.movieapp.presentation.image_detail_fragment.ImageDetailViewModel
 import com.example.movieapp.presentation.movie_detail_fragment.MovieDetailViewModel
@@ -55,4 +56,9 @@ interface ViewModelModule {
     @IntoMap
     @ViewModelKey(SearchSettingsDetailViewModel::class)
     fun bindSearchSettingsDetailViewModel(impl: SearchSettingsDetailViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(MainActivityViewModel::class)
+    fun bindMainActivityViewModel(impl: MainActivityViewModel): ViewModel
 }

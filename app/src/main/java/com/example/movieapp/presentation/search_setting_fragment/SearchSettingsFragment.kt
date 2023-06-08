@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.NumberPicker
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import com.example.movieapp.R
 import com.example.movieapp.databinding.FragmentSearchSettingBinding
 import com.example.movieapp.presentation.MovieApp
@@ -40,6 +41,8 @@ class SearchSettingsFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         component.inject(this)
+        searchSettingsViewModel =
+            ViewModelProvider(this, viewModelFactory)[SearchSettingsViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -63,6 +66,10 @@ class SearchSettingsFragment : Fragment() {
         binding.sliderRating.addOnChangeListener { slider, value, fromUser ->
             val toText = value.toString().split(".")[0]
             binding.tvRatingChoose.text = if (toText == "0") "неважно" else "от $toText"
+            searchSettingsViewModel?.saveSearchSettings(
+                RATING_KEY_WORD,
+                binding.sliderRating.value.toString()
+            )
         }
 
         binding.tvGenreChoose.setOnClickListener {
@@ -89,7 +96,6 @@ class SearchSettingsFragment : Fragment() {
             val toPicker = view.findViewById<NumberPicker>(R.id.to_picker)
 
 
-
             val currentYear = Calendar.getInstance().get(Calendar.YEAR)
             val minYear = 1900
             val maxYear = 2023
@@ -103,7 +109,7 @@ class SearchSettingsFragment : Fragment() {
             toPicker.value = currentYear
 
             fromPicker.setOnValueChangedListener { picker, oldVal, newVal ->
-                if(newVal >= toPicker.value) {
+                if (newVal >= toPicker.value) {
                     toPicker.value = newVal
                     toPicker.maxValue = newVal
                 }
@@ -118,10 +124,15 @@ class SearchSettingsFragment : Fragment() {
                 .setTitle("Год")
                 .setView(view)
                 .setPositiveButton("Выбрать") { dialogInterface: DialogInterface, i: Int ->
+                    val result = "${fromPicker.value} / ${toPicker.value}"
+                    searchSettingsViewModel?.saveSearchSettings(YEAR_KEY_WORD, result)
                 }
                 .setNegativeButton("Отмена", null)
                 .create()
             dialog.show()
+        }
+        binding.btnPlayTrailer.setOnClickListener {
+            searchSettingsViewModel?.getSearchSettings()
         }
     }
 
@@ -129,6 +140,9 @@ class SearchSettingsFragment : Fragment() {
 
         private const val GENRE_ARGUMENT = "genres.name"
         private const val COUNTRY_ARGUMENT = "countries.name"
+
+        private const val YEAR_KEY_WORD = "year"
+        private const val RATING_KEY_WORD = "rating"
 
         fun newInstance(): SearchSettingsFragment {
             return SearchSettingsFragment()

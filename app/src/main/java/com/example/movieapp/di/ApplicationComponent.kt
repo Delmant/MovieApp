@@ -2,6 +2,7 @@ package com.example.movieapp.di
 
 import android.app.Application
 import androidx.lifecycle.ViewModel
+import com.example.movieapp.presentation.MainActivity
 import com.example.movieapp.presentation.MovieApp
 import com.example.movieapp.presentation.actor_detail_fragment.ActorDetailFragment
 import com.example.movieapp.presentation.image_detail_fragment.ImageDetailFragment
@@ -33,6 +34,8 @@ interface ApplicationComponent {
     fun inject(fragment: ReviewDetailFragment)
 
     fun inject(fragment: ReviewListFragment)
+
+    fun inject(activity: MainActivity)
 
     fun inject(fragment: SearchFragment)
 
