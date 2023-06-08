@@ -2,7 +2,7 @@ package com.example.movieapp.domain.repository
 
 interface SearchSettingsRepository {
 
-    fun saveSearchSettings()
+    fun saveSearchSettings(type: String, gson: String)
 
     fun getSearchSettings()
 
