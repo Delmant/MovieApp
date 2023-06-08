@@ -3,7 +3,6 @@ package com.example.movieapp.presentation.adapters.settings_value
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
 import com.example.movieapp.databinding.SearchSettingDetailItemBinding
 import com.example.movieapp.domain.model.search_settings.SettingsValue
 
@@ -39,6 +38,10 @@ class SettingsValueAdapter(
             it.isChoose = false
         }
         notifyDataSetChanged()
+    }
+
+    fun fetchList(): List<SettingsValue> {
+        return list
     }
 
     interface OnClick {
