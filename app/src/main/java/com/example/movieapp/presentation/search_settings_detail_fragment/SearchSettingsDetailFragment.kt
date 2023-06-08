@@ -55,18 +55,30 @@ class SearchSettingsDetailFragment : Fragment() {
         viewModel?.liveData?.observe(viewLifecycleOwner) {
             val adapter = SettingsValueAdapter(it)
             binding.rvValue.adapter = adapter
-            adapter.listener = object : SettingsValueAdapter.OnClick {
-                override fun onClick(list: List<SettingsValue>, position: Int) {
-                    list[position].isChoose = true
-                }
+            setupAdapterClickListener(adapter)
+            setupResetListButton(adapter)
+            setupButtonSaveSettings(arguments, adapter)
+        }
+    }
+
+    private fun setupAdapterClickListener(adapter: SettingsValueAdapter) {
+        adapter.listener = object : SettingsValueAdapter.OnClick {
+            override fun onClick(list: List<SettingsValue>, position: Int) {
+                list[position].isChoose = true
             }
-            binding.appBar.tvReset.setOnClickListener {
-                adapter.resetList()
-            }
-            binding.btnPlayTrailer.setOnClickListener {
-                viewModel?.saveSettings(arguments ?: "", adapter.fetchList())
-                parentFragmentManager.popBackStack()
-            }
+        }
+    }
+
+    private fun setupResetListButton(adapter: SettingsValueAdapter) {
+        binding.appBar.tvReset.setOnClickListener {
+            adapter.resetList()
+        }
+    }
+
+    private fun setupButtonSaveSettings(arguments: String?, adapter: SettingsValueAdapter) {
+        binding.btnPlayTrailer.setOnClickListener {
+            viewModel?.saveSettings(arguments ?: "", adapter.fetchList())
+            parentFragmentManager.popBackStack()
         }
     }
 
