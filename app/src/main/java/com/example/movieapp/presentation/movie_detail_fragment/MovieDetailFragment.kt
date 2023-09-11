@@ -111,7 +111,7 @@ class MovieDetailFragment : Fragment() {
             setupCountryLengthAndPg(
                 it.countries, if (it.isSeries) {
                     it.seriesLength
-                } else it.movieLength, it.ageRating
+                } else it.movieLength, it.ageRating  
             )
             setupNames(it.name, it.alternativeName)
             setupFactsRv(parseFacts(it.facts))

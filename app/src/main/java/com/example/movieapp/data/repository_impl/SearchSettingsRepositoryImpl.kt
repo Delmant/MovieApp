@@ -13,7 +13,8 @@ class SearchSettingsRepositoryImpl @Inject constructor(
     val application: Application
 ) : SearchSettingsRepository {
 
-    private val sharedPreferences = application.getSharedPreferences(SHARED_PREFERENCES_KEY_WORD, Context.MODE_PRIVATE)
+    private val sharedPreferences = application
+        .getSharedPreferences(SHARED_PREFERENCES_KEY_WORD, Context.MODE_PRIVATE)
     private val sharedPreferencesEdit = sharedPreferences.edit()
 
     private val gson = Gson()

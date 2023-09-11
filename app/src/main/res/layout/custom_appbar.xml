@@ -25,7 +25,8 @@
         android:layout_height="wrap_content"
         android:text="Текст пример"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/tv_reset"
+        app:layout_constrainedWidth="true"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintStart_toEndOf="@id/iv_back"
         app:layout_constraintTop_toTopOf="parent" />

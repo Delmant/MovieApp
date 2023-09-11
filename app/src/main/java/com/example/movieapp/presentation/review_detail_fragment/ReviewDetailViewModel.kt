@@ -18,7 +18,7 @@ class ReviewDetailViewModel @Inject constructor(
 
     fun getReview(id: Int) {
         viewModelScope.launch {
-            val review = getReviewByMovieIdUseCase.invoke(id)
+            val review = getReviewByMovieIdUseCase.invoke(id, 1)
             _movieLiveDataReview.value = review
         }
     }
