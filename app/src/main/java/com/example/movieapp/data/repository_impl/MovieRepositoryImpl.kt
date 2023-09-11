@@ -6,6 +6,7 @@ import com.example.movieapp.domain.model.movie.Persons
 import androidx.lifecycle.LiveData
 import com.example.movieapp.data.mapper.MovieMapper
 import com.example.movieapp.data.network.ApiService
+import com.example.movieapp.data.remote_data_source.MovieRemoteDataSource
 import com.example.movieapp.domain.model.actor.Actor
 import com.example.movieapp.domain.model.image.ImageList
 import com.example.movieapp.domain.model.movie.Movie
@@ -18,7 +19,8 @@ import javax.inject.Inject
 
 class MovieRepositoryImpl @Inject constructor(
     val apiService: ApiService,
-    val movieMapper: MovieMapper
+    val movieMapper: MovieMapper,
+    val movieRemoteDataSource: MovieRemoteDataSource
 ) : MovieRepository {
 
 
