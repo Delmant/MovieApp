@@ -78,6 +78,9 @@ class SearchSettingsDetailFragment : Fragment() {
     private fun setupButtonSaveSettings(arguments: String?, adapter: SettingsValueAdapter) {
         binding.btnPlayTrailer.setOnClickListener {
             viewModel?.saveSettings(arguments ?: "", adapter.fetchList())
+
+            
+
             parentFragmentManager.popBackStack()
         }
     }

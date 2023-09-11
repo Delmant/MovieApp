@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.movieapp"
-        minSdk 26
+        minSdk 25
         targetSdk 33
         versionCode 1
         versionName "1.0"
@@ -22,6 +22,7 @@ android {
 
     kapt {
         generateStubs = true
+        correctErrorTypes = true
     }
 
 
@@ -47,6 +48,8 @@ android {
         viewBinding = true
     }
 
+
+
 }
 
 
@@ -60,11 +63,12 @@ dependencies {
     implementation 'com.google.android.material:material:1.8.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 
+    implementation "androidx.databinding:databinding-runtime:8.0.1"
 
     implementation "com.airbnb.android:epoxy:5.1.2"
     kapt "com.airbnb.android:epoxy-processor:5.1.2"
 
-    kapt("org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.3.0")
+//    kapt("org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.3.0")
 
 
 

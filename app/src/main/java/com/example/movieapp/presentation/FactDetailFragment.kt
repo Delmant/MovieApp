@@ -28,7 +28,7 @@ class FactDetailFragment: Fragment() {
         val fact = requireArguments().getString(EXTRA_FACT_STRING)
         binding.tvFactDesc.text = fact
         binding.btnClose.setOnClickListener {
-            fragmentManager?.popBackStack()
+            parentFragmentManager.popBackStack()
         }
     }
 

@@ -45,6 +45,8 @@ class MainActivity() : AppCompatActivity() {
 
         coroutineScope.launch {
             val movie = MovieMapper().toEntity(apiService.getMovieById(8228))
+            Log.d("CHECK1", "Test1")
+            Log.d("CHECK2", movie.toString())
             supportFragmentManager.beginTransaction()
                 .add(R.id.fragment_container, MovieListFragment.newInstance(movie)).commit()
 

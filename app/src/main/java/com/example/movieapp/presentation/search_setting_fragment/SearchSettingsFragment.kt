@@ -3,12 +3,14 @@ package com.example.movieapp.presentation.search_setting_fragment
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.NumberPicker
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResultListener
 import androidx.lifecycle.ViewModelProvider
 import com.example.movieapp.R
 import com.example.movieapp.databinding.FragmentSearchSettingBinding
@@ -45,6 +47,10 @@ class SearchSettingsFragment : Fragment() {
             ViewModelProvider(this, viewModelFactory)[SearchSettingsViewModel::class.java]
     }
 
+    override fun onResume() {
+        super.onResume()
+        Log.d("Test", "Test")
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -68,6 +74,7 @@ class SearchSettingsFragment : Fragment() {
         setupCountryButtonLaunchChoose()
         setupYearChoose()
         setupSaveButton()
+
     }
 
     private fun setupSlider() {

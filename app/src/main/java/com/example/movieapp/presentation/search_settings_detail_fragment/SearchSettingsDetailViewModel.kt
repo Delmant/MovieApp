@@ -8,7 +8,10 @@ import com.example.movieapp.domain.model.search_settings.SettingsValue
 import com.example.movieapp.domain.repository.SearchSettingsRepository
 import com.example.movieapp.domain.usecases.GetSettingsValueUseCase
 import com.google.gson.Gson
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class SearchSettingsDetailViewModel @Inject constructor(
