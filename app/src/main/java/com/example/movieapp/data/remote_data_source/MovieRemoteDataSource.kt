@@ -1,20 +1,20 @@
 package com.example.movieapp.data.remote_data_source
 
-import com.example.movieapp.data.network.model.actor_dto.ActorDto
-import com.example.movieapp.data.network.model.image_dto.ImageListDto
-import com.example.movieapp.data.network.model.movie_dto.MovieDto
-import com.example.movieapp.data.network.model.movie_list_dto.MovieListDto
-import com.example.movieapp.data.network.model.review_dto.ReviewListDto
+import com.example.movieapp.data.remote_data_source.model.actor_dto.ActorDto
+import com.example.movieapp.data.remote_data_source.model.image_dto.ImageListDto
+import com.example.movieapp.data.remote_data_source.model.movie_dto.MovieDto
+import com.example.movieapp.data.remote_data_source.model.movie_list_dto.MovieListDto
+import com.example.movieapp.data.remote_data_source.model.review_dto.ReviewListDto
 
 interface MovieRemoteDataSource {
 
-    fun getMovieById(id: Int): MovieDto
+    suspend fun getMovieById(id: Int): MovieDto
 
-    fun getSearchResultByMovieName(movieName: String): MovieListDto
+    suspend fun getSearchResultByMovieName(movieName: String): MovieListDto
 
-    fun getImageByMovieId(movieId: Int): ImageListDto
+    suspend fun getImageByMovieId(movieId: Int): ImageListDto
 
-    fun getPersonById(personId: Int): ActorDto
+    suspend fun getPersonById(personId: Int): ActorDto
 
-    fun getReviewByMovieId(movieId: Int): ReviewListDto
+    suspend fun getReviewByMovieId(movieId: Int): ReviewListDto
 }

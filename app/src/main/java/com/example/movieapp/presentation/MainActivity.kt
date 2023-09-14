@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.movieapp.R
 import com.example.movieapp.data.mapper.MovieMapper
 
-import com.example.movieapp.data.network.ApiFactory
+import com.example.movieapp.data.remote_data_source.ApiFactory
 import com.example.movieapp.databinding.ActivityMainBinding
 import com.example.movieapp.presentation.search_fragment.SearchFragment
 import kotlinx.coroutines.CoroutineScope

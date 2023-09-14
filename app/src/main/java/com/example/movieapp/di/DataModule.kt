@@ -1,8 +1,8 @@
 package com.example.movieapp.di
 
 import com.example.movieapp.data.repository_impl.MovieRepositoryImpl
-import com.example.movieapp.data.network.ApiFactory
-import com.example.movieapp.data.network.ApiService
+import com.example.movieapp.data.remote_data_source.ApiFactory
+import com.example.movieapp.data.remote_data_source.ApiService
 import com.example.movieapp.data.remote_data_source.MovieRemoteDataSource
 import com.example.movieapp.data.remote_data_source.MovieRemoteDataSourceImpl
 import com.example.movieapp.data.repository_impl.SearchSettingsRepositoryImpl
@@ -15,9 +15,6 @@ import dagger.Provides
 
 @Module
 interface DataModule {
-
-    @Binds
-    fun bindMovieRepository(impl: MovieRepositoryImpl): MovieRepository
 
     @Binds
     fun bindSearchSettingsRepository(impl: SearchSettingsRepositoryImpl): SearchSettingsRepository

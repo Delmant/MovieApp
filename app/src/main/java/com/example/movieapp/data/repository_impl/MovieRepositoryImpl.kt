@@ -1,11 +1,9 @@
 package com.example.movieapp.data.repository_impl
 
 
-import android.util.Log
-import com.example.movieapp.domain.model.movie.Persons
 import androidx.lifecycle.LiveData
 import com.example.movieapp.data.mapper.MovieMapper
-import com.example.movieapp.data.network.ApiService
+import com.example.movieapp.data.remote_data_source.ApiService
 import com.example.movieapp.data.remote_data_source.MovieRemoteDataSource
 import com.example.movieapp.domain.model.actor.Actor
 import com.example.movieapp.domain.model.image.ImageList
@@ -18,14 +16,14 @@ import com.example.movieapp.domain.repository.MovieRepository
 import javax.inject.Inject
 
 class MovieRepositoryImpl @Inject constructor(
-    val apiService: ApiService,
-    val movieMapper: MovieMapper,
-    val movieRemoteDataSource: MovieRemoteDataSource
+    private val apiService: ApiService,
+    private val movieMapper: MovieMapper,
+    private val movieRemoteDataSource: MovieRemoteDataSource
 ) : MovieRepository {
 
 
     override suspend fun getMovieById(id: Int): Movie {
-        return movieMapper.toEntity(apiService.getMovieById(id))
+        return movieMapper.toEntity(movieRemoteDataSource.getMovieById(id))
     }
 
     override suspend fun getSearchResult(name: String): MovieList {
@@ -33,7 +31,7 @@ class MovieRepositoryImpl @Inject constructor(
     }
 
     override suspend fun getImageByMovieId(id: Int): ImageList {
-        return movieMapper.imageListDtoToImageListEntity(apiService.getImageByMovieId(id, "screenshot", "still"))
+        return movieMapper.imageListDtoToImageListEntity(movieRemoteDataSource.getImageByMovieId(id))
     }
 
     override suspend fun getRandomMovie(): LiveData<Movie> {
