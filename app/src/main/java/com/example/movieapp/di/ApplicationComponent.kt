@@ -18,7 +18,7 @@ import dagger.Provides
 
 
 @ApplicationScope
-@Component(modules = [DataModule::class, ViewModelModule::class])
+@Component(modules = [DataModule::class, ViewModelModule::class, DomainModule::class])
 interface ApplicationComponent {
 
     fun inject(fragment: MovieDetailFragment)

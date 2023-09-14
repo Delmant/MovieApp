@@ -1,40 +1,40 @@
 package com.example.movieapp.data.mapper
 
-import com.example.movieapp.data.network.model.actor_dto.ActorDto
-import com.example.movieapp.data.network.model.actor_dto.BirthPlaceDto
-import com.example.movieapp.data.network.model.actor_dto.DeathPlaceDto
-import com.example.movieapp.data.network.model.actor_dto.MovieActDto
-import com.example.movieapp.data.network.model.actor_dto.ProfessionDto
-import com.example.movieapp.data.network.model.image_dto.ImageDto
-import com.example.movieapp.data.network.model.image_dto.ImageListDto
-import com.example.movieapp.data.network.model.movie_dto.BackdropDto
-import com.example.movieapp.data.network.model.movie_dto.BudgetDto
-import com.example.movieapp.data.network.model.movie_dto.CountryDto
-import com.example.movieapp.data.network.model.movie_dto.ExternalIdDto
-import com.example.movieapp.data.network.model.movie_dto.FactDto
-import com.example.movieapp.data.network.model.movie_dto.FeesDto
-import com.example.movieapp.data.network.model.movie_dto.GenreDto
-import com.example.movieapp.data.network.model.movie_dto.ImagesInfoDto
-import com.example.movieapp.data.network.model.movie_dto.LogoDto
-import com.example.movieapp.data.network.model.movie_dto.MovieDto
-import com.example.movieapp.data.network.model.movie_dto.NameDto
-import com.example.movieapp.data.network.model.movie_dto.PersonDto
-import com.example.movieapp.data.network.model.movie_dto.PosterDto
-import com.example.movieapp.data.network.model.movie_dto.PremiereDto
-import com.example.movieapp.data.network.model.movie_dto.ProductionCompanyDto
-import com.example.movieapp.data.network.model.movie_dto.RatingDto
-import com.example.movieapp.data.network.model.movie_dto.ReleaseYearDto
-import com.example.movieapp.data.network.model.movie_dto.ReviewInfoDto
-import com.example.movieapp.data.network.model.movie_dto.SeasonsInfoDto
-import com.example.movieapp.data.network.model.movie_dto.SequelsAndPrequelDto
-import com.example.movieapp.data.network.model.movie_dto.SimilarMovyDto
-import com.example.movieapp.data.network.model.movie_dto.VideosDto
-import com.example.movieapp.data.network.model.movie_dto.VotesDto
-import com.example.movieapp.data.network.model.movie_dto.WatchabilityDto
-import com.example.movieapp.data.network.model.movie_list_dto.MovieListDto
-import com.example.movieapp.data.network.model.review_dto.ReviewDto
-import com.example.movieapp.data.network.model.review_dto.ReviewListDto
-import com.example.movieapp.data.network.model.settings_dto.SettingsValueDto
+import com.example.movieapp.data.remote_data_source.model.actor_dto.ActorDto
+import com.example.movieapp.data.remote_data_source.model.actor_dto.BirthPlaceDto
+import com.example.movieapp.data.remote_data_source.model.actor_dto.DeathPlaceDto
+import com.example.movieapp.data.remote_data_source.model.actor_dto.MovieActDto
+import com.example.movieapp.data.remote_data_source.model.actor_dto.ProfessionDto
+import com.example.movieapp.data.remote_data_source.model.image_dto.ImageDto
+import com.example.movieapp.data.remote_data_source.model.image_dto.ImageListDto
+import com.example.movieapp.data.remote_data_source.model.movie_dto.BackdropDto
+import com.example.movieapp.data.remote_data_source.model.movie_dto.BudgetDto
+import com.example.movieapp.data.remote_data_source.model.movie_dto.CountryDto
+import com.example.movieapp.data.remote_data_source.model.movie_dto.ExternalIdDto
+import com.example.movieapp.data.remote_data_source.model.movie_dto.FactDto
+import com.example.movieapp.data.remote_data_source.model.movie_dto.FeesDto
+import com.example.movieapp.data.remote_data_source.model.movie_dto.GenreDto
+import com.example.movieapp.data.remote_data_source.model.movie_dto.ImagesInfoDto
+import com.example.movieapp.data.remote_data_source.model.movie_dto.LogoDto
+import com.example.movieapp.data.remote_data_source.model.movie_dto.MovieDto
+import com.example.movieapp.data.remote_data_source.model.movie_dto.NameDto
+import com.example.movieapp.data.remote_data_source.model.movie_dto.PersonDto
+import com.example.movieapp.data.remote_data_source.model.movie_dto.PosterDto
+import com.example.movieapp.data.remote_data_source.model.movie_dto.PremiereDto
+import com.example.movieapp.data.remote_data_source.model.movie_dto.ProductionCompanyDto
+import com.example.movieapp.data.remote_data_source.model.movie_dto.RatingDto
+import com.example.movieapp.data.remote_data_source.model.movie_dto.ReleaseYearDto
+import com.example.movieapp.data.remote_data_source.model.movie_dto.ReviewInfoDto
+import com.example.movieapp.data.remote_data_source.model.movie_dto.SeasonsInfoDto
+import com.example.movieapp.data.remote_data_source.model.movie_dto.SequelsAndPrequelDto
+import com.example.movieapp.data.remote_data_source.model.movie_dto.SimilarMovyDto
+import com.example.movieapp.data.remote_data_source.model.movie_dto.VideosDto
+import com.example.movieapp.data.remote_data_source.model.movie_dto.VotesDto
+import com.example.movieapp.data.remote_data_source.model.movie_dto.WatchabilityDto
+import com.example.movieapp.data.remote_data_source.model.movie_list_dto.MovieListDto
+import com.example.movieapp.data.remote_data_source.model.review_dto.ReviewDto
+import com.example.movieapp.data.remote_data_source.model.review_dto.ReviewListDto
+import com.example.movieapp.data.remote_data_source.model.settings_dto.SettingsValueDto
 import com.example.movieapp.domain.model.actor.Actor
 import com.example.movieapp.domain.model.actor.ActorFact
 import com.example.movieapp.domain.model.actor.BirthPlace
@@ -141,7 +141,7 @@ class MovieMapper @Inject constructor() {
             deathPlace = actorDto.deathPlace?.map { DeathPlaceDto.toEntity(it) } ?: listOf(),
             enName = actorDto.enName ?: "",
             actorFacts = actorDto.factDtos?.map {
-                com.example.movieapp.data.network.model.actor_dto.FactDto.toEntity(
+                com.example.movieapp.data.remote_data_source.model.actor_dto.FactDto.toEntity(
                     it
                 )
             } ?: listOf(),
