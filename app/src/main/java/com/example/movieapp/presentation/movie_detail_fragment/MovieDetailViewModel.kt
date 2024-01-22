@@ -21,7 +21,9 @@ import com.example.movieapp.domain.model.movie.SequelsAndPrequels
 import com.example.movieapp.domain.model.movie.SimilarMovies
 import com.example.movieapp.domain.model.movie.Trailers
 import com.example.movieapp.domain.model.movie.Votes
+import com.example.movieapp.domain.model.review.Review
 import com.example.movieapp.domain.model.review.ReviewList
+import com.example.movieapp.domain.reaction.Reaction
 import com.example.movieapp.domain.usecases.GetImageByMovieIdUseCase
 import com.example.movieapp.domain.usecases.GetMovieByIdUseCase
 import com.example.movieapp.domain.usecases.GetReviewByMovieIdUseCase
@@ -43,14 +45,50 @@ class MovieDetailViewModel @Inject constructor(
     private val _movieLiveDataReview = MutableLiveData<ReviewList>()
     val movieLiveDataReview: LiveData<ReviewList> = _movieLiveDataReview
 
+    private val _state = MutableLiveData<MovieDetailState>(MovieDetailState.Initial)
+    val state = _state
+
     fun getMovieById(id: Int) {
         viewModelScope.launch {
+            _state.value = MovieDetailState.IsLoading
             val movie = getMovieByIdUseCase.invoke(id)
             val image = getImageByMovieIdUseCase.invoke(id)
             val review = getReviewByMovieIdUseCase.invoke(id, START_PAGE_NUMBER_REVIEW)
-            _movieLiveData.value = movie
-            _movieLiveDataImages.value = image
-            _movieLiveDataReview.value = review
+            var movieResult: Movie? = null
+            var imageListResult: ImageList? = null
+            var reviewResult: ReviewList? = null
+
+            when(movie) {
+                is Reaction.Success -> {
+                    movieResult = movie.data
+                }
+                is Reaction.Error -> {
+
+                }
+            }
+
+            when(image) {
+                is Reaction.Success -> {
+                    imageListResult = image.data
+                }
+                is Reaction.Error -> {
+
+                }
+            }
+
+            when(review) {
+                is Reaction.Success -> {
+                    reviewResult = review.data
+                }
+                is Reaction.Error -> {
+
+                }
+            }
+            _state.value = MovieDetailState.Result(
+                movie = movieResult,
+                imageList = imageListResult,
+                review = reviewResult
+            )
         }
     }
 

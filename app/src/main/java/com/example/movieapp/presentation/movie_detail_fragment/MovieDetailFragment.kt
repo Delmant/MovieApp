@@ -45,8 +45,6 @@ import javax.inject.Inject
 
 class MovieDetailFragment : Fragment() {
 
-    private val coroutineScope = CoroutineScope(Dispatchers.Main)
-
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
 
@@ -84,40 +82,55 @@ class MovieDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val id = requireArguments().getInt(EXTRA_MOVIE_ID)
-        binding.progressBar.visibility = View.VISIBLE
-        binding.scrollview.visibility = View.GONE
 
         viewModel.getMovieById(id)
-        viewModel.movieLiveDataImages.observe(viewLifecycleOwner) {
-            setupImageRvAndListener(id, it.imageList)
+        viewModel.state.observe(viewLifecycleOwner) {
+            when (it) {
+                is MovieDetailState.Initial -> {
+
+                }
+
+                is MovieDetailState.IsError -> {
+
+                }
+
+                is MovieDetailState.IsLoading -> {
+                    binding.progressBar.visibility = View.VISIBLE
+                    binding.scrollview.visibility = View.GONE
+                }
+
+                is MovieDetailState.Result -> {
+
+                    it.imageList?.let { it1 -> setupImageRvAndListener(id, it1.imageList) }
+                    it.review?.let { it1 -> setupReview(id, it.review.list, it1.pages) }
+                    it.movie?.let { it1 -> setupPoster(it1.poster) }
+                    it.movie?.let { it1 -> setupGenreRv(it1.genres) }
+                    it.movie?.let { it1 -> setupSequelsRv(it1.sequelsAndPrequels) }
+                    it.movie?.let { it1 -> setupSimilarRv(it1.similarMovies) }
+                    it.movie?.let { it1 -> setupActorRv(it1.persons) }
+                    it.movie?.let { it1 -> setupRatingRv(it1.rating, it.movie.votes) }
+                    it.movie?.let { it1 -> setupBtnPlayTrailer(it1.videos) }
+                    it.movie?.let { it1 -> setupPersons(it1.persons) }
+                    it.movie?.let { it1 -> setupDescription(it1.description) }
+                    it.movie?.let { it1 -> setupVotes(it1.votes) }
+                    it.movie?.let { it1 -> setupRating(it1.rating) }
+                    it.movie?.let { it1 -> setupYearAndGenres(it1.year, it.movie.genres) }
+                    it.movie?.let { it1 ->
+                        setupCountryLengthAndPg(
+                            it1.countries, if (it.movie.isSeries) {
+                                it.movie.seriesLength
+                            } else it.movie.movieLength, it.movie.ageRating
+                        )
+                    }
+                    it.movie?.let { it1 -> setupNames(it1.name, it.movie.alternativeName) }
+                    it.movie?.let { it1 -> parseFacts(it1.facts) }?.let { it2 -> setupFactsRv(it2) }
+                    binding.scrollview.visibility = View.VISIBLE
+                    binding.progressBar.visibility = View.GONE
+                    setupBtnClose()
+
+                }
+            }
         }
-        viewModel.movieLiveDataReview.observe(viewLifecycleOwner) {
-            setupReview(id, it.list, it.pages)
-        }
-        viewModel.movieLiveData.observe(viewLifecycleOwner) {
-            setupPoster(it.poster)
-            setupGenreRv(it.genres)
-            setupSequelsRv(it.sequelsAndPrequels)
-            setupSimilarRv(it.similarMovies)
-            setupActorRv(it.persons)
-            setupRatingRv(it.rating, it.votes)
-            setupBtnPlayTrailer(it.videos)
-            setupPersons(it.persons)
-            setupDescription(it.description)
-            setupVotes(it.votes)
-            setupRating(it.rating)
-            setupYearAndGenres(it.year, it.genres)
-            setupCountryLengthAndPg(
-                it.countries, if (it.isSeries) {
-                    it.seriesLength
-                } else it.movieLength, it.ageRating  
-            )
-            setupNames(it.name, it.alternativeName)
-            setupFactsRv(parseFacts(it.facts))
-            binding.scrollview.visibility = View.VISIBLE
-            binding.progressBar.visibility = View.GONE
-        }
-        setupBtnClose()
     }
 
     private fun setupImageRvAndListener(id: Int, list: List<Image>) {
@@ -134,7 +147,7 @@ class MovieDetailFragment : Fragment() {
     }
 
     private fun setupReview(id: Int, list: List<Review>, pages: Int) {
-        binding.reviewContainer.visibility = if(list.isEmpty()) View.GONE else View.VISIBLE
+        binding.reviewContainer.visibility = if (list.isEmpty()) View.GONE else View.VISIBLE
         val adapter = ReviewMiniAdapter(id, list)
         binding.rvReview.adapter = adapter
         adapter.listener = object : ReviewMiniAdapter.OnItemClickListener {
@@ -164,7 +177,7 @@ class MovieDetailFragment : Fragment() {
     }
 
     private fun setupFactsRv(facts: List<Facts>) {
-        binding.tvFactTitle.visibility = if(facts.isEmpty()) View.GONE else View.VISIBLE
+        binding.tvFactTitle.visibility = if (facts.isEmpty()) View.GONE else View.VISIBLE
         val adapter = FactAdapter(facts)
         binding.rvFact.adapter = adapter
         adapter.listener = object : FactAdapter.OnItemClickListener {
@@ -199,8 +212,12 @@ class MovieDetailFragment : Fragment() {
         )
     }
 
-    private fun parseCountryLengthAndPg(listCountry: List<Country>, length: Int, ageRating: Int): String {
-         return "${listCountry[0].name}, ${parseMovieLength(length)}, $ageRating+"
+    private fun parseCountryLengthAndPg(
+        listCountry: List<Country>,
+        length: Int,
+        ageRating: Int
+    ): String {
+        return "${listCountry[0].name}, ${parseMovieLength(length)}, $ageRating+"
     }
 
     private fun parseMovieLength(length: Int): String {
@@ -217,11 +234,17 @@ class MovieDetailFragment : Fragment() {
     }
 
     private fun parseYearAndGenres(year: Int, genres: List<Genres>): String {
-        return "$year, ${genres[0].name}${if(genres.size > 1) {", ${genres[1].name}"} else ""}"
+        return "$year, ${genres[0].name}${
+            if (genres.size > 1) {
+                ", ${genres[1].name}"
+            } else ""
+        }"
     }
 
     private fun setupRating(rating: Rating) {
-        val newRating = if(rating.kp > 0) {rating.kp} else rating.imdb
+        val newRating = if (rating.kp > 0) {
+            rating.kp
+        } else rating.imdb
         binding.tvKpRating.text = parseRating(newRating)
         binding.tvKpRating.setTextColor(setupRatingColor(newRating))
     }
@@ -312,7 +335,7 @@ class MovieDetailFragment : Fragment() {
     }
 
     private fun setupSimilarRv(list: List<SimilarMovies>) {
-        binding.tvSimilarTitle.visibility = if(list.isEmpty()) View.GONE else View.VISIBLE
+        binding.tvSimilarTitle.visibility = if (list.isEmpty()) View.GONE else View.VISIBLE
         val similarMoviesAdapter = SimilarMovieAdapter(requireContext())
         binding.rvSimilarMovies.adapter = similarMoviesAdapter
 
@@ -329,7 +352,7 @@ class MovieDetailFragment : Fragment() {
 
     private fun setupSequelsRv(list: List<SequelsAndPrequels>) {
         Log.d("SEQ", list.toString())
-        binding.tvSequelsTitle.visibility = if(list.isEmpty()) View.GONE else View.VISIBLE
+        binding.tvSequelsTitle.visibility = if (list.isEmpty()) View.GONE else View.VISIBLE
         val sequelsAdapter = SimilarMovieAdapter(requireContext())
         binding.rvSeqMovies.adapter = sequelsAdapter
         sequelsAdapter.submitList(viewModel.similarToSequels(list))
@@ -346,7 +369,6 @@ class MovieDetailFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _bindingInfo = null
-        coroutineScope.cancel()
     }
 
     companion object {

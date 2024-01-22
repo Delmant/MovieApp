@@ -2,7 +2,7 @@ package com.example.movieapp.data.local_data_source
 
 interface MovieLocalDataSource {
 
-    fun saveSearchSettings()
+    fun saveSearchSettings(type: String, gson: String)
 
     fun getSearchSettings()
 

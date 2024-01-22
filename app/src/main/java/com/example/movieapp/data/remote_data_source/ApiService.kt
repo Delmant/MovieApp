@@ -22,7 +22,7 @@ interface ApiService {
     suspend fun getRandomMovie(
     ): MovieDto
 
-    @GET("v1.3/movie/{PATH_PARAM_ID}")
+    @GET("v1.4/movie/{PATH_PARAM_ID}")
     @Headers(
         MEDIA_TYPE,
         API_KEY
@@ -31,7 +31,7 @@ interface ApiService {
         @Path(PATH_PARAM_ID) id: Int
     ): MovieDto
 
-    @GET("v1.3/movie")
+    @GET("v1.4/movie")
     @Headers(
         MEDIA_TYPE,
         API_KEY
@@ -50,7 +50,7 @@ interface ApiService {
         @Query(PAGE_PARAM_LIMIT) pageLimit: Int
     ): JsonObject
 
-    @GET("v1/image")
+    @GET("v1.4/image")
     @Headers(
         MEDIA_TYPE,
         API_KEY
@@ -61,7 +61,7 @@ interface ApiService {
         @Query(IMAGE_PARAM_TYPE) type2: String
     ): ImageListDto
 
-    @GET("v1/person/{PATH_PERSON_ID}")
+    @GET("v1.4/person/{PATH_PERSON_ID}")
     @Headers(
         MEDIA_TYPE,
         API_KEY
@@ -70,7 +70,7 @@ interface ApiService {
         @Path(PATH_PERSON_ID) personId: Int
     ): ActorDto
 
-    @GET("v1/review")
+    @GET("v1.4/review")
     @Headers(
         MEDIA_TYPE,
         API_KEY

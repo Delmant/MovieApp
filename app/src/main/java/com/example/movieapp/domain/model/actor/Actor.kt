@@ -1,7 +1,7 @@
 package com.example.movieapp.domain.model.actor
 
 
-data class Actor(
+data class  Actor(
     val age: Int,
     val birthPlace: List<BirthPlace>,
     val birthday: String,

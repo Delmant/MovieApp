@@ -61,31 +61,44 @@ class ActorDetailFragment : Fragment() {
         return binding.root
     }
 
-    val coroutineScope = CoroutineScope(Dispatchers.Main)
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         val id = requireArguments().getInt(EXTRA_PERSON_ID)
         binding.container.visibility = View.GONE
+        viewModel.getPerson(id)
+        viewModel.actorState.observe(viewLifecycleOwner) {
+            when (it) {
+                ActorDetailState.IsLoading -> {
+                    binding.progressBar.visibility = View.VISIBLE
+                    binding.container.visibility = View.GONE
+                }
 
-        coroutineScope.launch {
-            viewModel.getPerson(id)
+                is ActorDetailState.IsError -> {
 
-            viewModel.personLiveData.observe(viewLifecycleOwner) {
-                setupActorName(it.name, it.enName)
-                setupActorPhoto(it.photo)
-                setupFactsRv(viewModel.convertFactsList(it.actorFacts))
-                setupActorMovie(it.movies)
-                setupActorProfession(it.profession)
-                setupAgeAndGrowth(it.age, it.growth)
-                setupDateOfBirthActor(it.birthday)
+                }
 
-                binding.progressBar.visibility = View.GONE
-                binding.container.visibility = View.VISIBLE
+                is ActorDetailState.Result -> {
+                    val actor = it.actor
+                    setupActorName(actor.name, actor.enName)
+                    setupActorPhoto(actor.photo)
+                    setupFactsRv(viewModel.convertFactsList(actor.actorFacts))
+                    setupActorMovie(actor.movies)
+                    setupActorProfession(actor.profession)
+                    setupAgeAndGrowth(actor.age, actor.growth)
+                    setupDateOfBirthActor(actor.birthday)
 
+                    binding.progressBar.visibility = View.GONE
+                    binding.container.visibility = View.VISIBLE
+                }
+
+                ActorDetailState.Initial -> {
+                    binding.progressBar.visibility = View.VISIBLE
+                    binding.container.visibility = View.GONE
+                }
             }
         }
+
         setupBtnClose()
     }
 
@@ -96,7 +109,7 @@ class ActorDetailFragment : Fragment() {
             override fun onItemClick(movieId: Int) {
                 parentFragmentManager.beginTransaction()
                     .add(R.id.fragment_container, MovieDetailFragment.newInstance(movieId))
-                    .addToBackStack(null)?.commit()
+                    .addToBackStack(null).commit()
             }
 
         }
@@ -142,10 +155,11 @@ class ActorDetailFragment : Fragment() {
     }
 
     private fun setupFactsRv(list: List<Facts>) {
-        if(list.isEmpty()) binding.tvFactTitle.visibility = View.GONE
+        if (list.isEmpty()) binding.tvFactTitle.visibility = View.GONE
         val adapter = FactAdapter(list)
         binding.rvFact.adapter = adapter
     }
+
     private fun setupBtnClose() {
         binding.btnClose.setOnClickListener {
             requireFragmentManager().popBackStack()

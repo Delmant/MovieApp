@@ -8,14 +8,15 @@ import com.example.movieapp.domain.model.image.ImageList
 import com.example.movieapp.domain.model.movie_list.MovieList
 import com.example.movieapp.domain.model.review.ReviewList
 import com.example.movieapp.domain.model.search_settings.SettingsValue
+import com.example.movieapp.domain.reaction.Reaction
 
 interface MovieRepository {
 
-     suspend fun getMovieById(id: Int): Movie
+     suspend fun getMovieById(id: Int): Reaction<Movie>
 
      suspend fun getSearchResult(name: String): MovieList
 
-     suspend fun getImageByMovieId(id: Int): ImageList
+     suspend fun getImageByMovieId(id: Int): Reaction<ImageList>
 
      suspend fun getRandomMovie(): LiveData<Movie>
 
@@ -23,11 +24,17 @@ interface MovieRepository {
 
      suspend fun getMovieListByPage(): LiveData<List<Movie>>
 
-     suspend fun getPersonById(id: Int): Actor
+     suspend fun getPersonById(id: Int): Reaction<Actor>
 
-     suspend fun getReviewByMovieId(id: Int, page: Int): ReviewList
+     suspend fun getReviewByMovieId(id: Int, page: Int): Reaction<ReviewList>
 
      suspend fun loadData()
 
      suspend fun getSettingsValue(value: String): List<SettingsValue>
+
+     fun saveSharedPrefSearchSettings(type: String, gson: String)
+
+     fun getSharedPrefSearchSettings()
+
+     fun deleteSharedPrefSearchSettings()
 }

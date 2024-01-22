@@ -13,9 +13,10 @@ import com.example.movieapp.presentation.MovieApp
 import com.example.movieapp.presentation.ViewModelFactory
 import com.example.movieapp.presentation.adapters.review_list.ReviewListAdapter
 import com.example.movieapp.presentation.adapters.review_page_number.ReviewPageNumberAdapter
+import com.example.movieapp.presentation.review_detail_fragment.ReviewState
 import javax.inject.Inject
 
-class ReviewListFragment: Fragment() {
+class ReviewListFragment : Fragment() {
 
     private var _binding: FragmentReviewListBinding? = null
     private val binding: FragmentReviewListBinding
@@ -60,28 +61,67 @@ class ReviewListFragment: Fragment() {
 
         viewModel?.getReview(id, START_PAGE)
 
-        viewModel?.movieLiveDataReview?.observe(viewLifecycleOwner) {
-            val adapter = ReviewListAdapter(id, it.list)
-            binding.rvReviewList.adapter = adapter
-        }
+        viewModel?.state?.observe(viewLifecycleOwner) {
+            when (it) {
+                is ReviewState.Initial -> {
 
-        val adapterPages = ReviewPageNumberAdapter(listPages)
-        binding.rvPageNumber.adapter = adapterPages
+                }
 
-        adapterPages.listener = object : ReviewPageNumberAdapter.OnItemClickListener {
-            override fun onClick(page: Int) {
-                viewModel?.getReview(id, page)
+                is ReviewState.IsLoading -> {
+                    binding.contentContainer.visibility = View.GONE
+                    binding.progressBar.visibility = View.VISIBLE
+                }
 
-                viewModel?.movieLiveDataReview?.observe(viewLifecycleOwner) {
-                    val adapter = ReviewListAdapter(id, it.list)
+                is ReviewState.IsError -> {
+
+                }
+
+                is ReviewState.Result -> {
+                    val adapter = ReviewListAdapter(id, it.review.list)
                     binding.rvReviewList.adapter = adapter
+
+                    val adapterPages = ReviewPageNumberAdapter(listPages)
+                    binding.rvPageNumber.adapter = adapterPages
+
+                    binding.contentContainer.visibility = View.VISIBLE
+                    binding.progressBar.visibility = View.GONE
+
+                    adapterPages.listener = object : ReviewPageNumberAdapter.OnItemClickListener {
+                        override fun onClick(page: Int) {
+                            viewModel?.getReview(id, page)
+
+                            viewModel?.state?.observe(viewLifecycleOwner) {
+                                when (it) {
+                                    is ReviewState.Initial -> {
+
+                                    }
+
+                                    is ReviewState.IsLoading -> {
+                                        binding.contentContainer.visibility = View.GONE
+                                        binding.progressBar.visibility = View.VISIBLE
+                                    }
+
+                                    is ReviewState.IsError -> {
+
+                                    }
+
+                                    is ReviewState.Result -> {
+                                        val adapter = ReviewListAdapter(id, it.review.list)
+                                        binding.rvReviewList.adapter = adapter
+                                        binding.contentContainer.visibility = View.VISIBLE
+                                        binding.progressBar.visibility = View.GONE
+                                    }
+                                }
+                            }
+                        }
+
+                    }
+
+                    binding.ivBtnClose.setOnClickListener {
+                        parentFragmentManager.popBackStack()
+                    }
                 }
             }
-
-        }
-
-        binding.ivBtnClose.setOnClickListener {
-            parentFragmentManager.popBackStack()
         }
     }
 
@@ -101,7 +141,7 @@ class ReviewListFragment: Fragment() {
             return ReviewListFragment().apply {
                 arguments = Bundle().apply {
                     putInt(EXTRA_MOVIE_ID, movieId)
-                    putInt( EXTRA_PAGES, pages)
+                    putInt(EXTRA_PAGES, pages)
                 }
             }
         }

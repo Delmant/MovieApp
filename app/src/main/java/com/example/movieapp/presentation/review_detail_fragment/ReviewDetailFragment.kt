@@ -11,6 +11,7 @@ import com.example.movieapp.databinding.FragmentReviewDetailBinding
 import com.example.movieapp.presentation.MovieApp
 import com.example.movieapp.presentation.ViewModelFactory
 import com.example.movieapp.presentation.adapters.review_detail.ReviewAdapter
+import kotlinx.coroutines.delay
 import javax.inject.Inject
 
 class ReviewDetailFragment : Fragment() {
@@ -51,13 +52,28 @@ class ReviewDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val arguments = requireArguments().getInt(EXTRA_MOVIE_ID)
         viewModel?.getReview(arguments)
-        viewModel?.movieLiveDataReview?.observe(viewLifecycleOwner) {
-            val adapter = ReviewAdapter(it.list)
-            binding.vpViewPager.adapter = adapter
-        }
-        binding.btnClose.setOnClickListener {
-            parentFragmentManager.popBackStack()
+        viewModel?.state?.observe(viewLifecycleOwner) {
+            when(it) {
+                is ReviewState.Initial -> {
 
+                }
+                is ReviewState.IsLoading -> {
+                    binding.progressBar.visibility = View.VISIBLE
+                    binding.contentContainer.visibility = View.GONE
+                }
+                is ReviewState.IsError -> {
+
+                }
+                is ReviewState.Result -> {
+                    val adapter = ReviewAdapter(it.review.list)
+                    binding.vpViewPager.adapter = adapter
+                    binding.btnClose.setOnClickListener {
+                        parentFragmentManager.popBackStack()
+                    }
+                    binding.progressBar.visibility = View.VISIBLE
+                    binding.contentContainer.visibility = View.GONE
+                }
+            }
         }
     }
 

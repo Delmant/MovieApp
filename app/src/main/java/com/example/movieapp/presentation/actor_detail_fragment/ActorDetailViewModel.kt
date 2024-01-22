@@ -10,8 +10,10 @@ import com.example.movieapp.domain.model.actor.Actor
 import com.example.movieapp.domain.model.actor.ActorFact
 import com.example.movieapp.domain.model.actor.Profession
 import com.example.movieapp.domain.model.movie.Facts
+import com.example.movieapp.domain.reaction.Reaction
 import com.example.movieapp.domain.usecases.GetMovieByIdUseCase
 import com.example.movieapp.domain.usecases.GetPersonByIdUseCase
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -21,14 +23,25 @@ class ActorDetailViewModel @Inject constructor(
     private val getMovieByIdUseCase: GetMovieByIdUseCase
 ) : ViewModel() {
 
-    private val _personLiveData = MutableLiveData<Actor>()
-    val personLiveData: LiveData<Actor> = _personLiveData
+    private val _actorState = MutableLiveData<ActorDetailState>(ActorDetailState.Initial)
+    val actorState: LiveData<ActorDetailState> = _actorState
 
     fun getPerson(id: Int) {
         viewModelScope.launch {
-            val person = getPersonByIdUseCase.invoke(id)
-            _personLiveData.value = person
-
+            _actorState.value = ActorDetailState.IsLoading
+            val result: Reaction<Actor> = getPersonByIdUseCase.invoke(id)
+            when(result) {
+                is Reaction.Error -> {
+                    _actorState.value = ActorDetailState.IsError(
+                        exception = result.exception
+                    )
+                }
+                is Reaction.Success -> {
+                    _actorState.value = ActorDetailState.Result(
+                        actor = result.data
+                    )
+                }
+            }
         }
     }
 

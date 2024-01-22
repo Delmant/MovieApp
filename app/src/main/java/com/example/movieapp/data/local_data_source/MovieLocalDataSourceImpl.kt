@@ -1,23 +1,22 @@
-package com.example.movieapp.data.repository_impl
+package com.example.movieapp.data.local_data_source
 
 import android.app.Application
 import android.content.Context
 import android.util.Log
-import com.example.movieapp.domain.model.search_settings.Settings
-import com.example.movieapp.domain.model.search_settings.SettingsValue
-import com.example.movieapp.domain.repository.SearchSettingsRepository
+import com.example.movieapp.data.remote_data_source.MovieRemoteDataSourceImpl
 import com.google.gson.Gson
 import javax.inject.Inject
 
-class SearchSettingsRepositoryImpl @Inject constructor(
+class MovieLocalDataSourceImpl @Inject constructor(
     val application: Application
-) : SearchSettingsRepository {
+): MovieLocalDataSource {
 
     private val sharedPreferences = application
         .getSharedPreferences(SHARED_PREFERENCES_KEY_WORD, Context.MODE_PRIVATE)
     private val sharedPreferencesEdit = sharedPreferences.edit()
 
     private val gson = Gson()
+
 
     override fun saveSearchSettings(type: String, gson: String) {
         sharedPreferencesEdit.putString(type, gson)

@@ -1,6 +1,7 @@
 package com.example.movieapp.presentation.image_detail_fragment
 
 import android.os.Bundle
+import android.provider.ContactsContract.CommonDataKinds.Im
 import android.view.GestureDetector
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -28,7 +29,7 @@ class ImageDetailFragment : Fragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
 
-    lateinit var viewModel: ImageDetailViewModel
+    private lateinit var viewModel: ImageDetailViewModel
 
     private val component by lazy {
         (requireActivity().application as MovieApp).component
@@ -54,12 +55,24 @@ class ImageDetailFragment : Fragment() {
         val args = requireArguments().getInt(EXTRA_MOVIE_ID)
         val position = requireArguments().getInt(EXTRA_IMAGE_POSITION)
         viewModel.getMovieById(args)
-        viewModel.movieLiveDataImages.observe(viewLifecycleOwner) {
-            val adapter = ImageDetailAdapter(it.imageList, requireContext())
-            binding.vpViewPager.adapter = adapter
-            binding.vpViewPager.setCurrentItem(position, false)
-        }
+        viewModel.state.observe(viewLifecycleOwner) {
+            when(it) {
+                is ImageDetailState.Initial -> {
 
+                }
+                is ImageDetailState.IsLoading -> {
+
+                }
+                is ImageDetailState.IsError -> {
+
+                }
+                is ImageDetailState.Result -> {
+                    val adapter = ImageDetailAdapter(it.imageList.imageList, requireContext())
+                    binding.vpViewPager.adapter = adapter
+                    binding.vpViewPager.setCurrentItem(position, false)
+                }
+            }
+        }
     }
 
     override fun onDestroyView() {
